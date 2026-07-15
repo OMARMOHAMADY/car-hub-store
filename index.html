@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarHub - Global Car Marketplace</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+        <a class="logo" href="index.html"><i class="fa-solid fa-car-side"></i>CarHub</a>
+        <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="header-actions">
+            <nav class="navbar">
+                <a href="index.html">Home</a>
+                <a href="cars.html">Cars</a>
+                <a href="sell-car.html">Sell</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="action-buttons">
+                <a class="button button-outline" href="login.html">Login</a>
+                <a class="button button-primary" href="register.html">Register</a>
+                <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <section class="page-section hero-section">
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <span class="section-label">Global car marketplace</span>
+                <h1>Buy and sell premium vehicles with confidence.</h1>
+                <p>CarHub brings together verified sellers and serious buyers in a polished, modern marketplace built for fast decisions and clear comparisons.</p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="cars.html">Browse Cars</a>
+                    <a class="button button-outline" href="sell-car.html">Sell Your Car</a>
+                </div>
+                <div class="hero-highlights">
+                    <div class="highlight-item">
+                        <span>35k+</span>
+                        <p>Verified Listings</p>
+                    </div>
+                    <div class="highlight-item">
+                        <span>12</span>
+                        <p>Global Markets</p>
+                    </div>
+                    <div class="highlight-item">
+                        <span>4.9/5</span>
+                        <p>Buyer Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="hero-card-top">
+                        <span class="hero-badge">Featured</span>
+                        <span class="hero-price">$80,000</span>
+                    </div>
+                    <img src="assets/image/2023-Mercedes-AMG-C-63-S-E-PERFORMANCE-00027.jpg" alt="Mercedes C63 AMG">
+                    <div class="hero-card-body">
+                        <h3>Mercedes C63 AMG</h3>
+                        <p>Luxury performance with signature styling and advanced tech.</p>
+                        <div class="hero-card-meta">
+                            <span>Cairo</span>
+                            <span>2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section search-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <span class="section-label">Find Your Car</span>
+                    <h2>Quickly locate the perfect ride.</h2>
+                </div>
+                <p>Filter vehicles by make, style, keyword, and budget to discover the best match instantly.</p>
+            </div>
+            <div class="search-box" id="searchBox">
+                <select id="searchBrand">
+                    <option value="">All brands</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Mercedes">Mercedes</option>
+                    <option value="Audi">Audi</option>
+                </select>
+                <select id="searchBody">
+                    <option value="">Any body type</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="Coupe">Coupe</option>
+                    <option value="SUV">SUV</option>
+                </select>
+                <select id="searchPrice">
+                    <option value="">Any budget</option>
+                    <option value="under-30000">Under $30,000</option>
+                    <option value="30-60000">$30,000 - $60,000</option>
+                    <option value="over-60000">Over $60,000</option>
+                </select>
+                <input type="text" id="searchKeyword" placeholder="Search by model, brand, or feature" aria-label="Search keyword">
+                <button type="button" id="clearSearch" class="button button-outline">Clear</button>
+                <button type="button" id="searchButton" class="button button-primary"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            </div>
+            <div class="search-meta" id="searchMeta">Search through our latest verified listings.</div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </section>
+    <section class="page-section why-section">
+        <div class="container">
+            <div class="section-title">Why CarHub?</div>
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <h3>Verified sellers</h3>
+                    <p>All listings are curated and presented with clear, consistent details for buyer confidence.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Global reach</h3>
+                    <p>Connect with buyers and sellers across markets, with fast browsing and transparent pricing.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Premium design</h3>
+                    <p>A modern, clean experience that aligns with the best international marketplaces.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="page-section featured">
+        <div class="container">
+            <div class="section-title">Top Picks</div>
+            <div class="cars-grid">
+                <article class="car-card">
+                    <img src="assets/image/1-BMW-M4-review-2024-UK.webp" alt="BMW M4 Competition">
+                    <div class="car-card-content">
+                        <span class="card-tag">Best Seller</span>
+                        <h3>BMW M4 Competition</h3>
+                        <p>Performance appeal with a luxurious cabin and sharp handling.</p>
+                        <div class="card-footer">
+                            <strong>$85,000</strong>
+                            <a class="button button-outline" href="car-details-bmw-m4.html">Details</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="car-card">
+                    <img src="assets/image/audi-rs7-is-the-most-beautiful-car-in-my-heart-v0-ae6jvke2alkf1.webp" alt="Audi RS7">
+                    <div class="car-card-content">
+                        <span class="card-tag">Luxury</span>
+                        <h3>Audi RS7</h3>
+                        <p>A refined sport sedan with elegant style and cutting-edge tech.</p>
+                        <div class="card-footer">
+                            <strong>$93,000</strong>
+                            <a class="button button-outline" href="car-details-audi-rs7.html">Details</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="car-card">
+                    <img src="assets/image/2023-Mercedes-AMG-C-63-S-E-PERFORMANCE-00027.jpg" alt="Mercedes C63 AMG">
+                    <div class="car-card-content">
+                        <span class="card-tag">Featured</span>
+                        <h3>Mercedes C63 AMG</h3>
+                        <p>Powerful and polished with an exceptional balance of luxury and performance.</p>
+                        <div class="card-footer">
+                            <strong>$80,000</strong>
+                            <a class="button button-outline" href="car-details-mercedes-c63.html">Details</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="page-section latest">
+        <div class="container">
+            <div class="section-title">Latest listings</div>
+            <div class="cars-grid">
+                <article class="car-card small-card">
+                    <img src="assets/image/c535495d-c28b-4d73-bb10-16d7ec97fbc1.webp" alt="BMW 320i">
+                    <div class="car-card-content">
+                        <h3>BMW 320i</h3>
+                        <p>2022 · 35,000 KM · Cairo</p>
+                        <div class="card-footer">
+                            <strong>$45,000</strong>
+                            <a class="button button-outline" href="car-details-bmw-320i.html">Details</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="car-card small-card">
+                    <img src="assets/image/f68c9779f46b44ae96ba45c91b2b1b51.jpg" alt="Audi A6">
+                    <div class="car-card-content">
+                        <h3>Audi A6</h3>
+                        <p>2024 · 10,000 KM · Giza</p>
+                        <div class="card-footer">
+                            <strong>$30,000</strong>
+                            <a class="button button-outline" href="car-details-audi.html">Details</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="car-card small-card">
+                    <img src="assets/image/f8a492ce57718b142cf0754c1b7e4ee0.jpg" alt="Mercedes C-Class">
+                    <div class="car-card-content">
+                        <h3>Mercedes C-Class</h3>
+                        <p>2023 · 20,000 KM · Cairo</p>
+                        <div class="card-footer">
+                            <strong>$60,000</strong>
+                            <a class="button button-outline" href="car-details-mercedes.html">Details</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="page-footer">
+    <div class="container footer-grid">
+        <div>
+            <a class="logo footer-logo" href="index.html"><i class="fa-solid fa-car-side"></i>CarHub</a>
+            <p>Modern car marketplace built for global buyers and sellers.</p>
+        </div>
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="sell-car.html">Sell</a>
+        </div>
+    </div>
+</footer>
+<script src="js/app.js"></script>
+</body>
+</html>

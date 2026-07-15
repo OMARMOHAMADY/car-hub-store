@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Car · CarHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+        <a class="logo" href="index.html"><i class="fa-solid fa-car"></i>CarHub</a>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="cars.html">Cars</a>
+            <a href="sell-car.html">Sell</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="action-buttons">
+            <a class="button button-outline" href="login.html">Login</a>
+            <a class="button button-primary" href="register.html">Register</a>
+        </div>
+    </div>
+</header>
+<main class="page-section form-section">
+    <div class="container">
+        <div class="form-box">
+            <div class="form-header">
+                <div>
+                    <h1>Sell Your Car</h1>
+                    <p>List your vehicle quickly — add photos, price, and details to attract buyers.</p>
+                </div>
+                <div class="form-note">Tip: High-resolution photos get more views.</div>
+            </div>
+
+            <form id="sellCarForm" enctype="multipart/form-data">
+                <div class="form-grid">
+                    <div class="col">
+                        <label class="field">
+                            <span>Car Brand</span>
+                            <input type="text" name="brand" placeholder="e.g. BMW" required>
+                        </label>
+
+                        <label class="field">
+                            <span>Car Model</span>
+                            <input type="text" name="model" placeholder="e.g. 320i" required>
+                        </label>
+
+                        <div class="two-up">
+                            <label class="field">
+                                <span>Year</span>
+                                <input type="number" name="year" placeholder="2020" min="1900" max="2099" required>
+                            </label>
+                            <label class="field">
+                                <span>Mileage</span>
+                                <input type="number" name="mileage" placeholder="e.g. 45,000" required>
+                            </label>
+                        </div>
+
+                        <label class="field">
+                            <span>Location</span>
+                            <input type="text" name="location" placeholder="City, Country" required>
+                        </label>
+
+                        <label class="field">
+                            <span>Price (USD)</span>
+                            <input type="number" name="price" placeholder="e.g. 15900" required>
+                        </label>
+                    </div>
+
+                    <aside class="col image-col">
+                        <label class="field file-field">
+                            <span>Primary Photo</span>
+                            <input id="photoInput" type="file" name="photo" accept="image/*" required>
+                            <div class="file-hint">PNG/JPG — up to 10MB</div>
+                        </label>
+
+                        <label class="field">
+                            <span>Contact Phone</span>
+                            <input type="text" name="phone" placeholder="Optional" >
+                        </label>
+                    </aside>
+                </div>
+
+                <label class="field">
+                    <span>Car Description</span>
+                    <textarea name="description" placeholder="Describe condition, service history, options, and any faults" required></textarea>
+                </label>
+
+                <div class="form-actions">
+                    <button type="submit" class="button button-primary">Post Car</button>
+                    <a href="cars.html" class="button button-outline">View Listings</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<footer class="page-footer">
+    <div class="container">
+        <p>CarHub · Modern car marketplace demo</p>
+    </div>
+</footer>
+<script src="js/app.js"></script>
+</body>
+</html>

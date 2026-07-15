@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Cars · CarHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+        <a class="logo" href="index.html"><i class="fa-solid fa-car"></i>CarHub</a>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="cars.html">Cars</a>
+            <a href="sell-car.html">Sell</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="action-buttons">
+            <a class="button button-outline" href="login.html" data-i18n="login">Login</a>
+            <a class="button button-primary" href="register.html" data-i18n="register">Register</a>
+            <select id="langSelect" class="button button-outline lang-selector" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+    </div>
+</header>
+<main class="page-section">
+    <div class="container">
+        <div class="page-header">
+            <div>
+                <span class="section-label" data-i18n="sectionLabel">Car Listings</span>
+                <h1 data-i18n="mainHeading">Browse our latest available cars.</h1>
+                <p data-i18n="mainDescription">Find verified vehicles from trusted sellers with transparent specs and pricing.</p>
+            </div>
+        </div>
+        <div class="section-title" data-i18n="categoryTitle">Browse by category</div>
+        <div class="feature-grid">
+            <article class="feature-card" data-i18n-title="categorySUVTitle" data-i18n-desc="categorySUVDesc">
+                <i class="fa-solid fa-suv"></i>
+                <h3>SUVs</h3>
+                <p>Spacious, rugged, and ready for any terrain or family adventure.</p>
+            </article>
+            <article class="feature-card" data-i18n-title="categorySedanTitle" data-i18n-desc="categorySedanDesc">
+                <i class="fa-solid fa-car-side"></i>
+                <h3>Sedans</h3>
+                <p>Comfortable daily drivers with sleek styling and efficient performance.</p>
+            </article>
+            <article class="feature-card" data-i18n-title="categoryPerformanceTitle" data-i18n-desc="categoryPerformanceDesc">
+                <i class="fa-solid fa-gauge-high"></i>
+                <h3>Performance</h3>
+                <p>Sporty models with powerful engines and bold handling dynamics.</p>
+            </article>
+            <article class="feature-card" data-i18n-title="categoryElectricTitle" data-i18n-desc="categoryElectricDesc">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>Electric</h3>
+                <p>Modern EVs with clean power delivery and advanced technology.</p>
+            </article>
+        </div>
+        <div class="cars-grid">
+            <article class="car-card" data-car-id="bmw-320i">
+                <img src="assets/image/c535495d-c28b-4d73-bb10-16d7ec97fbc1.webp" alt="BMW 320i">
+                <div class="car-card-content">
+                    <h3 data-i18n-title="bmw320iTitle">BMW 320i</h3>
+                    <p data-i18n-desc="bmw320iDesc">2022 · 35,000 KM · Cairo</p>
+                    <h4>$45,000</h4>
+                    <a class="button button-outline" href="car-details-bmw-320i.html" data-i18n="viewDetails">View Details</a>
+                </div>
+            </article>
+            <article class="car-card" data-car-id="audi-a6">
+                <img src="assets/image/f68c9779f46b44ae96ba45c91b2b1b51.jpg" alt="Audi A6">
+                <div class="car-card-content">
+                    <h3 data-i18n-title="audiA6Title">Audi A6</h3>
+                    <p data-i18n-desc="audiA6Desc">2024 · 10,000 KM · Giza</p>
+                    <h4>$30,000</h4>
+                    <a class="button button-outline" href="car-details-audi.html" data-i18n="viewDetails">View Details</a>
+                </div>
+            </article>
+            <article class="car-card" data-car-id="mercedes-c-class">
+                <img src="assets/image/f8a492ce57718b142cf0754c1b7e4ee0.jpg" alt="Mercedes C-Class">
+                <div class="car-card-content">
+                    <h3 data-i18n-title="mercedesCClassTitle">Mercedes C-Class</h3>
+                    <p data-i18n-desc="mercedesCClassDesc">2023 · 20,000 KM · Cairo</p>
+                    <h4>$60,000</h4>
+                    <a class="button button-outline" href="car-details-mercedes.html" data-i18n="viewDetails">View Details</a>
+                </div>
+            </article>
+            <article class="car-card" data-car-id="bmw-m4">
+                <img src="assets/image/1-BMW-M4-review-2024-UK.webp" alt="BMW M4 Competition">
+                <div class="car-card-content">
+                    <h3 data-i18n-title="bmwM4Title">BMW M4 Competition</h3>
+                    <p data-i18n-desc="bmwM4Desc">2024 · 12,000 KM · Alexandria</p>
+                    <h4>$85,000</h4>
+                    <a class="button button-outline" href="car-details-bmw-m4.html" data-i18n="viewDetails">View Details</a>
+                </div>
+            </article>
+            <article class="car-card" data-car-id="audi-rs7">
+                <img src="assets/image/audi-rs7-is-the-most-beautiful-car-in-my-heart-v0-ae6jvke2alkf1.webp" alt="Audi RS7">
+                <div class="car-card-content">
+                    <h3 data-i18n-title="audiRs7Title">Audi RS7</h3>
+                    <p data-i18n-desc="audiRs7Desc">2023 · 8,000 KM · Giza</p>
+                    <h4>$93,000</h4>
+                    <a class="button button-outline" href="car-details-audi-rs7.html" data-i18n="viewDetails">View Details</a>
+                </div>
+            </article>
+            <article class="car-card" data-car-id="mercedes-c63">
+                <img src="assets/image/2023-Mercedes-AMG-C-63-S-E-PERFORMANCE-00027.jpg" alt="Mercedes C63 AMG">
+                <div class="car-card-content">
+                    <h3 data-i18n-title="mercedesC63Title">Mercedes C63 AMG</h3>
+                    <p data-i18n-desc="mercedesC63Desc">2023 · 5,500 KM · Cairo</p>
+                    <h4>$80,000</h4>
+                    <a class="button button-outline" href="car-details-mercedes-c63.html" data-i18n="viewDetails">View Details</a>
+                </div>
+            </article>
+            <article class="car-card" data-car-id="porsche-911">
+                <img src="assets/image/Artboard-1-1024x576.jpg" alt="Porsche 911 Turbo">
+                <div class="car-card-content">
+                    <h3 data-i18n-title="porsche911Title">Porsche 911 Turbo</h3>
+                    <p data-i18n-desc="porsche911Desc">2022 · 9,200 KM · Cairo</p>
+                    <h4>$140,000</h4>
+                    <a class="button button-outline" href="car-details-porsche-911.html" data-i18n="viewDetails">View Details</a>
+                </div>
+            </article>
+            <article class="car-card" data-car-id="tesla-model-s">
+                <img src="assets/image/Tesla Model S Plaid 2023 UK.webp" alt="Tesla Model S">
+                <div class="car-card-content">
+                    <h3 data-i18n-title="teslaModelSTitle">Tesla Model S</h3>
+                    <p data-i18n-desc="teslaModelSDesc">2024 · 4,500 KM · Giza</p>
+                    <h4>$95,000</h4>
+                    <a class="button button-outline" href="car-details-tesla-model-s.html" data-i18n="viewDetails">View Details</a>
+                </div>
+            </article>
+            <article class="car-card" data-car-id="range-rover-sport">
+                <img src="assets/image/usn-5066.webp" alt="Range Rover Sport">
+                <div class="car-card-content">
+                    <h3 data-i18n-title="rangeRoverTitle">Range Rover Sport</h3>
+                    <p data-i18n-desc="rangeRoverDesc">2021 · 28,000 KM · Alexandria</p>
+                    <h4>$72,000</h4>
+                    <a class="button button-outline" href="car-details-range-rover-sport.html" data-i18n="viewDetails">View Details</a>
+                </div>
+            </article>
+        </div>
+    </div>
+</main>
+<footer class="page-footer">
+    <div class="container">
+        <p>CarHub · Modern car marketplace demo</p>
+    </div>
+</footer>
+<script>
+    const translations = {
+        en: {
+            title: 'All Cars · CarHub',
+            sectionLabel: 'Car Listings',
+            mainHeading: 'Browse our latest available cars.',
+            mainDescription: 'Find verified vehicles from trusted sellers with transparent specs and pricing.',
+            categoryTitle: 'Browse by category',
+            categorySUVTitle: 'SUVs',
+            categorySUVDesc: 'Spacious, rugged, and ready for any terrain or family adventure.',
+            categorySedanTitle: 'Sedans',
+            categorySedanDesc: 'Comfortable daily drivers with sleek styling and efficient performance.',
+            categoryPerformanceTitle: 'Performance',
+            categoryPerformanceDesc: 'Sporty models with powerful engines and bold handling dynamics.',
+            categoryElectricTitle: 'Electric',
+            categoryElectricDesc: 'Modern EVs with clean power delivery and advanced technology.',
+            viewDetails: 'View Details',
+            login: 'Login',
+            register: 'Register',
+            bmw320iTitle: 'BMW 320i',
+            bmw320iDesc: '2022 · 35,000 KM · Cairo',
+            audiA6Title: 'Audi A6',
+            audiA6Desc: '2024 · 10,000 KM · Giza',
+            mercedesCClassTitle: 'Mercedes C-Class',
+            mercedesCClassDesc: '2023 · 20,000 KM · Cairo',
+            bmwM4Title: 'BMW M4 Competition',
+            bmwM4Desc: '2024 · 12,000 KM · Alexandria',
+            audiRs7Title: 'Audi RS7',
+            audiRs7Desc: '2023 · 8,000 KM · Giza',
+            mercedesC63Title: 'Mercedes C63 AMG',
+            mercedesC63Desc: '2023 · 5,500 KM · Cairo',
+            porsche911Title: 'Porsche 911 Turbo',
+            porsche911Desc: '2022 · 9,200 KM · Cairo',
+            teslaModelSTitle: 'Tesla Model S',
+            teslaModelSDesc: '2024 · 4,500 KM · Giza',
+            rangeRoverTitle: 'Range Rover Sport',
+            rangeRoverDesc: '2021 · 28,000 KM · Alexandria'
+        },
+        ar: {
+            title: 'جميع السيارات · CarHub',
+            sectionLabel: 'قائمة السيارات',
+            mainHeading: 'تصفح أحدث السيارات المتاحة.',
+            mainDescription: 'اعثر على سيارات موثوقة من بائعين معتمدين مع مواصفات واضحة وأسعار شفافة.',
+            categoryTitle: 'تصفح حسب الفئة',
+            categorySUVTitle: 'SUV',
+            categorySUVDesc: 'سيارات عائلية قوية جاهزة لأي طريق ومريحة للمسافات الطويلة.',
+            categorySedanTitle: 'سيدان',
+            categorySedanDesc: 'سيارات يومية أنيقة واقتصادية تمنحك راحة ومساحة جيدة.',
+            categoryPerformanceTitle: 'رياضية',
+            categoryPerformanceDesc: 'نماذج رياضية بمحركات قوية وتجربة قيادة حماسية.',
+            categoryElectricTitle: 'كهربائية',
+            categoryElectricDesc: 'سيارات كهربائية حديثة بقوة نظيفة وتقنيات متقدمة.',
+            viewDetails: 'عرض التفاصيل',
+            login: 'تسجيل الدخول',
+            register: 'التسجيل',
+            bmw320iTitle: 'بي إم دبليو 320i',
+            bmw320iDesc: '2022 · 35,000 كم · القاهرة',
+            audiA6Title: 'أودي A6',
+            audiA6Desc: '2024 · 10,000 كم · الجيزة',
+            mercedesCClassTitle: 'مرسيدس C-Class',
+            mercedesCClassDesc: '2023 · 20,000 كم · القاهرة',
+            bmwM4Title: 'بي إم دبليو M4 كومبيتيشن',
+            bmwM4Desc: '2024 · 12,000 كم · الإسكندرية',
+            audiRs7Title: 'أودي RS7',
+            audiRs7Desc: '2023 · 8,000 كم · الجيزة',
+            mercedesC63Title: 'مرسيدس C63 AMG',
+            mercedesC63Desc: '2023 · 5,500 كم · القاهرة',
+            porsche911Title: 'بورشه 911 توربو',
+            porsche911Desc: '2022 · 9,200 كم · القاهرة',
+            teslaModelSTitle: 'تسلا موديل S',
+            teslaModelSDesc: '2024 · 4,500 كم · الجيزة',
+            rangeRoverTitle: 'رنج روفر سبورت',
+            rangeRoverDesc: '2021 · 28,000 كم · الإسكندرية'
+        },
+        fr: {
+            title: 'Toutes les voitures · CarHub',
+            sectionLabel: 'Annonces de voitures',
+            mainHeading: 'Parcourez nos dernières voitures disponibles.',
+            mainDescription: 'Trouvez des véhicules vérifiés auprès de vendeurs de confiance avec des spécifications transparentes et des prix clairs.',
+            categoryTitle: 'Parcourir par catégorie',
+            categorySUVTitle: 'SUV',
+            categorySUVDesc: 'Spacieux, robustes et prêts pour tout terrain ou aventure familiale.',
+            categorySedanTitle: 'Berlines',
+            categorySedanDesc: 'Voitures de tous les jours élégantes avec des performances efficaces.',
+            categoryPerformanceTitle: 'Performance',
+            categoryPerformanceDesc: 'Modèles sportifs avec des moteurs puissants et une tenue de route dynamique.',
+            categoryElectricTitle: 'Électrique',
+            categoryElectricDesc: 'VÉ modernes avec une puissance propre et une technologie avancée.',
+            viewDetails: 'Voir les détails',
+            login: 'Connexion',
+            register: 'S\'inscrire',
+            bmw320iTitle: 'BMW 320i',
+            bmw320iDesc: '2022 · 35 000 KM · Le Caire',
+            audiA6Title: 'Audi A6',
+            audiA6Desc: '2024 · 10 000 KM · Gizeh',
+            mercedesCClassTitle: 'Mercedes C-Class',
+            mercedesCClassDesc: '2023 · 20 000 KM · Le Caire',
+            bmwM4Title: 'BMW M4 Competition',
+            bmwM4Desc: '2024 · 12 000 KM · Alexandrie',
+            audiRs7Title: 'Audi RS7',
+            audiRs7Desc: '2023 · 8 000 KM · Gizeh',
+            mercedesC63Title: 'Mercedes C63 AMG',
+            mercedesC63Desc: '2023 · 5 500 KM · Le Caire',
+            porsche911Title: 'Porsche 911 Turbo',
+            porsche911Desc: '2022 · 9 200 KM · Le Caire',
+            teslaModelSTitle: 'Tesla Model S',
+            teslaModelSDesc: '2024 · 4 500 KM · Gizeh',
+            rangeRoverTitle: 'Range Rover Sport',
+            rangeRoverDesc: '2021 · 28 000 KM · Alexandrie'
+        }
+    };
+
+    function updateLanguage(lang) {
+        const strings = translations[lang] || translations.en;
+        document.title = strings.title;
+        document.documentElement.lang = lang;
+        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+        document.querySelectorAll('[data-i18n]').forEach((node) => {
+            const key = node.getAttribute('data-i18n');
+            if (strings[key]) node.textContent = strings[key];
+        });
+
+        document.querySelectorAll('[data-i18n-title]').forEach((node) => {
+            const key = node.getAttribute('data-i18n-title');
+            if (strings[key]) node.textContent = strings[key];
+        });
+
+        document.querySelectorAll('[data-i18n-desc]').forEach((node) => {
+            const key = node.getAttribute('data-i18n-desc');
+            if (strings[key]) node.textContent = strings[key];
+        });
+
+        const langSelect = document.getElementById('langSelect');
+        if (langSelect) langSelect.value = lang;
+        localStorage.setItem('siteLanguage', lang);
+    }
+
+    const savedLang = localStorage.getItem('siteLanguage') || 'en';
+    updateLanguage(savedLang);
+
+    const langSelect = document.getElementById('langSelect');
+    if (langSelect) {
+        langSelect.addEventListener('change', (event) => {
+            updateLanguage(event.target.value);
+        });
+    }
+</script>
+<script src="js/app.js"></script>
+</body>
+</html>
