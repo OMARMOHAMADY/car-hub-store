@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
+
 <header class="site-header">
     <div class="container header-inner">
         <a class="logo" href="index.html"><i class="fa-solid fa-car-side"></i>CarHub</a>
@@ -31,11 +32,18 @@
                 <a class="button button-outline" href="login.html">Login</a>
                 <a class="button button-primary" href="register.html">Register</a>
                 <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
+                <select id="langSelect" class="button button-outline lang-selector" aria-label="Language selector">
+                    <option value="en">English</option>
+                    <option value="ar">العربية</option>
+                    <option value="fr">Français</option>
+                </select>
             </div>
         </div>
     </div>
 </header>
+
 <main>
+    <!-- HERO SECTION -->
     <section class="page-section hero-section">
         <div class="container hero-grid">
             <div class="hero-copy">
@@ -85,6 +93,8 @@
             </div>
         </div>
     </section>
+
+    <!-- SEARCH SECTION -->
     <section class="page-section search-section">
         <div class="container">
             <div class="section-header">
@@ -121,6 +131,8 @@
             <div class="search-results" id="searchResults"></div>
         </div>
     </section>
+
+    <!-- WHY SECTION -->
     <section class="page-section why-section">
         <div class="container">
             <div class="section-title">Why buyers choose CarHub</div>
@@ -144,6 +156,8 @@
             </div>
         </div>
     </section>
+
+    <!-- FEATURED CARS SECTION -->
     <section class="page-section featured">
         <div class="container">
             <div class="section-title">Popular picks for today</div>
@@ -161,6 +175,7 @@
                         </div>
                     </div>
                 </article>
+
                 <article class="car-card">
                     <img src="assets/image/audi-rs7-is-the-most-beautiful-car-in-my-heart-v0-ae6jvke2alkf1.webp" alt="Audi RS7">
                     <div class="car-card-content">
@@ -173,6 +188,7 @@
                         </div>
                     </div>
                 </article>
+
                 <article class="car-card">
                     <img src="assets/image/2023-Mercedes-AMG-C-63-S-E-PERFORMANCE-00027.jpg" alt="Mercedes C63 AMG">
                     <div class="car-card-content">
@@ -188,6 +204,8 @@
             </div>
         </div>
     </section>
+
+    <!-- LATEST LISTINGS SECTION -->
     <section class="page-section latest">
         <div class="container">
             <div class="section-title">Latest listings</div>
@@ -203,6 +221,7 @@
                         </div>
                     </div>
                 </article>
+
                 <article class="car-card small-card">
                     <img src="assets/image/f68c9779f46b44ae96ba45c91b2b1b51.jpg" alt="Audi A6">
                     <div class="car-card-content">
@@ -214,6 +233,7 @@
                         </div>
                     </div>
                 </article>
+
                 <article class="car-card small-card">
                     <img src="assets/image/f8a492ce57718b142cf0754c1b7e4ee0.jpg" alt="Mercedes C-Class">
                     <div class="car-card-content">
@@ -229,6 +249,7 @@
         </div>
     </section>
 </main>
+
 <footer class="page-footer">
     <div class="container footer-grid">
         <div>
@@ -242,6 +263,227 @@
         </div>
     </div>
 </footer>
+
+<script>
+    const translations = {
+        en: {
+            title: 'CarHub - Global Car Marketplace',
+            label: 'Global car marketplace',
+            heroTitle: 'Find your next car, anywhere in the world.',
+            heroDesc: 'Discover premium vehicles, compare trusted listings, and connect with verified sellers in a marketplace built for confident international buying.',
+            browseCars: 'Browse Cars',
+            sellYourCar: 'Sell Your Car',
+            verifiedSellers: 'Verified sellers',
+            globalMarkets: '12 global markets',
+            secureDeals: 'Secure deals',
+            listingsCount: 'Verified listings',
+            satisfaction: 'Buyer satisfaction',
+            support247: 'Support ready',
+            findCarLabel: 'Find Your Car',
+            findCarTitle: 'Search smarter across global inventory.',
+            findCarDesc: 'Filter by brand, body style, budget, and keyword to find the right vehicle in seconds.',
+            searchPlaceholder: 'Search by model, brand, or feature',
+            clear: 'Clear',
+            search: 'Search',
+            searchMeta: 'Search through our latest verified listings and discover premium vehicles with confidence.',
+            whyTitle: 'Why buyers choose CarHub',
+            whyDesc: 'A premium marketplace crafted for clarity, speed, and confidence.',
+            verifiedTitle: 'Verified sellers',
+            verifiedDesc: 'Every listing is curated to help you buy with confidence and transparency.',
+            globalTitle: 'Global reach',
+            globalDesc: 'Connect with buyers and sellers across markets with fast browsing and clear pricing.',
+            premiumTitle: 'Premium experience',
+            premiumDesc: 'A modern, polished experience designed to feel as refined as the vehicles you browse.',
+            popularTitle: 'Popular picks for today',
+            popularDesc: 'Handpicked vehicles that combine style, performance, and value.',
+            latestTitle: 'Latest listings',
+            details: 'Details',
+            footerTitle: 'Modern car marketplace built for global buyers and sellers.',
+            login: 'Login',
+            register: 'Register'
+        },
+        ar: {
+            title: 'CarHub - سوق السيارات العالمي',
+            label: 'سوق السيارات العالمي',
+            heroTitle: 'اعثر على سيارتك القادمة، في أي مكان في العالم.',
+            heroDesc: 'اكتشف السيارات المميزة، قارن القوائم الموثوقة، وتواصل مع البائعين المعتمدين في سوق مصمم للشراء الدولي بثقة.',
+            browseCars: 'تصفح السيارات',
+            sellYourCar: 'بيع سيارتك',
+            verifiedSellers: 'بائعون موثقون',
+            globalMarkets: '12 سوق عالمي',
+            secureDeals: 'صفقات آمنة',
+            listingsCount: 'قائمة موثقة',
+            satisfaction: 'رضا المشترين',
+            support247: 'دعم 24/7',
+            findCarLabel: 'ابحث عن سيارتك',
+            findCarTitle: 'ابحث بذكاء عبر المخزون العالمي.',
+            findCarDesc: 'تصفية حسب الماركة ونوع الهيكل والميزانية والكلمة المفتاحية للعثور على السيارة المناسبة في ثوان.',
+            searchPlaceholder: 'ابحث بالموديل أو الماركة أو الميزة',
+            clear: 'مسح',
+            search: 'بحث',
+            searchMeta: 'ابحث في أحدث قوائمنا الموثقة واكتشف السيارات المميزة بثقة.',
+            whyTitle: 'لماذا يختار المشترون CarHub',
+            whyDesc: 'سوق ممتاز مصمم للوضوح والسرعة والثقة.',
+            verifiedTitle: 'بائعون موثقون',
+            verifiedDesc: 'كل قائمة منسقة لمساعدتك على الشراء بثقة وشفافية.',
+            globalTitle: 'وصول عالمي',
+            globalDesc: 'تواصل مع المشترين والبائعين عبر الأسواق بتصفح سريع وأسعار واضحة.',
+            premiumTitle: 'تجربة ممتازة',
+            premiumDesc: 'تجربة حديثة ومصقولة مصممة لتشعرك برقي السيارات التي تتصفحها.',
+            popularTitle: 'اختيارات اليوم الشائعة',
+            popularDesc: 'سيارات منتقاة تجمع بين الأناقة والأداء والقيمة.',
+            latestTitle: 'أحدث القوائم',
+            details: 'التفاصيل',
+            footerTitle: 'سوق سيارات حديث مبني للمشترين والبائعين حول العالم.',
+            login: 'تسجيل الدخول',
+            register: 'التسجيل'
+        },
+        fr: {
+            title: 'CarHub - Marche automobile mondial',
+            label: 'Marche automobile mondial',
+            heroTitle: 'Trouvez votre prochaine voiture, partout dans le monde.',
+            heroDesc: 'Decouvrez des vehicules premium, comparez des annonces de confiance et connectez-vous avec des vendeurs verifies sur un marche concu pour des achats internationaux en toute confiance.',
+            browseCars: 'Parcourir les voitures',
+            sellYourCar: 'Vendre votre voiture',
+            verifiedSellers: 'Vendeurs verifies',
+            globalMarkets: '12 marches mondiaux',
+            secureDeals: 'Transactions securisees',
+            listingsCount: 'Annonces verifiees',
+            satisfaction: 'Satisfaction acheteur',
+            support247: 'Support 24/7',
+            findCarLabel: 'Trouvez votre voiture',
+            findCarTitle: 'Recherchez intelligemment dans l inventaire mondial.',
+            findCarDesc: 'Filtrez par marque, type de carrosserie, budget et mot-cle pour trouver le bon vehicule en quelques secondes.',
+            searchPlaceholder: 'Rechercher par modele, marque ou caracteristique',
+            clear: 'Effacer',
+            search: 'Rechercher',
+            searchMeta: 'Parcourez nos dernieres annonces verifiees et decouvrez des vehicules premium en toute confiance.',
+            whyTitle: 'Pourquoi les acheteurs choisissent CarHub',
+            whyDesc: 'Un marche premium concu pour la clarte, la rapidite et la confiance.',
+            verifiedTitle: 'Vendeurs verifies',
+            verifiedDesc: 'Chaque annonce est curetee pour vous aider a acheter en toute confiance et transparence.',
+            globalTitle: 'Portee mondiale',
+            globalDesc: 'Connectez-vous avec les acheteurs et les vendeurs sur les marches avec une navigation rapide et des prix clairs.',
+            premiumTitle: 'Experience premium',
+            premiumDesc: 'Une experience moderne et soignee concue pour etre aussi raffinee que les vehicules que vous parcourez.',
+            popularTitle: 'Selection du jour',
+            popularDesc: 'Vehicules selectionnes alliant style, performances et valeur.',
+            latestTitle: 'Dernieres annonces',
+            details: 'Details',
+            footerTitle: 'Marche automobile moderne concu pour les acheteurs et les vendeurs du monde entier.',
+            login: 'Connexion',
+            register: 'Inscription'
+        }
+    };
+
+    function updateLanguage(lang) {
+        const strings = translations[lang] || translations.en;
+        document.title = strings.title;
+        document.documentElement.lang = lang;
+        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+        const label = document.querySelector('.section-label');
+        if (label) label.textContent = strings.label;
+
+        const heroTitle = document.querySelector('.hero-copy h1');
+        if (heroTitle) heroTitle.textContent = strings.heroTitle;
+
+        const heroDesc = document.querySelector('.hero-copy > p');
+        if (heroDesc) heroDesc.textContent = strings.heroDesc;
+
+        const heroBtns = document.querySelectorAll('.hero-actions .button');
+        if (heroBtns[0]) heroBtns[0].textContent = strings.browseCars;
+        if (heroBtns[1]) heroBtns[1].textContent = strings.sellYourCar;
+
+        const trustPills = document.querySelectorAll('.trust-pill');
+        if (trustPills[0]) trustPills[0].innerHTML = '<i class="fa-solid fa-shield-check"></i> ' + strings.verifiedSellers;
+        if (trustPills[1]) trustPills[1].innerHTML = '<i class="fa-solid fa-earth-americas"></i> ' + strings.globalMarkets;
+        if (trustPills[2]) trustPills[2].innerHTML = '<i class="fa-solid fa-credit-card"></i> ' + strings.secureDeals;
+
+        const highlightItems = document.querySelectorAll('.highlight-item');
+        if (highlightItems[0]) {
+            const p = highlightItems[0].querySelector('p');
+            if (p) p.textContent = strings.listingsCount;
+        }
+        if (highlightItems[1]) {
+            const p = highlightItems[1].querySelector('p');
+            if (p) p.textContent = strings.satisfaction;
+        }
+        if (highlightItems[2]) {
+            const p = highlightItems[2].querySelector('p');
+            if (p) p.textContent = strings.support247;
+        }
+
+        const sectionLabels = document.querySelectorAll('.section-header .section-label');
+        if (sectionLabels[0]) sectionLabels[0].textContent = strings.findCarLabel;
+        const sectionH2 = document.querySelector('.section-header h2');
+        if (sectionH2) sectionH2.textContent = strings.findCarTitle;
+        const sectionDesc = document.querySelector('.section-header > p');
+        if (sectionDesc) sectionDesc.textContent = strings.findCarDesc;
+
+        const keywordInput = document.getElementById('searchKeyword');
+        if (keywordInput) keywordInput.placeholder = strings.searchPlaceholder;
+
+        const clearBtn = document.getElementById('clearSearch');
+        if (clearBtn) clearBtn.textContent = strings.clear;
+        const searchBtn = document.getElementById('searchButton');
+        if (searchBtn) searchBtn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> ' + strings.search;
+
+        const searchMeta = document.getElementById('searchMeta');
+        if (searchMeta) searchMeta.textContent = strings.searchMeta;
+
+        const sectionTitles = document.querySelectorAll('.section-title');
+        if (sectionTitles[0]) sectionTitles[0].textContent = strings.whyTitle;
+        if (sectionTitles[1]) sectionTitles[1].textContent = strings.popularTitle;
+        if (sectionTitles[2]) sectionTitles[2].textContent = strings.latestTitle;
+
+        const introPs = document.querySelectorAll('.section-intro');
+        if (introPs[0]) introPs[0].textContent = strings.whyDesc;
+        if (introPs[1]) introPs[1].textContent = strings.popularDesc;
+
+        const featureCards = document.querySelectorAll('.feature-card');
+        if (featureCards[0]) {
+            const h3 = featureCards[0].querySelector('h3');
+            const p = featureCards[0].querySelector('p');
+            if (h3) h3.textContent = strings.verifiedTitle;
+            if (p) p.textContent = strings.verifiedDesc;
+        }
+        if (featureCards[1]) {
+            const h3 = featureCards[1].querySelector('h3');
+            const p = featureCards[1].querySelector('p');
+            if (h3) h3.textContent = strings.globalTitle;
+            if (p) p.textContent = strings.globalDesc;
+        }
+        if (featureCards[2]) {
+            const h3 = featureCards[2].querySelector('h3');
+            const p = featureCards[2].querySelector('p');
+            if (h3) h3.textContent = strings.premiumTitle;
+            if (p) p.textContent = strings.premiumDesc;
+        }
+
+        const footerP = document.querySelector('.footer-grid p');
+        if (footerP) footerP.textContent = strings.footerTitle;
+
+        const loginLink = document.querySelector('.button-outline[href="login.html"]');
+        if (loginLink) loginLink.textContent = strings.login;
+        const registerLink = document.querySelector('.button-primary[href="register.html"]');
+        if (registerLink) registerLink.textContent = strings.register;
+
+        const langSelect = document.getElementById('langSelect');
+        if (langSelect) langSelect.value = lang;
+        localStorage.setItem('siteLanguage', lang);
+    }
+
+    const savedLang = localStorage.getItem('siteLanguage') || 'en';
+    updateLanguage(savedLang);
+
+    const langSelect = document.getElementById('langSelect');
+    if (langSelect) {
+        langSelect.addEventListener('change', function(event) {
+            updateLanguage(event.target.value);
+        });
+    }
+</script>
 <script src="js/app.js"></script>
 </body>
 </html>

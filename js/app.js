@@ -253,6 +253,168 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ---- Favorites (localStorage) ----
+    function getFavorites() {
+        try {
+            return JSON.parse(localStorage.getItem('carFavorites') || '[]');
+        } catch { return []; }
+    }
+
+    function setFavorites(list) {
+        localStorage.setItem('carFavorites', JSON.stringify(list));
+    }
+
+    function toggleFavorite(carId, carTitle, btn) {
+        const favs = getFavorites();
+        const idx = favs.findIndex(f => f.id === carId);
+        if (idx > -1) {
+            favs.splice(idx, 1);
+            btn.classList.remove('favorited');
+            btn.innerHTML = '<i class="fa-regular fa-heart"></i> Add Favorite';
+        } else {
+            favs.push({ id: carId, title: carTitle });
+            btn.classList.add('favorited');
+            btn.innerHTML = '<i class="fa-solid fa-heart"></i> Favorited';
+        }
+        setFavorites(favs);
+    }
+
+    function initFavoriteButton(btn) {
+        const carId = btn.dataset.carId;
+        const favs = getFavorites();
+        if (favs.some(f => f.id === carId)) {
+            btn.classList.add('favorited');
+            btn.innerHTML = '<i class="fa-solid fa-heart"></i> Favorited';
+        } else {
+            btn.innerHTML = '<i class="fa-regular fa-heart"></i> Add Favorite';
+        }
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleFavorite(carId, btn.dataset.carTitle || carId, btn);
+        });
+    }
+
+    document.querySelectorAll('.fav-btn').forEach(initFavoriteButton);
+
+    // ---- Compare (localStorage) ----
+    function getCompareList() {
+        try {
+            return JSON.parse(localStorage.getItem('carCompare') || '[]');
+        } catch { return []; }
+    }
+
+    function setCompareList(list) {
+        localStorage.setItem('carCompare', JSON.stringify(list));
+        window.dispatchEvent(new CustomEvent('compareUpdated', { detail: list }));
+    }
+
+    function toggleCompare(carId, carTitle, btn) {
+        const list = getCompareList();
+        const idx = list.findIndex(c => c.id === carId);
+        if (idx > -1) {
+            list.splice(idx, 1);
+            btn.classList.remove('compared');
+            btn.innerHTML = '<i class="fa-regular fa-clipboard"></i> Compare';
+        } else {
+            if (list.length >= 3) {
+                alert('You can compare up to 3 cars at a time. Remove one first.');
+                return;
+            }
+            list.push({ id: carId, title: carTitle });
+            btn.classList.add('compared');
+            btn.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Comparing';
+        }
+        setCompareList(list);
+    }
+
+    function initCompareButton(btn) {
+        const carId = btn.dataset.carId;
+        const list = getCompareList();
+        if (list.some(c => c.id === carId)) {
+            btn.classList.add('compared');
+            btn.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Comparing';
+        } else {
+            btn.innerHTML = '<i class="fa-regular fa-clipboard"></i> Compare';
+        }
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleCompare(carId, btn.dataset.carTitle || carId, btn);
+        });
+    }
+
+    document.querySelectorAll('.compare-btn').forEach(initCompareButton);
+
+    // ---- Share ----
+    document.querySelectorAll('.share-btn').forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const shareData = {
+                title: btn.dataset.carTitle || 'CarHub Listing',
+                text: `Check out this ${btn.dataset.carTitle || 'car'} on CarHub!`,
+                url: window.location.href,
+            };
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch { /* user cancelled */ }
+            } else {
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    alert('Link copied to clipboard!');
+                } catch {
+                    alert('Share this link: ' + window.location.href);
+                }
+            }
+        });
+    });
+
+    // ---- Compare Toast/Badge indicator ----
+    function updateCompareBadge() {
+        const list = getCompareList();
+        const existing = document.querySelector('.compare-badge');
+        if (existing) {
+            if (list.length > 0) {
+                existing.textContent = list.length;
+                existing.style.display = 'inline-flex';
+            } else {
+                existing.style.display = 'none';
+            }
+        }
+    }
+
+    // Add compare badge to header if not exists
+    if (!document.querySelector('.compare-badge')) {
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle && themeToggle.parentNode) {
+            const badge = document.createElement('span');
+            badge.className = 'compare-badge';
+            badge.style.cssText = 'display:none;position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--primary);color:#fff;border-radius:999px;padding:12px 20px;font-size:0.9rem;font-weight:600;gap:8px;align-items:center;box-shadow:0 8px 30px rgba(96,165,250,0.3);cursor:pointer;';
+            badge.innerHTML = '<i class="fa-solid fa-clipboard-list"></i> Compare (<span class="compare-count">0</span>)';
+            badge.addEventListener('click', () => {
+                const list = getCompareList();
+                if (list.length === 0) {
+                    alert('No cars in your compare list yet.');
+                    return;
+                }
+                alert(`Comparing: ${list.map(c => c.title).join(' vs ')}\n\nThis will open a comparison view in the full version.`);
+            });
+            document.body.appendChild(badge);
+        }
+    }
+
+    function updateCompareBadgeCount() {
+        const badge = document.querySelector('.compare-badge');
+        if (badge) {
+            const list = getCompareList();
+            const countSpan = badge.querySelector('.compare-count');
+            if (countSpan) countSpan.textContent = list.length;
+            badge.style.display = list.length > 0 ? 'inline-flex' : 'none';
+        }
+    }
+
+    window.addEventListener('compareUpdated', updateCompareBadgeCount);
+    updateCompareBadgeCount();
+
     const galleryThumbs = document.querySelectorAll('.gallery-thumbs img');
     const galleryMain = document.querySelector('.gallery-main img');
     galleryThumbs.forEach((thumb) => {

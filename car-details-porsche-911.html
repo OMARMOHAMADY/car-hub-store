@@ -27,9 +27,14 @@
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </nav>
-        <div class="action-buttons">
+<div class="action-buttons">
             <a class="button button-outline" href="login.html">Login</a>
-            <a class="button button-primary" href="register.html">Register</a>`r`n                <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
+            <a class="button button-primary" href="register.html">Register</a>                <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
+            <select id="langSelect" class="button button-outline lang-selector" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
+                <option value="fr">Français</option>
+            </select>
         </div>
         </div>
     </div>
@@ -40,10 +45,10 @@
             <section class="car-gallery">
                 <div class="gallery-badge">Verified listing</div>
                 <div class="gallery-main">
-                    <img src="assets/image/porsche-911.jpg" alt="Porsche 911 Turbo">
+                    <img src="/car-marketplace/clint/assets/image/Artboard-1-1024x576.jpg" alt="Porsche 911 Turbo">
                 </div>
                 <div class="gallery-thumbs">
-                    <img src="assets/image/porsche-911.jpg" alt="Porsche 911 Turbo">
+                    <img src="/car-marketplace/clint/assets/image/Artboard-1-1024x576.jpg" alt="Porsche 911 Turbo">
                 </div>
             </section>
 
@@ -73,10 +78,23 @@
                     </div>
 
                     <div class="summary-actions">
-                        <button id="contactSellerBtn" class="button button-primary">Contact Seller</button>
-                        <a href="cars.html" class="button button-outline">See other listings</a>
+                        <div class="action-row">
+                            <button id="contactSellerBtn" class="button button-primary">Contact Seller</button>
+                            <a href="cars.html" class="button button-outline">See other listings</a>
+                        </div>
+                        <div class="action-secondary">
+                            <button class="action-icon-btn fav-btn" data-car-id="porsche-911" data-car-title="Porsche 911 Turbo">
+                                <i class="fa-regular fa-heart"></i> Add Favorite
+                            </button>
+                            <button class="action-icon-btn compare-btn" data-car-id="porsche-911" data-car-title="Porsche 911 Turbo">
+                                <i class="fa-regular fa-clipboard"></i> Compare
+                            </button>
+                            <button class="action-icon-btn share-btn" data-car-id="porsche-911" data-car-title="Porsche 911 Turbo">
+                                <i class="fa-regular fa-share-from-square"></i> Share
+                            </button>
+                        </div>
                     </div>
-                </div>
+</div>
                 <div class="seller-card">
                     <h2>Seller details</h2>
                     <p>High-end performance dealer with fast response and verified service records.</p>
@@ -85,6 +103,14 @@
                         <li><strong>Phone</strong> +201006300508</li>
                         <li><strong>Response time</strong> under 1 hour</li>
                     </ul>
+                </div>
+                <div class="payment-card">
+                    <h3><i class="fa-solid fa-credit-card"></i> Payment Methods</h3>
+                    <div class="payment-methods">
+                        <div class="payment-method"><i class="fa-brands fa-cc-visa"></i><span>Visa / Mastercard</span></div>
+                        <div class="payment-method"><i class="fa-brands fa-cc-paypal"></i><span>PayPal</span></div>
+                        <div class="payment-method"><i class="fa-brands fa-cc-apple-pay"></i><span>Apple Pay</span></div>
+                        <div class="payment-method"><i class="fa-solid fa-wallet"></i><span>Bank Transfer</span></div>
                 </div>
             </aside>
         </div>
@@ -114,6 +140,27 @@
         <p>CarHub · Modern car marketplace demo</p>
     </div>
 </footer>
+<script>
+    const translations = {
+        en: { title: 'Porsche 911 Turbo · CarHub', login: 'Login', register: 'Register', contactSeller: 'Contact Seller', backToList: 'See other listings', sellerDetails: 'Seller details', email: 'Email', phone: 'Phone', responseTime: 'Response time', paymentMethods: 'Payment Methods', addFav: 'Add Favorite', compare: 'Compare', share: 'Share', overview: 'Overview', vehicleDetails: 'Vehicle details' },
+        ar: { title: 'بورشه 911 توربو · CarHub', login: 'تسجيل الدخول', register: 'التسجيل', contactSeller: 'اتصل بالبائع', backToList: 'عرض إعلانات أخرى', sellerDetails: 'تفاصيل البائع', email: 'البريد الإلكتروني', phone: 'الهاتف', responseTime: 'وقت الاستجابة', paymentMethods: 'طرق الدفع', addFav: 'إضافة للمفضلة', compare: 'مقارنة', share: 'مشاركة', overview: 'نظرة عامة', vehicleDetails: 'تفاصيل المركبة' },
+        fr: { title: 'Porsche 911 Turbo · CarHub', login: 'Connexion', register: 'S\'inscrire', contactSeller: 'Contacter le vendeur', backToList: 'Voir autres annonces', sellerDetails: 'Détails du vendeur', email: 'Email', phone: 'Téléphone', responseTime: 'Temps de réponse', paymentMethods: 'Moyens de paiement', addFav: 'Ajouter aux favoris', compare: 'Comparer', share: 'Partager', overview: 'Aperçu', vehicleDetails: 'Détails du véhicule' }
+    };
+    function updateLanguage(lang) {
+        const strings = translations[lang] || translations.en;
+        if (strings.title) document.title = strings.title;
+        document.documentElement.lang = lang;
+        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        document.querySelectorAll('[data-i18n]').forEach(n => { const k = n.getAttribute('data-i18n'); if (strings[k]) n.textContent = strings[k]; });
+        const ls = document.getElementById('langSelect');
+        if (ls) ls.value = lang;
+        localStorage.setItem('siteLanguage', lang);
+    }
+    const savedLang = localStorage.getItem('siteLanguage') || 'en';
+    updateLanguage(savedLang);
+    const langSelect = document.getElementById('langSelect');
+    if (langSelect) langSelect.addEventListener('change', e => updateLanguage(e.target.value));
+</script>
 <script src="js/app.js"></script>
 </body>
 </html>

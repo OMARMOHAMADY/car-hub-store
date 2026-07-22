@@ -29,8 +29,13 @@
         </nav>
         <div class="action-buttons">
             <a class="button button-outline" href="login.html">Login</a>
-            <a class="button button-primary" href="register.html">Register</a>`r`n                <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
-        </div>
+            <a class="button button-primary" href="register.html">Register</a>
+            <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
+            <select id="langSelect" class="button button-outline lang-selector" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
+                <option value="fr">Français</option>
+            </select>
         </div>
     </div>
 </header>
@@ -40,10 +45,9 @@
             <div class="form-header">
                 <div>
                     <h1>Sell Your Car</h1>
-                    <p>List your vehicle quickly — add photos, price, and details to attract buyers.</p>
+                    <p>List your vehicle quickly add photos, price, and details to attract buyers.</p>
                 </div>
                 <div class="form-note">Tip: High-resolution photos get more views.</div>
-            </div>
 
             <form id="sellCarForm" enctype="multipart/form-data">
                 <div class="form-grid">
@@ -84,7 +88,7 @@
                         <label class="field file-field">
                             <span>Primary Photo</span>
                             <input id="photoInput" type="file" name="photo" accept="image/*" required>
-                            <div class="file-hint">PNG/JPG — up to 10MB</div>
+                            <div class="file-hint">PNG/JPG up to 10MB</div>
                         </label>
 
                         <label class="field">
@@ -105,14 +109,169 @@
                 </div>
             </form>
         </div>
-    </div>
 </main>
 <footer class="page-footer">
     <div class="container">
         <p>CarHub · Modern car marketplace demo</p>
     </div>
 </footer>
+<script>
+    const translations = {
+        en: {
+            title: 'Sell Your Car · CarHub',
+            heading: 'Sell Your Car',
+            desc: 'List your vehicle quickly add photos, price, and details to attract buyers.',
+            tip: 'Tip: High-resolution photos get more views.',
+            brandLabel: 'Car Brand',
+            brandPlaceholder: 'e.g. BMW',
+            modelLabel: 'Car Model',
+            modelPlaceholder: 'e.g. 320i',
+            yearLabel: 'Year',
+            yearPlaceholder: '2020',
+            mileageLabel: 'Mileage',
+            mileagePlaceholder: 'e.g. 45,000',
+            locationLabel: 'Location',
+            locationPlaceholder: 'City, Country',
+            priceLabel: 'Price (USD)',
+            pricePlaceholder: 'e.g. 15900',
+            photoLabel: 'Primary Photo',
+            photoHint: 'PNG/JPG up to 10MB',
+            phoneLabel: 'Contact Phone',
+            phonePlaceholder: 'Optional',
+            descLabel: 'Car Description',
+            descPlaceholder: 'Describe condition, service history, options, and any faults',
+            postCar: 'Post Car',
+            viewListings: 'View Listings',
+            footerText: 'CarHub · Modern car marketplace demo',
+            login: 'Login',
+            register: 'Register'
+        },
+        ar: {
+            title: 'بيع سيارتك · CarHub',
+            heading: 'بيع سيارتك',
+            desc: 'قم بإدراج سيارتك بسرعة أضف الصور والسعر والتفاصيل لجذب المشترين.',
+            tip: 'نصيحة: الصور عالية الدقة تحصل على مشاهدات أكثر.',
+            brandLabel: 'ماركة السيارة',
+            brandPlaceholder: 'مثال: BMW',
+            modelLabel: 'موديل السيارة',
+            modelPlaceholder: 'مثال: 320i',
+            yearLabel: 'السنة',
+            yearPlaceholder: '2020',
+            mileageLabel: 'عدد الكيلومترات',
+            mileagePlaceholder: 'مثال: 45,000',
+            locationLabel: 'الموقع',
+            locationPlaceholder: 'المدينة، الدولة',
+            priceLabel: 'السعر (بالدولار)',
+            pricePlaceholder: 'مثال: 15900',
+            photoLabel: 'الصورة الرئيسية',
+            photoHint: 'PNG/JPG حتى 10 ميجابايت',
+            phoneLabel: 'رقم الهاتف',
+            phonePlaceholder: 'اختياري',
+            descLabel: 'وصف السيارة',
+            descPlaceholder: 'صف الحالة، تاريخ الصيانة، الخيارات وأي عيوب',
+            postCar: 'نشر السيارة',
+            viewListings: 'عرض الإعلانات',
+            footerText: 'CarHub · سوق سيارات حديث تجريبي',
+            login: 'تسجيل الدخول',
+            register: 'التسجيل'
+        },
+        fr: {
+            title: 'Vendez votre voiture · CarHub',
+            heading: 'Vendez votre voiture',
+            desc: 'Listez votre vehicule rapidement ajoutez photos, prix et details pour attirer les acheteurs.',
+            tip: 'Conseil: Les photos haute resolution obtiennent plus de vues.',
+            brandLabel: 'Marque',
+            brandPlaceholder: 'ex: BMW',
+            modelLabel: 'Modele',
+            modelPlaceholder: 'ex: 320i',
+            yearLabel: 'Annee',
+            yearPlaceholder: '2020',
+            mileageLabel: 'Kilometrage',
+            mileagePlaceholder: 'ex: 45,000',
+            locationLabel: 'Emplacement',
+            locationPlaceholder: 'Ville, Pays',
+            priceLabel: 'Prix (USD)',
+            pricePlaceholder: 'ex: 15900',
+            photoLabel: 'Photo principale',
+            photoHint: 'PNG/JPG jusqua 10 Mo',
+            phoneLabel: 'Telephone',
+            phonePlaceholder: 'Optionnel',
+            descLabel: 'Description',
+            descPlaceholder: 'Decrivez l etat, l historique d entretien, les options et les defauts',
+            postCar: 'Publier la voiture',
+            viewListings: 'Voir les annonces',
+            footerText: 'CarHub · Demo de marche automobile moderne',
+            login: 'Connexion',
+            register: 'Inscription'
+        }
+    };
+
+    function updateLanguage(lang) {
+        const strings = translations[lang] || translations.en;
+        document.title = strings.title;
+        document.documentElement.lang = lang;
+        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+        const h1 = document.querySelector('.form-header h1');
+        if (h1) h1.textContent = strings.heading;
+
+        const p = document.querySelector('.form-header p');
+        if (p) p.textContent = strings.desc;
+
+        const note = document.querySelector('.form-note');
+        if (note) note.textContent = strings.tip;
+
+        const fieldSpans = document.querySelectorAll('.field span');
+        if (fieldSpans[0]) fieldSpans[0].textContent = strings.brandLabel;
+        if (fieldSpans[1]) fieldSpans[1].textContent = strings.modelLabel;
+        if (fieldSpans[2]) fieldSpans[2].textContent = strings.yearLabel;
+        if (fieldSpans[3]) fieldSpans[3].textContent = strings.mileageLabel;
+        if (fieldSpans[4]) fieldSpans[4].textContent = strings.locationLabel;
+        if (fieldSpans[5]) fieldSpans[5].textContent = strings.priceLabel;
+        if (fieldSpans[6]) fieldSpans[6].textContent = strings.photoLabel;
+        if (fieldSpans[7]) fieldSpans[7].textContent = strings.phoneLabel;
+        if (fieldSpans[8]) fieldSpans[8].textContent = strings.descLabel;
+
+        const inputs = document.querySelectorAll('.field input, .field textarea');
+        if (inputs[0]) inputs[0].placeholder = strings.brandPlaceholder;
+        if (inputs[1]) inputs[1].placeholder = strings.modelPlaceholder;
+        if (inputs[2]) inputs[2].placeholder = strings.yearPlaceholder;
+        if (inputs[3]) inputs[3].placeholder = strings.mileagePlaceholder;
+        if (inputs[4]) inputs[4].placeholder = strings.locationPlaceholder;
+        if (inputs[5]) inputs[5].placeholder = strings.pricePlaceholder;
+        if (inputs[7]) inputs[7].placeholder = strings.phonePlaceholder;
+        if (inputs[8]) inputs[8].placeholder = strings.descPlaceholder;
+
+        const hint = document.querySelector('.file-hint');
+        if (hint) hint.textContent = strings.photoHint;
+
+        const buttons = document.querySelectorAll('.form-actions .button');
+        if (buttons[0]) buttons[0].textContent = strings.postCar;
+        if (buttons[1]) buttons[1].textContent = strings.viewListings;
+
+        const footerP = document.querySelector('.page-footer p');
+        if (footerP) footerP.textContent = strings.footerText;
+
+        const loginLink = document.querySelector('.button-outline[href="login.html"]');
+        if (loginLink) loginLink.textContent = strings.login;
+        const registerLink = document.querySelector('.button-primary[href="register.html"]');
+        if (registerLink) registerLink.textContent = strings.register;
+
+        const langSelect = document.getElementById('langSelect');
+        if (langSelect) langSelect.value = lang;
+        localStorage.setItem('siteLanguage', lang);
+    }
+
+    const savedLang = localStorage.getItem('siteLanguage') || 'en';
+    updateLanguage(savedLang);
+
+    const langSelect = document.getElementById('langSelect');
+    if (langSelect) {
+        langSelect.addEventListener('change', function(event) {
+            updateLanguage(event.target.value);
+        });
+    }
+</script>
 <script src="js/app.js"></script>
 </body>
 </html>
-

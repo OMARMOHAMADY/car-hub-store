@@ -31,7 +31,11 @@
             <a class="button button-outline" href="login.html">Login</a>
             <a class="button button-primary" href="register.html">Register</a>
             <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
-        </div>
+            <select id="langSelect" class="button button-outline lang-selector" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
+                <option value="fr">Français</option>
+            </select>
         </div>
     </div>
 </header>
@@ -44,7 +48,6 @@
                     <h1>Driving confidence for buyers and sellers.</h1>
                     <p>CarHub is a purpose-built automotive marketplace designed to simplify every step of the car buying and selling journey. We combine verified listings with a clean user experience so customers can find great vehicles faster.</p>
                 </div>
-            </div>
             <div class="about-grid">
                 <article class="car-card">
                     <h3>Trusted Listings</h3>
@@ -59,7 +62,6 @@
                     <p>Fast navigation, responsive design, and intuitive search tools give both buyers and sellers a refined, reliable platform.</p>
                 </article>
             </div>
-        </div>
     </section>
     <section class="page-section">
         <div class="container">
@@ -81,7 +83,6 @@
                     <p>Smart filtering and intuitive discovery help shoppers find the right car without wasted time.</p>
                 </article>
             </div>
-        </div>
     </section>
     <section class="page-section">
         <div class="container">
@@ -100,7 +101,6 @@
                     <p>We focus on speed, clarity, and premium presentation so buyers can make decisions with certainty.</p>
                 </article>
             </div>
-        </div>
     </section>
     <section class="page-section">
         <div class="container">
@@ -112,9 +112,7 @@
                         <a class="button button-primary" href="cars.html">Browse Cars</a>
                         <a class="button button-outline" href="sell-car.html">Sell Your Car</a>
                     </div>
-                </div>
             </div>
-        </div>
     </section>
 </main>
 <footer class="page-footer">
@@ -122,7 +120,219 @@
         <p>CarHub · Modern car marketplace demo</p>
     </div>
 </footer>
+<script>
+    const translations = {
+        en: {
+            title: 'About · CarHub',
+            sectionLabel: 'About CarHub',
+            mainHeading: 'Driving confidence for buyers and sellers.',
+            mainDesc: 'CarHub is a purpose-built automotive marketplace designed to simplify every step of the car buying and selling journey. We combine verified listings with a clean user experience so customers can find great vehicles faster.',
+            trustedTitle: 'Trusted Listings',
+            trustedDesc: 'Every vehicle is presented with clear details and professional visuals, helping shoppers compare options with confidence.',
+            sellerSupportTitle: 'Seller Support',
+            sellerSupportDesc: 'We make it easy to showcase your car, capture buyer interest, and present your listing in a polished professional format.',
+            modernExpTitle: 'Modern Experience',
+            modernExpDesc: 'Fast navigation, responsive design, and intuitive search tools give both buyers and sellers a refined, reliable platform.',
+            exceptionalTitle: 'What makes CarHub exceptional',
+            verifiedSellers: 'Verified sellers',
+            verifiedSellersDesc: 'We keep quality high with curated listings and consistent standards for every car in the marketplace.',
+            globalReach: 'Global market reach',
+            globalReachDesc: 'CarHub connects local drivers with a broader audience of serious buyers across regions.',
+            fastSearch: 'Fast search',
+            fastSearchDesc: 'Smart filtering and intuitive discovery help shoppers find the right car without wasted time.',
+            missionTitle: 'Our mission',
+            buildTrust: 'Build trust',
+            buildTrustDesc: 'We create confidence by making every listing transparent, easy to compare, and visually engaging.',
+            empowerSellers: 'Empower sellers',
+            empowerSellersDesc: 'From upload to sale, our platform keeps the process simple with modern tools and clear support.',
+            delightBuyers: 'Delight buyers',
+            delightBuyersDesc: 'We focus on speed, clarity, and premium presentation so buyers can make decisions with certainty.',
+            joinTitle: 'Join thousands of satisfied car hunters and sellers.',
+            joinDesc: 'Ready to explore the best selection of verified listings? Browse our cars or post your own vehicle today.',
+            browseCars: 'Browse Cars',
+            sellYourCar: 'Sell Your Car',
+            footerText: 'CarHub · Modern car marketplace demo',
+            login: 'Login',
+            register: 'Register'
+        },
+        ar: {
+            title: 'حول · CarHub',
+            sectionLabel: 'حول CarHub',
+            mainHeading: 'الثقة للمشترين والبائعين.',
+            mainDesc: 'CarHub هو سوق سيارات مصمم لتبسيط كل خطوة من رحلة شراء وبيع السيارات. نحن نجمع بين القوائم الموثقة وتجربة مستخدم نظيفة ليتمكن العملاء من العثور على سيارات رائعة بشكل أسرع.',
+            trustedTitle: 'قوائم موثوقة',
+            trustedDesc: 'يتم تقديم كل مركبة بتفاصيل واضحة ومرئيات احترافية، مما يساعد المتسوقين على مقارنة الخيارات بثقة.',
+            sellerSupportTitle: 'دعم البائع',
+            sellerSupportDesc: 'نجعل من السهل عرض سيارتك وجذب اهتمام المشتري وتقديم قائمتك بتنسيق احترافي.',
+            modernExpTitle: 'تجربة حديثة',
+            modernExpDesc: 'يمنح التنقل السريع والتصميم المتجاوب وأدوات البحث البديهية كل من المشترين والبائعين منصة موثوقة.',
+            exceptionalTitle: 'ما يجعل CarHub استثنائية',
+            verifiedSellers: 'بائعون موثقون',
+            verifiedSellersDesc: 'نحافظ على الجودة العالية من خلال قوائم منسقة ومعايير متسقة لكل سيارة في السوق.',
+            globalReach: 'وصول عالمي',
+            globalReachDesc: 'تربط CarHub السائقين المحليين بجمهور أوسع من المشترين الجادين عبر المناطق.',
+            fastSearch: 'بحث سريع',
+            fastSearchDesc: 'يساعد التصفية الذكية والاكتشاف البديهي المتسوقين في العثور على السيارة المناسبة دون إضاعة الوقت.',
+            missionTitle: 'مهمتنا',
+            buildTrust: 'بناء الثقة',
+            buildTrustDesc: 'نخلق الثقة من خلال جعل كل قائمة شفافة وسهلة المقارنة وجذابة بصريا.',
+            empowerSellers: 'تمكين البائعين',
+            empowerSellersDesc: 'من الرفع إلى البيع، تحافظ منصتنا على العملية بسيطة بأدوات حديثة ودعم واضح.',
+            delightBuyers: 'إسعاد المشترين',
+            delightBuyersDesc: 'نركز على السرعة والوضوح والعرض المتميز حتى يتمكن المشترون من اتخاذ القرارات بثقة.',
+            joinTitle: 'انضم إلى آلاف صائدي وبائعي السيارات الراضين.',
+            joinDesc: 'مستعد لاستكشاف أفضل مجموعة من القوائم الموثقة؟ تصفح سياراتنا أو انشر سيارتك اليوم.',
+            browseCars: 'تصفح السيارات',
+            sellYourCar: 'بيع سيارتك',
+            footerText: 'CarHub · سوق سيارات حديث تجريبي',
+            login: 'تسجيل الدخول',
+            register: 'التسجيل'
+        },
+        fr: {
+            title: 'A propos · CarHub',
+            sectionLabel: 'A propos de CarHub',
+            mainHeading: 'La confiance pour les acheteurs et les vendeurs.',
+            mainDesc: 'CarHub est un marche automobile concu pour simplifier chaque etape du processus d achat et de vente de voitures. Nous combinons des annonces verifiees avec une experience utilisateur propre pour permettre aux clients de trouver plus rapidement de superbes vehicules.',
+            trustedTitle: 'Annonces de confiance',
+            trustedDesc: 'Chaque vehicule est presente avec des details clairs et des visuels professionnels, aidant les acheteurs a comparer les options en toute confiance.',
+            sellerSupportTitle: 'Support vendeur',
+            sellerSupportDesc: 'Nous facilitons la presentation de votre voiture, la capture de l interet de l acheteur et la presentation de votre annonce dans un format professionnel soigne.',
+            modernExpTitle: 'Experience moderne',
+            modernExpDesc: 'Navigation rapide, design responsive et outils de recherche intuitifs offrent aux acheteurs et aux vendeurs une plateforme raffinee et fiable.',
+            exceptionalTitle: 'Ce qui rend CarHub exceptionnel',
+            verifiedSellers: 'Vendeurs verifies',
+            verifiedSellersDesc: 'Nous maintenons une qualite elevee avec des annonces curetees et des normes coherentes pour chaque voiture sur le marche.',
+            globalReach: 'Portee mondiale',
+            globalReachDesc: 'CarHub connecte les conducteurs locaux a un public plus large d acheteurs serieux dans toutes les regions.',
+            fastSearch: 'Recherche rapide',
+            fastSearchDesc: 'Le filtrage intelligent et la decouverte intuitive aident les acheteurs a trouver la bonne voiture sans perdre de temps.',
+            missionTitle: 'Notre mission',
+            buildTrust: 'Construire la confiance',
+            buildTrustDesc: 'Nous creons la confiance en rendant chaque annonce transparente, facile a comparer et visuellement attrayante.',
+            empowerSellers: 'Autonomiser les vendeurs',
+            empowerSellersDesc: 'Du depot a la vente, notre plateforme maintient le processus simple avec des outils modernes et un support clair.',
+            delightBuyers: 'Ravir les acheteurs',
+            delightBuyersDesc: 'Nous nous concentrons sur la vitesse, la clarte et une presentation premium pour que les acheteurs puissent prendre des decisions en toute confiance.',
+            joinTitle: 'Rejoignez des milliers de chasseurs et vendeurs de voitures satisfaits.',
+            joinDesc: 'Pret a explorer la meilleure selection d annonces verifiees? Parcourez nos voitures ou publiez votre propre vehicule aujourd hui.',
+            browseCars: 'Parcourir les voitures',
+            sellYourCar: 'Vendre votre voiture',
+            footerText: 'CarHub · Demo de marche automobile moderne',
+            login: 'Connexion',
+            register: 'Inscription'
+        }
+    };
+
+    function updateLanguage(lang) {
+        const strings = translations[lang] || translations.en;
+        document.title = strings.title;
+        document.documentElement.lang = lang;
+        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+        const label = document.querySelector('.section-label');
+        if (label) label.textContent = strings.sectionLabel;
+
+        const h1 = document.querySelector('.page-header h1');
+        if (h1) h1.textContent = strings.mainHeading;
+
+        const pageDesc = document.querySelector('.page-header p');
+        if (pageDesc) pageDesc.textContent = strings.mainDesc;
+
+        const cards = document.querySelectorAll('.about-grid .car-card');
+        if (cards[0]) {
+            const h3 = cards[0].querySelector('h3');
+            const p = cards[0].querySelector('p');
+            if (h3) h3.textContent = strings.trustedTitle;
+            if (p) p.textContent = strings.trustedDesc;
+        }
+        if (cards[1]) {
+            const h3 = cards[1].querySelector('h3');
+            const p = cards[1].querySelector('p');
+            if (h3) h3.textContent = strings.sellerSupportTitle;
+            if (p) p.textContent = strings.sellerSupportDesc;
+        }
+        if (cards[2]) {
+            const h3 = cards[2].querySelector('h3');
+            const p = cards[2].querySelector('p');
+            if (h3) h3.textContent = strings.modernExpTitle;
+            if (p) p.textContent = strings.modernExpDesc;
+        }
+
+        const sectionTitles = document.querySelectorAll('.section-title');
+        if (sectionTitles[0]) sectionTitles[0].textContent = strings.exceptionalTitle;
+        if (sectionTitles[1]) sectionTitles[1].textContent = strings.missionTitle;
+
+        const featureCards = document.querySelectorAll('.feature-card');
+        if (featureCards[0]) {
+            const h3 = featureCards[0].querySelector('h3');
+            const p = featureCards[0].querySelector('p');
+            if (h3) h3.textContent = strings.verifiedSellers;
+            if (p) p.textContent = strings.verifiedSellersDesc;
+        }
+        if (featureCards[1]) {
+            const h3 = featureCards[1].querySelector('h3');
+            const p = featureCards[1].querySelector('p');
+            if (h3) h3.textContent = strings.globalReach;
+            if (p) p.textContent = strings.globalReachDesc;
+        }
+        if (featureCards[2]) {
+            const h3 = featureCards[2].querySelector('h3');
+            const p = featureCards[2].querySelector('p');
+            if (h3) h3.textContent = strings.fastSearch;
+            if (p) p.textContent = strings.fastSearchDesc;
+        }
+
+        if (cards[3]) {
+            const h3 = cards[3].querySelector('h3');
+            const p = cards[3].querySelector('p');
+            if (h3) h3.textContent = strings.buildTrust;
+            if (p) p.textContent = strings.buildTrustDesc;
+        }
+        if (cards[4]) {
+            const h3 = cards[4].querySelector('h3');
+            const p = cards[4].querySelector('p');
+            if (h3) h3.textContent = strings.empowerSellers;
+            if (p) p.textContent = strings.empowerSellersDesc;
+        }
+        if (cards[5]) {
+            const h3 = cards[5].querySelector('h3');
+            const p = cards[5].querySelector('p');
+            if (h3) h3.textContent = strings.delightBuyers;
+            if (p) p.textContent = strings.delightBuyersDesc;
+        }
+
+        const joinH2 = document.querySelector('.page-header h2');
+        if (joinH2) joinH2.textContent = strings.joinTitle;
+        const joinDesc = document.querySelectorAll('.page-header p');
+        if (joinDesc[1]) joinDesc[1].textContent = strings.joinDesc;
+
+        const buttons = document.querySelectorAll('.hero-actions .button');
+        if (buttons[0]) buttons[0].textContent = strings.browseCars;
+        if (buttons[1]) buttons[1].textContent = strings.sellYourCar;
+
+        const footerP = document.querySelector('.page-footer p');
+        if (footerP) footerP.textContent = strings.footerText;
+
+        const loginLink = document.querySelector('.button-outline[href="login.html"]');
+        if (loginLink) loginLink.textContent = strings.login;
+        const registerLink = document.querySelector('.button-primary[href="register.html"]');
+        if (registerLink) registerLink.textContent = strings.register;
+
+        const langSelect = document.getElementById('langSelect');
+        if (langSelect) langSelect.value = lang;
+        localStorage.setItem('siteLanguage', lang);
+    }
+
+    const savedLang = localStorage.getItem('siteLanguage') || 'en';
+    updateLanguage(savedLang);
+
+    const langSelect = document.getElementById('langSelect');
+    if (langSelect) {
+        langSelect.addEventListener('change', function(event) {
+            updateLanguage(event.target.value);
+        });
+    }
+</script>
 <script src="js/app.js"></script>
 </body>
 </html>
-

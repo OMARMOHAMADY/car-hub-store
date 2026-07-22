@@ -29,8 +29,13 @@
         </nav>
         <div class="action-buttons">
             <a class="button button-outline" href="login.html">Login</a>
-            <a class="button button-primary" href="register.html">Register</a>`r`n                <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
-        </div>
+            <a class="button button-primary" href="register.html">Register</a>
+            <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
+            <select id="langSelect" class="button button-outline lang-selector" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
+                <option value="fr">Français</option>
+            </select>
         </div>
     </div>
 </header>
@@ -59,21 +64,109 @@
                             <button type="submit" class="button button-primary">Login</button>
                             <a href="register.html" class="button button-outline">Create account</a>
                         </div>
-                    </div>
                 </div>
             </form>
             <p class="form-footer" style="margin-top:12px; color:var(--muted);">
                 Need help? <a href="contact.html">Contact support</a>
             </p>
         </div>
-    </div>
 </main>
 <footer class="page-footer">
     <div class="container">
         <p>CarHub · Modern car marketplace demo</p>
     </div>
 </footer>
+<script>
+    const translations = {
+        en: {
+            title: 'Login · CarHub',
+            heading: 'Welcome Back',
+            desc: 'Sign in to your account and continue browsing top car listings.',
+            emailLabel: 'Email',
+            emailPlaceholder: 'you@domain.com',
+            passwordLabel: 'Password',
+            passwordPlaceholder: 'Password',
+            loginBtn: 'Login',
+            createAccount: 'Create account',
+            footerText: 'CarHub · Modern car marketplace demo',
+            login: 'Login',
+            register: 'Register'
+        },
+        ar: {
+            title: 'تسجيل الدخول · CarHub',
+            heading: 'مرحبا بعودتك',
+            desc: 'قم بتسجيل الدخول إلى حسابك واستمر في تصفح أفضل قوائم السيارات.',
+            emailLabel: 'البريد الإلكتروني',
+            emailPlaceholder: 'you@domain.com',
+            passwordLabel: 'كلمة المرور',
+            passwordPlaceholder: 'كلمة المرور',
+            loginBtn: 'تسجيل الدخول',
+            createAccount: 'إنشاء حساب',
+            footerText: 'CarHub · سوق سيارات حديث تجريبي',
+            login: 'تسجيل الدخول',
+            register: 'التسجيل'
+        },
+        fr: {
+            title: 'Connexion · CarHub',
+            heading: 'Bon retour',
+            desc: 'Connectez-vous a votre compte et continuez a parcourir les meilleures annonces de voitures.',
+            emailLabel: 'Email',
+            emailPlaceholder: 'you@domain.com',
+            passwordLabel: 'Mot de passe',
+            passwordPlaceholder: 'Mot de passe',
+            loginBtn: 'Connexion',
+            createAccount: 'Creer un compte',
+            footerText: 'CarHub · Demo de marche automobile moderne',
+            login: 'Connexion',
+            register: 'Inscription'
+        }
+    };
+
+    function updateLanguage(lang) {
+        const strings = translations[lang] || translations.en;
+        document.title = strings.title;
+        document.documentElement.lang = lang;
+        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+        const h1 = document.querySelector('.form-box h1');
+        if (h1) h1.textContent = strings.heading;
+        const desc = document.querySelector('.form-box > p');
+        if (desc) desc.textContent = strings.desc;
+
+        const labels = document.querySelectorAll('.field span');
+        if (labels[0]) labels[0].textContent = strings.emailLabel;
+        if (labels[1]) labels[1].textContent = strings.passwordLabel;
+
+        const inputs = document.querySelectorAll('.field input');
+        if (inputs[0]) inputs[0].placeholder = strings.emailPlaceholder;
+        if (inputs[1]) inputs[1].placeholder = strings.passwordPlaceholder;
+
+        const loginBtn = document.querySelector('.form-actions .button-primary');
+        if (loginBtn) loginBtn.textContent = strings.loginBtn;
+        const createBtn = document.querySelector('.button-outline[href="register.html"]');
+        if (createBtn) createBtn.textContent = strings.createAccount;
+
+        const footerP = document.querySelector('.page-footer p');
+        if (footerP) footerP.textContent = strings.footerText;
+
+        const loginLink = document.querySelector('.button-outline[href="login.html"]');
+        if (loginLink) loginLink.textContent = strings.login;
+
+        const langSelect = document.getElementById('langSelect');
+        if (langSelect) langSelect.value = lang;
+        localStorage.setItem('siteLanguage', lang);
+    }
+
+    const savedLang = localStorage.getItem('siteLanguage') || 'en';
+    updateLanguage(savedLang);
+
+    const langSelect = document.getElementById('langSelect');
+    if (langSelect) {
+        langSelect.addEventListener('change', function(event) {
+            updateLanguage(event.target.value);
+        });
+    }
+</script>
 <script src="js/app.js"></script>
 </body>
 </html>
-
