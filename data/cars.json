@@ -1,0 +1,388 @@
+[
+  {
+    "id": "bmw-m4",
+    "title": "BMW M4 Competition",
+    "brand": "BMW",
+    "model": "M4 Competition",
+    "year": 2024,
+    "body": "Coupe",
+    "fuel": "Petrol",
+    "transmission": "Automatic",
+    "mileage": 12000,
+    "price": 85000,
+    "location": "Alexandria",
+    "country": "Egypt",
+    "lat": 31.2001,
+    "lng": 29.9187,
+    "description": "Performance appeal with a luxurious cabin and sharp handling.",
+    "longDescription": "This BMW M4 Competition is in exceptional condition with a clean accident record and full service history. The interior is immaculately kept, and the car includes premium options like adaptive cruise control, leather seats, and a digital cockpit. The powerful twin-turbo inline-6 engine delivers breathtaking performance while maintaining everyday usability.",
+    "highlights": [
+      "One owner vehicle with comprehensive maintenance records",
+      "Full exterior and interior detailing completed recently",
+      "Factory warranty still valid through 2027",
+      "Carbon fiber trim and M Sport package"
+    ],
+    "image": "assets/image/1-BMW-M4-review-2024-UK.webp",
+    "images": [
+      "assets/image/1-BMW-M4-review-2024-UK.webp",
+      "assets/image/1-BMW-M4-review-2024-UK.webp"
+    ],
+    "tag": "Best Seller",
+    "featured": true,
+    "dealer": {
+      "name": "Premium Motors Alexandria",
+      "rating": 4.8,
+      "totalSales": 340,
+      "responseTime": "Under 1 hour",
+      "phone": "+201006300508",
+      "email": "premium.alex@carhub.example",
+      "joined": "2021",
+      "logo": ""
+    },
+    "reviews": [
+      { "id": "r1", "user": "Ahmed K.", "rating": 5, "comment": "Incredible car, smooth transaction!", "date": "2024-08-15" },
+      { "id": "r2", "user": "Sara M.", "rating": 4, "comment": "Great condition as described. Highly recommend.", "date": "2024-07-22" }
+    ]
+  },
+  {
+    "id": "audi-rs7",
+    "title": "Audi RS7",
+    "brand": "Audi",
+    "model": "RS7",
+    "year": 2023,
+    "body": "Sedan",
+    "fuel": "Petrol",
+    "transmission": "Automatic",
+    "mileage": 8000,
+    "price": 93000,
+    "location": "Giza",
+    "country": "Egypt",
+    "lat": 29.987,
+    "lng": 31.2118,
+    "description": "A refined sport sedan with elegant style and cutting-edge tech.",
+    "longDescription": "The Audi RS7 combines breathtaking performance with everyday practicality. This example features the premium package with leather seats, Bang & Olufsen sound system, and adaptive air suspension. Finished in a stunning color with minimal mileage.",
+    "highlights": [
+      "Low mileage — only 8,000 KM",
+      "Premium sound system with 3D audio",
+      "Adaptive cruise control with traffic assist",
+      "Full LED matrix headlights"
+    ],
+    "image": "assets/image/audi-rs7-is-the-most-beautiful-car-in-my-heart-v0-ae6jvke2alkf1.webp",
+    "images": [
+      "assets/image/audi-rs7-is-the-most-beautiful-car-in-my-heart-v0-ae6jvke2alkf1.webp",
+      "assets/image/audi-rs7-is-the-most-beautiful-car-in-my-heart-v0-ae6jvke2alkf1.webp"
+    ],
+    "tag": "Luxury",
+    "featured": true,
+    "dealer": {
+      "name": "Giza Auto Elite",
+      "rating": 4.9,
+      "totalSales": 512,
+      "responseTime": "Under 30 min",
+      "phone": "+201006300508",
+      "email": "elite.giza@carhub.example",
+      "joined": "2020"
+    },
+    "reviews": [
+      { "id": "r3", "user": "Omar E.", "rating": 5, "comment": "Best car I've ever owned! Amazing service.", "date": "2024-09-01" }
+    ]
+  },
+  {
+    "id": "mercedes-c63",
+    "title": "Mercedes C63 AMG",
+    "brand": "Mercedes",
+    "model": "C63 AMG",
+    "year": 2023,
+    "body": "Sedan",
+    "fuel": "Petrol",
+    "transmission": "Automatic",
+    "mileage": 5500,
+    "price": 80000,
+    "location": "Cairo",
+    "country": "Egypt",
+    "lat": 30.0444,
+    "lng": 31.2357,
+    "description": "Powerful and polished with an exceptional balance of luxury and performance.",
+    "longDescription": "This Mercedes C63 AMG is the ultimate blend of luxury and performance. The handcrafted V8 engine delivers thunderous power while the cabin provides first-class comfort. Recent service completed and factory warranty active.",
+    "highlights": [
+      "Handcrafted AMG V8 biturbo engine",
+      "Premium interior with Nappa leather",
+      "AMG Performance exhaust system",
+      "Burmester surround sound system"
+    ],
+    "image": "assets/image/2023-Mercedes-AMG-C-63-S-E-PERFORMANCE-00027.jpg",
+    "images": [
+      "assets/image/2023-Mercedes-AMG-C-63-S-E-PERFORMANCE-00027.jpg",
+      "assets/image/2023-Mercedes-AMG-C-63-S-E-PERFORMANCE-00027.jpg"
+    ],
+    "tag": "Featured",
+    "featured": true,
+    "dealer": {
+      "name": "Cairo Luxury Cars",
+      "rating": 4.7,
+      "totalSales": 890,
+      "responseTime": "Under 1 hour",
+      "phone": "+201006300508",
+      "email": "luxury.cairo@carhub.example",
+      "joined": "2019"
+    },
+    "reviews": [
+      { "id": "r4", "user": "Mohamed A.", "rating": 5, "comment": "A beast on the road! Love every drive.", "date": "2024-06-10" },
+      { "id": "r5", "user": "Laila N.", "rating": 4, "comment": "Beautiful car and professional dealer.", "date": "2024-05-18" }
+    ]
+  },
+  {
+    "id": "bmw-320i",
+    "title": "BMW 320i",
+    "brand": "BMW",
+    "model": "320i",
+    "year": 2022,
+    "body": "Sedan",
+    "fuel": "Petrol",
+    "transmission": "Automatic",
+    "mileage": 35000,
+    "price": 45000,
+    "location": "Cairo",
+    "country": "Egypt",
+    "lat": 30.0444,
+    "lng": 31.2357,
+    "description": "Compact luxury with strong efficiency and premium comfort.",
+    "longDescription": "Excellent condition BMW 320i with a clean accident record and full service history. The interior is immaculately kept, and the car includes premium options like adaptive cruise control, leather seats, and a digital cockpit.",
+    "highlights": [
+      "One owner vehicle with comprehensive maintenance records",
+      "Full exterior and interior detailing completed recently",
+      "Factory warranty still valid through 2025",
+      "Fuel-efficient turbocharged inline-4 engine"
+    ],
+    "image": "assets/image/c535495d-c28b-4d73-bb10-16d7ec97fbc1.webp",
+    "images": [
+      "assets/image/c535495d-c28b-4d73-bb10-16d7ec97fbc1.webp",
+      "assets/image/c535495d-c28b-4d73-bb10-16d7ec97fbc1.webp"
+    ],
+    "tag": "",
+    "featured": false,
+    "dealer": {
+      "name": "Cairo Auto Market",
+      "rating": 4.5,
+      "totalSales": 1200,
+      "responseTime": "Under 2 hours",
+      "phone": "+201006300508",
+      "email": "info.cairo@carhub.example",
+      "joined": "2020"
+    },
+    "reviews": []
+  },
+  {
+    "id": "audi-a6",
+    "title": "Audi A6",
+    "brand": "Audi",
+    "model": "A6",
+    "year": 2024,
+    "body": "Sedan",
+    "fuel": "Petrol",
+    "transmission": "Automatic",
+    "mileage": 10000,
+    "price": 30000,
+    "location": "Giza",
+    "country": "Egypt",
+    "lat": 29.987,
+    "lng": 31.2118,
+    "description": "Refined and practical with upscale interior features.",
+    "longDescription": "This Audi A6 offers a perfect balance of luxury and value. With low mileage and full service history, it's ready for a new owner. Features include virtual cockpit, premium audio, and comfortable leather seating.",
+    "highlights": [
+      "Virtual cockpit digital display",
+      "Premium leather seats with heating",
+      "Bang & Olufsen sound system",
+      "Low mileage — only 10,000 KM"
+    ],
+    "image": "assets/image/f68c9779f46b44ae96ba45c91b2b1b51.jpg",
+    "images": [
+      "assets/image/f68c9779f46b44ae96ba45c91b2b1b51.jpg",
+      "assets/image/f68c9779f46b44ae96ba45c91b2b1b51.jpg"
+    ],
+    "tag": "Great Value",
+    "featured": false,
+    "dealer": {
+      "name": "Giza Auto Elite",
+      "rating": 4.9,
+      "totalSales": 512,
+      "responseTime": "Under 30 min",
+      "phone": "+201006300508",
+      "email": "elite.giza@carhub.example",
+      "joined": "2020"
+    },
+    "reviews": [
+      { "id": "r6", "user": "Khaled R.", "rating": 5, "comment": "Excellent value for money. Very happy!", "date": "2024-08-28" }
+    ]
+  },
+  {
+    "id": "mercedes-c-class",
+    "title": "Mercedes C-Class",
+    "brand": "Mercedes",
+    "model": "C-Class",
+    "year": 2023,
+    "body": "Sedan",
+    "fuel": "Petrol",
+    "transmission": "Automatic",
+    "mileage": 20000,
+    "price": 60000,
+    "location": "Cairo",
+    "country": "Egypt",
+    "lat": 30.0444,
+    "lng": 31.2357,
+    "description": "Elegant and smooth with modern technology and comfort.",
+    "longDescription": "This Mercedes C-Class combines elegant design with modern technology. The interior features high-quality materials and the latest MBUX infotainment system. A well-maintained example with complete service records.",
+    "highlights": [
+      "MBUX infotainment with voice control",
+      "64-color ambient lighting",
+      "Active brake assist and safety package",
+      "Panoramic sunroof"
+    ],
+    "image": "assets/image/f8a492ce57718b142cf0754c1b7e4ee0.jpg",
+    "images": [
+      "assets/image/f8a492ce57718b142cf0754c1b7e4ee0.jpg",
+      "assets/image/f8a492ce57718b142cf0754c1b7e4ee0.jpg"
+    ],
+    "tag": "",
+    "featured": false,
+    "dealer": {
+      "name": "Cairo Luxury Cars",
+      "rating": 4.7,
+      "totalSales": 890,
+      "responseTime": "Under 1 hour",
+      "phone": "+201006300508",
+      "email": "luxury.cairo@carhub.example",
+      "joined": "2019"
+    },
+    "reviews": []
+  },
+  {
+    "id": "porsche-911",
+    "title": "Porsche 911 Turbo",
+    "brand": "Porsche",
+    "model": "911 Turbo",
+    "year": 2022,
+    "body": "Coupe",
+    "fuel": "Petrol",
+    "transmission": "Automatic",
+    "mileage": 9200,
+    "price": 140000,
+    "location": "Cairo",
+    "country": "Egypt",
+    "lat": 30.0444,
+    "lng": 31.2357,
+    "description": "An icon of performance with breathtaking acceleration and refined luxury.",
+    "longDescription": "This Porsche 911 Turbo combines breathtaking acceleration with refined luxury. It is fully inspected and offers premium features for an elite driving experience. Exceptional condition with a clean ownership history. Includes premium sport seats, adaptive suspension, and an advanced aerodynamics package.",
+    "highlights": [
+      "Powerful twin-turbocharged flat-six engine",
+      "Sport Chrono package with launch control",
+      "Premium leather interior with carbon trim",
+      "Recent service and detailing completed"
+    ],
+    "image": "assets/image/Artboard-1-1024x576.jpg",
+    "images": [
+      "assets/image/Artboard-1-1024x576.jpg",
+      "assets/image/Artboard-1-1024x576.jpg"
+    ],
+    "tag": "Premium",
+    "featured": true,
+    "dealer": {
+      "name": "Cairo Luxury Cars",
+      "rating": 4.7,
+      "totalSales": 890,
+      "responseTime": "Under 1 hour",
+      "phone": "+201006300508",
+      "email": "luxury.cairo@carhub.example",
+      "joined": "2019"
+    },
+    "reviews": [
+      { "id": "r7", "user": "Youssef H.", "rating": 5, "comment": "Dream car! Everything was perfect.", "date": "2024-07-14" },
+      { "id": "r8", "user": "Nadia F.", "rating": 5, "comment": "Outstanding service and incredible car.", "date": "2024-06-30" }
+    ]
+  },
+  {
+    "id": "tesla-model-s",
+    "title": "Tesla Model S",
+    "brand": "Tesla",
+    "model": "Model S",
+    "year": 2024,
+    "body": "Sedan",
+    "fuel": "Electric",
+    "transmission": "Automatic",
+    "mileage": 4500,
+    "price": 95000,
+    "location": "Giza",
+    "country": "Egypt",
+    "lat": 29.987,
+    "lng": 31.2118,
+    "description": "Premium electric sedan with advanced Autopilot and exceptional acceleration.",
+    "longDescription": "This Model S is a premium electric sedan with advanced Autopilot features and exceptional acceleration. It offers a clean and efficient driving experience with long range and premium comfort. Features include a glass roof, 17-inch display, and premium audio.",
+    "highlights": [
+      "Long-range battery with fast charging capability",
+      "Premium interior with full self-driving ready hardware",
+      "Advanced safety and driver assistance features",
+      "Recently maintained and inspected"
+    ],
+    "image": "assets/image/Tesla Model S Plaid 2023 UK.webp",
+    "images": [
+      "assets/image/Tesla Model S Plaid 2023 UK.webp",
+      "assets/image/Tesla Model S Plaid 2023 UK.webp"
+    ],
+    "tag": "Electric",
+    "featured": true,
+    "dealer": {
+      "name": "Giza Auto Elite",
+      "rating": 4.9,
+      "totalSales": 512,
+      "responseTime": "Under 30 min",
+      "phone": "+201006300508",
+      "email": "elite.giza@carhub.example",
+      "joined": "2020"
+    },
+    "reviews": [
+      { "id": "r9", "user": "Ali Z.", "rating": 5, "comment": "The future of driving! Amazing range.", "date": "2024-09-05" }
+    ]
+  },
+  {
+    "id": "range-rover-sport",
+    "title": "Range Rover Sport",
+    "brand": "Range Rover",
+    "model": "Sport",
+    "year": 2021,
+    "body": "SUV",
+    "fuel": "Petrol",
+    "transmission": "Automatic",
+    "mileage": 28000,
+    "price": 72000,
+    "location": "Alexandria",
+    "country": "Egypt",
+    "lat": 31.2001,
+    "lng": 29.9187,
+    "description": "Luxury SUV with powerful performance and refined design.",
+    "longDescription": "High-end luxury SUV with strong off-road capability and modern tech. Well-maintained with a spacious cabin and premium finishes. Ready for premium family driving, this Range Rover Sport offers luxurious comfort and powerful performance.",
+    "highlights": [
+      "Premium leather interior with heated seats",
+      "Advanced terrain response system",
+      "Large infotainment display and wellness features",
+      "Complete service history and recent inspection"
+    ],
+    "image": "assets/image/usn-5066.webp",
+    "images": [
+      "assets/image/usn-5066.webp",
+      "assets/image/usn-5066.webp"
+    ],
+    "tag": "",
+    "featured": false,
+    "dealer": {
+      "name": "Premium Motors Alexandria",
+      "rating": 4.8,
+      "totalSales": 340,
+      "responseTime": "Under 1 hour",
+      "phone": "+201006300508",
+      "email": "premium.alex@carhub.example",
+      "joined": "2021"
+    },
+    "reviews": []
+  }
+]
+

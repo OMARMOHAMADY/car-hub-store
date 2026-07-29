@@ -162,46 +162,7 @@
         <div class="container">
             <div class="section-title">Popular picks for today</div>
             <p class="section-intro">Handpicked vehicles that combine style, performance, and value.</p>
-            <div class="cars-grid">
-                <article class="car-card">
-                    <img src="assets/image/1-BMW-M4-review-2024-UK.webp" alt="BMW M4 Competition">
-                    <div class="car-card-content">
-                        <span class="card-tag">Best Seller</span>
-                        <h3>BMW M4 Competition</h3>
-                        <p>Performance appeal with a luxurious cabin and sharp handling.</p>
-                        <div class="card-footer">
-                            <strong>$85,000</strong>
-                            <a class="button button-outline" href="car-details-bmw-m4.html">Details</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="car-card">
-                    <img src="assets/image/audi-rs7-is-the-most-beautiful-car-in-my-heart-v0-ae6jvke2alkf1.webp" alt="Audi RS7">
-                    <div class="car-card-content">
-                        <span class="card-tag">Luxury</span>
-                        <h3>Audi RS7</h3>
-                        <p>A refined sport sedan with elegant style and cutting-edge tech.</p>
-                        <div class="card-footer">
-                            <strong>$93,000</strong>
-                            <a class="button button-outline" href="car-details-audi-rs7.html">Details</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="car-card">
-                    <img src="assets/image/2023-Mercedes-AMG-C-63-S-E-PERFORMANCE-00027.jpg" alt="Mercedes C63 AMG">
-                    <div class="car-card-content">
-                        <span class="card-tag">Featured</span>
-                        <h3>Mercedes C63 AMG</h3>
-                        <p>Powerful and polished with an exceptional balance of luxury and performance.</p>
-                        <div class="card-footer">
-                            <strong>$80,000</strong>
-                            <a class="button button-outline" href="car-details-mercedes-c63.html">Details</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
+            <div class="cars-grid" id="featuredCarsGrid"></div>
         </div>
     </section>
 
@@ -209,45 +170,12 @@
     <section class="page-section latest">
         <div class="container">
             <div class="section-title">Latest listings</div>
-            <div class="cars-grid">
-                <article class="car-card small-card">
-                    <img src="assets/image/c535495d-c28b-4d73-bb10-16d7ec97fbc1.webp" alt="BMW 320i">
-                    <div class="car-card-content">
-                        <h3>BMW 320i</h3>
-                        <p>2022 · 35,000 KM · Cairo</p>
-                        <div class="card-footer">
-                            <strong>$45,000</strong>
-                            <a class="button button-outline" href="car-details-bmw-320i.html">Details</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="car-card small-card">
-                    <img src="assets/image/f68c9779f46b44ae96ba45c91b2b1b51.jpg" alt="Audi A6">
-                    <div class="car-card-content">
-                        <h3>Audi A6</h3>
-                        <p>2024 · 10,000 KM · Giza</p>
-                        <div class="card-footer">
-                            <strong>$30,000</strong>
-                            <a class="button button-outline" href="car-details-audi.html">Details</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="car-card small-card">
-                    <img src="assets/image/f8a492ce57718b142cf0754c1b7e4ee0.jpg" alt="Mercedes C-Class">
-                    <div class="car-card-content">
-                        <h3>Mercedes C-Class</h3>
-                        <p>2023 · 20,000 KM · Cairo</p>
-                        <div class="card-footer">
-                            <strong>$60,000</strong>
-                            <a class="button button-outline" href="car-details-mercedes.html">Details</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
+            <div class="cars-grid" id="latestListingsGrid"></div>
         </div>
     </section>
+
+    <!-- RECENTLY VIEWED (dynamic) -->
+    <div id="recentlyViewedContainer"></div>
 </main>
 
 <footer class="page-footer">
@@ -484,6 +412,8 @@
         });
     }
 </script>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

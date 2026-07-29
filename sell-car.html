@@ -90,10 +90,48 @@
                             <input id="photoInput" type="file" name="photo" accept="image/*" required>
                             <div class="file-hint">PNG/JPG up to 10MB</div>
                         </label>
+                        <div class="image-preview" id="imagePreview">
+                            <img src="" alt="Preview" style="display:none;">
+                        </div>
 
                         <label class="field">
                             <span>Contact Phone</span>
-                            <input type="text" name="phone" placeholder="Optional" >
+                            <input type="text" name="phone" placeholder="Optional">
+                        </label>
+
+                        <label class="field">
+                            <span>Dealer/Your Name</span>
+                            <input type="text" name="dealerName" placeholder="Your name or dealership">
+                        </label>
+
+                        <label class="field">
+                            <span>Body Type</span>
+                            <select name="body">
+                                <option value="Sedan">Sedan</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Coupe">Coupe</option>
+                                <option value="Hatchback">Hatchback</option>
+                                <option value="Convertible">Convertible</option>
+                                <option value="Wagon">Wagon</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Fuel Type</span>
+                            <select name="fuel">
+                                <option value="Petrol">Petrol</option>
+                                <option value="Diesel">Diesel</option>
+                                <option value="Electric">Electric</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Transmission</span>
+                            <select name="transmission">
+                                <option value="Automatic">Automatic</option>
+                                <option value="Manual">Manual</option>
+                            </select>
                         </label>
                     </aside>
                 </div>
@@ -272,6 +310,8 @@
         });
     }
 </script>
+<script src="js/data.js"></script>
+<script src="js/sell-car.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
