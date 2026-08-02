@@ -22,6 +22,11 @@ const CarHubComponents = {
             <strong>$${price}</strong>
             <a class="button button-outline" href="car-details.html?id=${car.id}">Details</a>
           </div>
+          <div style="margin-top:10px;">
+            <button class="add-cart-btn" data-car-id="${car.id}" data-car-title="${car.title}" style="width:100%;">
+              <i class="fa-solid fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
         </div>
       </article>
     `;
@@ -130,6 +135,9 @@ const CarHubComponents = {
         <div class="summary-actions">
           <div class="action-row">
             <button id="contactSellerBtn" class="button button-primary">Contact Seller</button>
+            <button id="addToCartBtn" class="button button-outline add-cart-btn-detail" data-car-id="${car.id}" data-car-title="${car.title}">
+              <i class="fa-solid fa-cart-plus"></i> Add to Cart
+            </button>
             <a href="cars.html" class="button button-outline">See other listings</a>
           </div>
           <div class="action-secondary">

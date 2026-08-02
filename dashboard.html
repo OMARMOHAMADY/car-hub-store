@@ -30,6 +30,10 @@
             <div class="action-buttons">
                 <a class="button button-outline" href="login.html" id="loginNavBtn">Login</a>
                 <a class="button button-primary" href="register.html" id="registerNavBtn">Register</a>
+                <a href="cart.html" class="cart-badge" id="cartBadge" style="display:none;" aria-label="Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge-count" id="cartBadgeCount">0</span>
+                </a>
                 <div class="user-badge" id="userBadge" style="display:none;">
                     <button class="user-badge-toggle" type="button" aria-haspopup="true" aria-expanded="false">
                         <span class="user-badge-avatar" id="userBadgeAvatar">U</span>
@@ -46,8 +50,9 @@
                     <option value="en">English</option>
                     <option value="ar">العربية</option>
                     <option value="fr">Français</option>
-                </select>
-            </div>
+            </select>
+        </div>
+    </div>
     </div>
 </header>
 
@@ -184,6 +189,7 @@
 <script src="js/auth.js"></script>
 <script src="js/data.js"></script>
 <script src="js/components.js"></script>
+<script src="js/cart.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', async () => {
     // ===== Guard: redirect to login if not authenticated =====

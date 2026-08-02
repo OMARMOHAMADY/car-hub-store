@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart · CarHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+        <a class="logo" href="index.html"><i class="fa-solid fa-car"></i>CarHub</a>
+        <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="header-actions">
+            <nav class="navbar">
+                <a href="index.html">Home</a>
+                <a href="cars.html">Cars</a>
+                <a href="sell-car.html">Sell</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="action-buttons">
+                <a class="button button-outline" href="login.html" id="loginNavBtn">Login</a>
+                <a class="button button-primary" href="register.html" id="registerNavBtn">Register</a>
+                <a href="cart.html" class="cart-badge" id="cartBadge" style="display:none;" aria-label="Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge-count" id="cartBadgeCount">0</span>
+                </a>
+                <div class="user-badge" id="userBadge" style="display:none;">
+                    <button class="user-badge-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="user-badge-avatar" id="userBadgeAvatar">U</span>
+                        <span class="user-badge-name" id="userBadgeName">User</span>
+                        <i class="fa-solid fa-chevron-down user-badge-caret"></i>
+                    </button>
+                    <div class="user-badge-dropdown">
+                        <a href="dashboard.html" class="user-badge-item"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                        <button type="button" class="user-badge-item user-badge-logout" id="userBadgeLogout"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
+                    </div>
+                </div>
+                <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
+                <select id="langSelect" class="button button-outline lang-selector" aria-label="Language selector">
+                    <option value="en">English</option>
+                    <option value="ar">العربية</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="page-section">
+    <div class="container">
+        <div class="page-header">
+            <div>
+                <span class="section-label">Shopping Cart</span>
+                <h1>Your Cart</h1>
+                <p>Review the cars you've added and complete your purchase with confidence.</p>
+            </div>
+        </div>
+
+        <!-- Cart Content -->
+        <div id="cartContent">
+            <div class="search-empty">
+                <i class="fa-solid fa-cart-shopping" style="font-size:2.5rem;color:var(--primary);margin-bottom:16px;display:block;"></i>
+                <h2 style="margin-bottom:8px;">Loading your cart...</h2>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="page-footer">
+    <div class="container">
+        <p>CarHub · Modern car marketplace demo</p>
+    </div>
+</footer>
+
+<script src="js/auth.js"></script>
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/app.js"></script>
+<script>
+    // ============================================================
+    // Cart Page Rendering
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', async () => {
+        const cartContent = document.getElementById('cartContent');
+        if (!cartContent) return;
+
+        const renderCart = async () => {
+            try {
+                const items = await CarHubCart.getDetailedCart();
+                const total = await CarHubCart.getTotal();
+
+                if (!items || items.length === 0) {
+                    cartContent.innerHTML = `
+                        <div class="search-empty">
+                            <i class="fa-solid fa-cart-shopping" style="font-size:2.5rem;color:var(--primary);margin-bottom:16px;display:block;"></i>
+                            <h2 style="margin-bottom:8px;">Your cart is empty</h2>
+                            <p style="margin-bottom:20px;">Looks like you haven't added any cars yet. Browse our listings and find your dream car.</p>
+                            <a href="cars.html" class="button button-primary">Browse Cars</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const itemsHtml = items.map((car) => {
+                    const price = Number(car.price).toLocaleString();
+                    const lineTotal = (Number(car.price) * car.quantity).toLocaleString();
+                    return `
+                        <div class="cart-item" data-car-id="${car.id}">
+                            <img src="${car.image}" alt="${car.title}" class="cart-item-image">
+                            <div class="cart-item-info">
+                                <h3>${car.title}</h3>
+                                <p class="cart-item-meta">${car.year} · ${car.body} · ${car.location}</p>
+                                <div class="cart-item-price">$${price}</div>
+                            </div>
+                            <div class="cart-item-controls">
+                                <div class="cart-qty-control">
+                                    <button class="cart-qty-btn" data-action="dec" data-id="${car.id}" aria-label="Decrease quantity">−</button>
+                                    <span class="cart-qty-value">${car.quantity}</span>
+                                    <button class="cart-qty-btn" data-action="inc" data-id="${car.id}" aria-label="Increase quantity">+</button>
+                                </div>
+                                <div class="cart-item-line-total">$${lineTotal}</div>
+                                <button class="cart-remove-btn" data-id="${car.id}" aria-label="Remove from cart">
+                                    <i class="fa-regular fa-trash-can"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                cartContent.innerHTML = `
+                    <div class="cart-layout">
+                        <div class="cart-items-list">
+                            ${itemsHtml}
+                        </div>
+                        <aside class="cart-summary-box">
+                            <h3>Order Summary</h3>
+                            <div class="cart-summary-row">
+                                <span>Items</span>
+                                <strong>${items.length}</strong>
+                            </div>
+                            <div class="cart-summary-row">
+                                <span>Total</span>
+                                <strong>$${total.toLocaleString()}</strong>
+                            </div>
+                            <button id="checkoutBtn" class="button button-primary" style="width:100%;margin-top:16px;">
+                                <i class="fa-solid fa-lock"></i> Checkout
+                            </button>
+                            <button id="clearCartBtn" class="button button-outline" style="width:100%;margin-top:10px;">
+                                <i class="fa-regular fa-trash-can"></i> Clear Cart
+                            </button>
+                            <a href="cars.html" class="button button-outline" style="width:100%;margin-top:10px;">
+                                Continue Shopping
+                            </a>
+                        </aside>
+                    </div>
+                `;
+
+                // Bind events
+                cartContent.querySelectorAll('.cart-qty-btn').forEach((btn) => {
+                    btn.addEventListener('click', async () => {
+                        const id = btn.dataset.id;
+                        const item = items.find(i => i.id === id);
+                        if (!item) return;
+                        const newQty = btn.dataset.action === 'inc' ? item.quantity + 1 : item.quantity - 1;
+                        if (newQty < 1) return;
+                        await CarHubCart.updateQuantity(id, newQty);
+                        await renderCart();
+                    });
+                });
+
+                cartContent.querySelectorAll('.cart-remove-btn').forEach((btn) => {
+                    btn.addEventListener('click', async () => {
+                        await CarHubCart.removeItem(btn.dataset.id);
+                        await renderCart();
+                    });
+                });
+
+                const checkoutBtn = document.getElementById('checkoutBtn');
+                if (checkoutBtn) {
+                    checkoutBtn.addEventListener('click', () => {
+                        alert('Checkout is a demo feature in this version.\n\nYour order total: $' + total.toLocaleString() + '\n\nThank you for shopping with CarHub!');
+                    });
+                }
+
+                const clearCartBtn = document.getElementById('clearCartBtn');
+                if (clearCartBtn) {
+                    clearCartBtn.addEventListener('click', async () => {
+                        if (confirm('Are you sure you want to clear your cart?')) {
+                            await CarHubCart.clearCart();
+                            await renderCart();
+                        }
+                    });
+                }
+
+            } catch (err) {
+                console.error('Failed to render cart:', err);
+                cartContent.innerHTML = `
+                    <div class="search-empty">
+                        <h2>Error loading cart</h2>
+                        <p>Something went wrong. Please try again later.</p>
+                    </div>
+                `;
+            }
+        };
+
+        await renderCart();
+
+        // Re-render cart when cart changes
+        window.addEventListener('cartChanged', renderCart);
+    });
+</script>
+</body>
+</html>
+

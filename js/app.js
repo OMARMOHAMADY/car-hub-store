@@ -252,6 +252,45 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateCompareBadgeCount();
 
   /********************************************************************
+   * SECTION 5.5: Add to Cart Buttons
+   ********************************************************************/
+
+  function initAddToCartButton(btn) {
+    if (!btn || btn.dataset.cartBound) return;
+    btn.dataset.cartBound = 'true';
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const carId = btn.dataset.carId;
+      if (!carId) return;
+      try {
+        await CarHubCart.addItem(carId);
+        btn.classList.add('added');
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Added';
+        // Dispatch cart event
+        window.dispatchEvent(new CustomEvent('cartChanged'));
+        setTimeout(() => {
+          btn.classList.remove('added');
+          btn.innerHTML = '<i class="fa-solid fa-cart-plus"></i> Add to Cart';
+        }, 1600);
+      } catch (err) {
+        console.error('Failed to add to cart:', err);
+        alert('Could not add the car to your cart. Please try again.');
+      }
+    });
+  }
+
+  // Bind any static add-cart buttons present in the DOM
+  document.querySelectorAll('.add-cart-btn, .add-cart-btn-detail').forEach(initAddToCartButton);
+
+  // Re-bind when cards are re-rendered (after async renders complete)
+  window.addEventListener('cartChanged', () => {
+    // no-op; buttons re-bound via render functions
+  });
+
+  // Expose so render functions can re-init after rendering
+  window.initAddToCartButton = initAddToCartButton;
+
+  /********************************************************************
    * SECTION 6: Contact Seller Button
    ********************************************************************/
 
@@ -287,6 +326,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       const featured = await CarHubData.getFeaturedCars();
       featuredGrid.innerHTML = featured.map(c => CarHubComponents.renderCarCard(c)).join('');
+      featuredGrid.querySelectorAll('.add-cart-btn, .add-cart-btn-detail').forEach(initAddToCartButton);
     } catch (err) {
       console.error('Failed to load featured cars:', err);
     }
@@ -300,6 +340,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const allCars = await CarHubData.getAllCars();
       const latest = allCars.slice(0, 6);
       latestGrid.innerHTML = latest.map(c => CarHubComponents.renderCarCard(c, { size: 'small' })).join('');
+      latestGrid.querySelectorAll('.add-cart-btn, .add-cart-btn-detail').forEach(initAddToCartButton);
     } catch (err) {
       console.error('Failed to load latest listings:', err);
     }
@@ -316,6 +357,72 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (err) {
       console.error('Failed to load recently viewed:', err);
     }
+  }
+
+  /********************************************************************
+   * SECTION 7.5: Homepage Search Box (index.html)
+   ********************************************************************/
+  const searchResultsEl = document.getElementById('searchResults');
+  if (searchResultsEl) {
+    const searchBrand = document.getElementById('searchBrand');
+    const searchBody = document.getElementById('searchBody');
+    const searchPrice = document.getElementById('searchPrice');
+    const searchKeyword = document.getElementById('searchKeyword');
+    const searchButton = document.getElementById('searchButton');
+    const clearSearchBtn = document.getElementById('clearSearch');
+    const searchMeta = document.getElementById('searchMeta');
+
+    const priceMap = {
+      'under-30000': { min: 0, max: 30000 },
+      '30-60000': { min: 30000, max: 60000 },
+      'over-60000': { min: 60000, max: Infinity }
+    };
+
+    const runHomeSearch = async () => {
+      showSkeletonLoad(searchResultsEl, 6);
+      const filters = {};
+      if (searchKeyword && searchKeyword.value.trim()) filters.keyword = searchKeyword.value.trim();
+      if (searchBrand && searchBrand.value) filters.brand = searchBrand.value;
+      if (searchBody && searchBody.value) filters.body = searchBody.value;
+      if (searchPrice && searchPrice.value && priceMap[searchPrice.value]) {
+        filters.priceMin = priceMap[searchPrice.value].min;
+        filters.priceMax = priceMap[searchPrice.value].max;
+      }
+      try {
+        const results = await CarHubData.searchCars(filters);
+        if (results.length === 0) {
+          searchResultsEl.innerHTML = '<div class="search-empty">No listings match your filters. Try adjusting your selection.</div>';
+        } else {
+          searchResultsEl.innerHTML = results.map(c => CarHubComponents.renderSearchResultCard(c)).join('');
+        }
+        searchResultsEl.querySelectorAll('.add-cart-btn, .add-cart-btn-detail').forEach(initAddToCartButton);
+        if (searchMeta) searchMeta.textContent = `Showing ${results.length} car${results.length !== 1 ? 's' : ''}`;
+      } catch (err) {
+        console.error('Homepage search failed:', err);
+        searchResultsEl.innerHTML = '<div class="search-empty">Error loading cars. Please try again.</div>';
+      }
+    };
+
+    if (searchButton) searchButton.addEventListener('click', runHomeSearch);
+    if (searchKeyword) {
+      searchKeyword.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); runHomeSearch(); }
+      });
+    }
+    if (searchBrand) searchBrand.addEventListener('change', runHomeSearch);
+    if (searchBody) searchBody.addEventListener('change', runHomeSearch);
+    if (searchPrice) searchPrice.addEventListener('change', runHomeSearch);
+    if (clearSearchBtn) {
+      clearSearchBtn.addEventListener('click', () => {
+        if (searchKeyword) searchKeyword.value = '';
+        if (searchBrand) searchBrand.value = '';
+        if (searchBody) searchBody.value = '';
+        if (searchPrice) searchPrice.value = '';
+        runHomeSearch();
+      });
+    }
+    // Initial render (show all cars)
+    runHomeSearch();
   }
 
   /********************************************************************
@@ -442,9 +549,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (carsResultsCount) {
         carsResultsCount.textContent = `Showing ${results.length} car${results.length !== 1 ? 's' : ''}`;
       }
-      // Re-init favorite/compare buttons on newly rendered cards
+      // Re-init favorite/compare/add-cart buttons on newly rendered cards
       carsListContainer.querySelectorAll('.fav-btn').forEach(initFavoriteButton);
       carsListContainer.querySelectorAll('.compare-btn').forEach(initCompareButton);
+      carsListContainer.querySelectorAll('.add-cart-btn, .add-cart-btn-detail').forEach(initAddToCartButton);
     } catch (err) {
       console.error('Failed to render cars:', err);
       carsListContainer.innerHTML = '<div class="search-empty">Error loading cars. Please try again.</div>';
@@ -536,6 +644,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           detailsContainer.querySelectorAll('.fav-btn').forEach(initFavoriteButton);
           detailsContainer.querySelectorAll('.compare-btn').forEach(initCompareButton);
           detailsContainer.querySelectorAll('.share-btn').forEach(shareBtnInit);
+          detailsContainer.querySelectorAll('.add-cart-btn, .add-cart-btn-detail').forEach(initAddToCartButton);
 
           // Contact seller
           const contactBtn = document.getElementById('contactSellerBtn');
