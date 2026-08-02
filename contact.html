@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact · CarHub</title>
+    <meta name="description" content="Contact CarHub for support, listing help, or general inquiries. Fast responses from our team.">
+    <meta property="og:title" content="Contact · CarHub">
+    <meta property="og:description" content="Contact CarHub for support or listing help.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,209 +59,190 @@
     </div>
 </header>
 <main class="page-section form-section">
-    <div class="container">
-        <div class="form-box">
-            <h1>Contact Us</h1>
-            <p>Have a question or need help with a listing? Send us a message and we will respond quickly.</p>
-            <form id="contactForm">
-                <div class="form-grid">
-                    <div class="col">
-                        <label class="field">
-                            <span>Name</span>
-                            <input type="text" name="name" placeholder="Your Name" required>
-                        </label>
+    <div class="container contact-page">
+        <section class="contact-intro">
+            <div class="section-heading">
+                <p class="eyebrow">Need Help?</p>
+                <h1>Contact Us</h1>
+                <p>Have a question or need help with a listing? Send us a message and we will respond quickly.</p>
+            </div>
+        </section>
 
-                        <label class="field">
-                            <span>Email</span>
-                            <input type="email" name="email" placeholder="Your Email" required>
-                        </label>
+        <section class="contact-content grid-two-col">
+            <article class="contact-form-card">
+                <h2>Send us a message</h2>
+                <form id="contactForm" class="contact-form">
+                    <label class="field">
+                        <span>Name</span>
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </label>
+                    <label class="field">
+                        <span>Email</span>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </label>
+                    <label class="field">
+                        <span>Message</span>
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                    </label>
+                    <div class="form-actions">
+                        <button type="submit" class="button button-primary">Send Message</button>
+                    </div>
+                </form>
+            </article>
 
-                        <label class="field">
-                            <span>Message</span>
-                            <textarea name="message" placeholder="Your Message" required></textarea>
-                        </label>
-
-                        <div class="form-actions">
-                            <button type="submit" class="button button-primary">Send Message</button>
-                        </div>
-
-                    <aside class="col">
-                        <div style="padding:18px; border-radius:12px; background:var(--surface-soft); border:1px solid var(--border); margin-bottom:20px;">
-                            <h4 style="margin:0 0 8px;">Get in touch</h4>
-                            <p style="margin:0 0 8px; color:var(--muted);">Email: omarelmohamady2012@gmail.com</p>
-                            <p style="margin:0; color:var(--muted);">Phone: +2 (100-630-0508)</p>
-                        </div>
-                        <div style="padding:18px; border-radius:12px; background:var(--surface-soft); border:1px solid var(--border);">
-                            <h4 style="margin:0 0 12px;">Payment Methods</h4>
-                            <p style="margin:0 0 16px; color:var(--muted);">Choose a secure payment option for booking fees, deposits, or premium support.</p>
-                            <div style="display:grid; gap:12px;">
-                                <div style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; background:var(--surface); border:1px solid var(--border);">
-                                    <i class="fa-brands fa-cc-visa" style="font-size:1.2rem;"></i>
-                                    <span>Visa / Mastercard</span>
-                                </div>
-                                <div style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; background:var(--surface); border:1px solid var(--border);">
-                                    <i class="fa-brands fa-cc-paypal" style="font-size:1.2rem;"></i>
-                                    <span>PayPal</span>
-                                </div>
-                                <div style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; background:var(--surface); border:1px solid var(--border);">
-                                    <i class="fa-brands fa-cc-apple-pay" style="font-size:1.2rem;"></i>
-                                    <span>Apple Pay</span>
-                                </div>
-                                <div style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; background:var(--surface); border:1px solid var(--border);">
-                                    <i class="fa-solid fa-wallet" style="font-size:1.2rem;"></i>
-                                    <span>Bank Transfer</span>
-                                </div>
-                        </div>
-                    </aside>
+            <aside class="contact-info-card">
+                <div class="info-block">
+                    <h3>Get in touch</h3>
+                    <p>Email: <a href="mailto:omarelmohamady2012@gmail.com">omarelmohamady2012@gmail.com</a></p>
+                    <p>Phone: <a href="tel:+21006300508">+2 (100-630-0508)</a></p>
                 </div>
-            </form>
-        </div>
+                <div class="info-block">
+                    <h3>Payment Methods</h3>
+                    <p>Choose a secure payment option for booking fees, deposits, or premium support.</p>
+                    <ul class="payment-methods">
+                        <li><i class="fa-brands fa-cc-visa"></i> Visa / Mastercard</li>
+                        <li><i class="fa-brands fa-cc-paypal"></i> PayPal</li>
+                        <li><i class="fa-brands fa-cc-apple-pay"></i> Apple Pay</li>
+                        <li><i class="fa-solid fa-wallet"></i> Bank Transfer</li>
+                    </ul>
+                </div>
+            </aside>
+        </section>
+    </div>
 </main>
 <footer class="page-footer">
     <div class="container">
         <p>CarHub · Modern car marketplace demo</p>
     </div>
 </footer>
-<script>
-    const translations = {
-        en: {
-            title: 'Contact · CarHub',
-            contactHeading: 'Contact Us',
-            contactDesc: 'Have a question or need help with a listing? Send us a message and we will respond quickly.',
-            nameLabel: 'Name',
-            namePlaceholder: 'Your Name',
-            emailLabel: 'Email',
-            emailPlaceholder: 'Your Email',
-            messageLabel: 'Message',
-            messagePlaceholder: 'Your Message',
-            sendMessage: 'Send Message',
-            getInTouch: 'Get in touch',
-            contactEmail: 'Email: omarelmohamady2012@gmail.com',
-            contactPhone: 'Phone: +2 (100-630-0508)',
-            paymentTitle: 'Payment Methods',
-            paymentDesc: 'Choose a secure payment option for booking fees, deposits, or premium support.',
-            visaMc: 'Visa / Mastercard',
-            paypal: 'PayPal',
-            applePay: 'Apple Pay',
-            bankTransfer: 'Bank Transfer',
-            footerText: 'CarHub · Modern car marketplace demo',
-            login: 'Login',
-            register: 'Register'
-        },
-        ar: {
-            title: 'اتصل بنا · CarHub',
-            contactHeading: 'اتصل بنا',
-            contactDesc: 'هل لديك سؤال أو تحتاج مساعدة في إعلان؟ أرسل لنا رسالة وسنرد بسرعة.',
-            nameLabel: 'الاسم',
-            namePlaceholder: 'اسمك',
-            emailLabel: 'البريد الإلكتروني',
-            emailPlaceholder: 'بريدك الإلكتروني',
-            messageLabel: 'الرسالة',
-            messagePlaceholder: 'رسالتك',
-            sendMessage: 'إرسال الرسالة',
-            getInTouch: 'تواصل معنا',
-            contactEmail: 'البريد الإلكتروني: omarelmohamady2012@gmail.com',
-            contactPhone: 'الهاتف: +2 (100-630-0508)',
-            paymentTitle: 'طرق الدفع',
-            paymentDesc: 'اختر خيار دفع آمن لرسوم الحجز أو الودائع أو الدعم المميز.',
-            visaMc: 'فيزا / ماستركارد',
-            paypal: 'باي بال',
-            applePay: 'أبل باي',
-            bankTransfer: 'تحويل بنكي',
-            footerText: 'CarHub · سوق سيارات حديث تجريبي',
-            login: 'تسجيل الدخول',
-            register: 'التسجيل'
-        },
-        fr: {
-            title: 'Contact · CarHub',
-            contactHeading: 'Contactez-nous',
-            contactDesc: 'Vous avez une question ou besoin d aide pour une annonce? Envoyez-nous un message et nous repondrons rapidement.',
-            nameLabel: 'Nom',
-            namePlaceholder: 'Votre nom',
-            emailLabel: 'Email',
-            emailPlaceholder: 'Votre email',
-            messageLabel: 'Message',
-            messagePlaceholder: 'Votre message',
-            sendMessage: 'Envoyer le message',
-            getInTouch: 'Contactez-nous',
-            contactEmail: 'Email: omarelmohamady2012@gmail.com',
-            contactPhone: 'Telephone: +2 (100-630-0508)',
-            paymentTitle: 'Moyens de paiement',
-            paymentDesc: 'Choisissez une option de paiement securisee pour les frais de reservation, les depots ou le support premium.',
-            visaMc: 'Visa / Mastercard',
-            paypal: 'PayPal',
-            applePay: 'Apple Pay',
-            bankTransfer: 'Virement bancaire',
-            footerText: 'CarHub · Demo de marche automobile moderne',
-            login: 'Connexion',
-            register: 'Inscription'
+
+<div id="carhub-toast-container" class="toast-container" aria-hidden="true"></div>
+
+<script type="module">
+import { showToast } from './js/toast.module.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+            showToast('Please complete all required fields.', 'error');
+            return;
         }
-    };
+        // Simulated send (replace with fetch to your backend if available)
+        showToast('Message sent — we will get back to you soon.', 'success');
+        form.reset();
+    });
+});
+</script>
 
-    function updateLanguage(lang) {
-        const strings = translations[lang] || translations.en;
-        document.title = strings.title;
-        document.documentElement.lang = lang;
-        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+<!-- Modules -->
+<script type="module" src="js/toast.module.js"></script>
+<script type="module" src="js/cart.module.js"></script>
+<script type="module" src="js/main.module.js"></script>
+<script type="module" src="js/modal.module.js"></script>
+<script type="module" src="js/filter.module.js"></script>
 
-        const heading = document.querySelector('.form-box h1');
-        if (heading) heading.textContent = strings.contactHeading;
-
-        const desc = document.querySelector('.form-box > p');
-        if (desc) desc.textContent = strings.contactDesc;
-
-        const labels = document.querySelectorAll('.field span');
-        if (labels[0]) labels[0].textContent = strings.nameLabel;
-        if (labels[1]) labels[1].textContent = strings.emailLabel;
-        if (labels[2]) labels[2].textContent = strings.messageLabel;
-
-        const inputs = document.querySelectorAll('.field input, .field textarea');
-        if (inputs[0]) inputs[0].placeholder = strings.namePlaceholder;
-        if (inputs[1]) inputs[1].placeholder = strings.emailPlaceholder;
-        if (inputs[2]) inputs[2].placeholder = strings.messagePlaceholder;
-
-        const sendBtn = document.querySelector('.form-actions .button-primary');
-        if (sendBtn) sendBtn.textContent = strings.sendMessage;
-
-        const asideH4s = document.querySelectorAll('aside .col h4, aside h4');
-        if (asideH4s[0]) asideH4s[0].textContent = strings.getInTouch;
-        if (asideH4s[1]) asideH4s[1].textContent = strings.paymentTitle;
-
-        const contactPs = document.querySelectorAll('aside .col p');
-        if (contactPs[0]) contactPs[0].innerHTML = strings.contactEmail;
-        if (contactPs[1]) contactPs[1].innerHTML = strings.contactPhone;
-
-        const paymentDesc = document.querySelectorAll('aside .col > div:last-child > p');
-        if (paymentDesc[0]) paymentDesc[0].textContent = strings.paymentDesc;
-
-        const paySpans = document.querySelectorAll('aside .col > div:last-child span');
-        if (paySpans[0]) paySpans[0].textContent = strings.visaMc;
-        if (paySpans[1]) paySpans[1].textContent = strings.paypal;
-        if (paySpans[2]) paySpans[2].textContent = strings.applePay;
-        if (paySpans[3]) paySpans[3].textContent = strings.bankTransfer;
-
-        const footerP = document.querySelector('.page-footer p');
-        if (footerP) footerP.textContent = strings.footerText;
-
-        const loginLink = document.querySelector('.button-outline[href="login.html"]');
-        if (loginLink) loginLink.textContent = strings.login;
-        const registerLink = document.querySelector('.button-primary[href="register.html"]');
-        if (registerLink) registerLink.textContent = strings.register;
-
-        const langSelect = document.getElementById('langSelect');
-        if (langSelect) langSelect.value = lang;
-        localStorage.setItem('siteLanguage', lang);
+<script>
+const translations = {
+    en: {
+        title: 'Contact · CarHub',
+        heading: 'Contact Us',
+        description: 'Have a question or need help with a listing? Send us a message and we will respond quickly.',
+        nameLabel: 'Name',
+        namePlaceholder: 'Your Name',
+        emailLabel: 'Email',
+        emailPlaceholder: 'Your Email',
+        messageLabel: 'Message',
+        messagePlaceholder: 'Your Message',
+        sendMessage: 'Send Message',
+        getInTouch: 'Get in touch',
+        paymentTitle: 'Payment Methods',
+        emailText: 'Email: <a href="mailto:omarelmohamady2012@gmail.com">omarelmohamady2012@gmail.com</a>',
+        phoneText: 'Phone: <a href="tel:+21006300508">+2 (100-630-0508)</a>',
+        paymentDesc: 'Choose a secure payment option for booking fees, deposits, or premium support.',
+        footerText: 'CarHub · Modern car marketplace demo',
+        login: 'Login',
+        register: 'Register'
+    },
+    ar: {
+        title: 'اتصل بنا · CarHub',
+        heading: 'اتصل بنا',
+        description: 'هل لديك سؤال أو تحتاج مساعدة في إعلان؟ أرسل لنا رسالة وسنرد بسرعة.',
+        nameLabel: 'الاسم',
+        namePlaceholder: 'اسمك',
+        emailLabel: 'البريد الإلكتروني',
+        emailPlaceholder: 'بريدك الإلكتروني',
+        messageLabel: 'الرسالة',
+        messagePlaceholder: 'رسالتك',
+        sendMessage: 'إرسال الرسالة',
+        getInTouch: 'تواصل معنا',
+        paymentTitle: 'طرق الدفع',
+        emailText: 'البريد الإلكتروني: <a href="mailto:omarelmohamady2012@gmail.com">omarelmohamady2012@gmail.com</a>',
+        phoneText: 'الهاتف: <a href="tel:+21006300508">+2 (100-630-0508)</a>',
+        paymentDesc: 'اختر خيار دفع آمن لرسوم الحجز أو الودائع أو الدعم المميز.',
+        footerText: 'CarHub · سوق سيارات حديث تجريبي',
+        login: 'تسجيل الدخول',
+        register: 'التسجيل'
+    },
+    fr: {
+        title: 'Contact · CarHub',
+        heading: 'Contactez-nous',
+        description: 'Vous avez une question ou besoin d aide pour une annonce? Envoyez-nous un message et nous repondrons rapidement.',
+        nameLabel: 'Nom',
+        namePlaceholder: 'Votre nom',
+        emailLabel: 'Email',
+        emailPlaceholder: 'Votre email',
+        messageLabel: 'Message',
+        messagePlaceholder: 'Votre message',
+        sendMessage: 'Envoyer le message',
+        getInTouch: 'Contactez-nous',
+        paymentTitle: 'Moyens de paiement',
+        emailText: 'Email: <a href="mailto:omarelmohamady2012@gmail.com">omarelmohamady2012@gmail.com</a>',
+        phoneText: 'Telephone: <a href="tel:+21006300508">+2 (100-630-0508)</a>',
+        paymentDesc: 'Choisissez une option de paiement securisee pour les frais de reservation, les depots ou le support premium.',
+        footerText: 'CarHub · Demo de marche automobile moderne',
+        login: 'Connexion',
+        register: 'Inscription'
     }
+};
 
+function updateLanguage(lang) {
+    const strings = translations[lang] || translations.en;
+    document.title = strings.title;
+    document.documentElement.lang = lang;
+    document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    document.querySelector('.section-heading h1').textContent = strings.heading;
+    document.querySelector('.section-heading p').textContent = strings.description;
+    document.querySelector('.contact-form-card label:nth-of-type(1) span').textContent = strings.nameLabel;
+    document.querySelector('.contact-form-card label:nth-of-type(1) input').placeholder = strings.namePlaceholder;
+    document.querySelector('.contact-form-card label:nth-of-type(2) span').textContent = strings.emailLabel;
+    document.querySelector('.contact-form-card label:nth-of-type(2) input').placeholder = strings.emailPlaceholder;
+    document.querySelector('.contact-form-card label:nth-of-type(3) span').textContent = strings.messageLabel;
+    document.querySelector('.contact-form-card label:nth-of-type(3) textarea').placeholder = strings.messagePlaceholder;
+    document.querySelector('.form-actions .button-primary').textContent = strings.sendMessage;
+    document.querySelector('.contact-info-card .info-block:nth-of-type(1) h3').textContent = strings.getInTouch;
+    const infoParagraphs = document.querySelectorAll('.contact-info-card .info-block:nth-of-type(1) p');
+    if (infoParagraphs[0]) infoParagraphs[0].innerHTML = strings.emailText;
+    if (infoParagraphs[1]) infoParagraphs[1].innerHTML = strings.phoneText;
+    document.querySelector('.contact-info-card .info-block:nth-of-type(2) h3').textContent = strings.paymentTitle;
+    document.querySelector('.contact-info-card .info-block:nth-of-type(2) p').textContent = strings.paymentDesc;
+    document.querySelector('.page-footer p').textContent = strings.footerText;
+    document.querySelector('.button-outline[href="login.html"]').textContent = strings.login;
+    document.querySelector('.button-primary[href="register.html"]').textContent = strings.register;
+    document.getElementById('langSelect').value = lang;
+    localStorage.setItem('siteLanguage', lang);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     const savedLang = localStorage.getItem('siteLanguage') || 'en';
     updateLanguage(savedLang);
-
-    const langSelect = document.getElementById('langSelect');
-    if (langSelect) {
-        langSelect.addEventListener('change', function(event) {
-            updateLanguage(event.target.value);
-        });
-    }
+    document.getElementById('langSelect')?.addEventListener('change', (event) => {
+        updateLanguage(event.target.value);
+    });
+});
 </script>
 <script src="js/auth.js"></script>
 <script src="js/data.js"></script>

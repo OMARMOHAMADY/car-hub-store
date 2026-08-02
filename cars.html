@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Cars · CarHub</title>
+    <meta name="description" content="Browse all car listings on CarHub — filter by brand, body type, fuel, price and more.">
+    <meta property="og:title" content="All Cars · CarHub">
+    <meta property="og:description" content="Search and filter verified car listings across global markets.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -140,9 +143,18 @@
         <p>CarHub · Modern car marketplace demo</p>
     </div>
 </footer>
+<div id="carhub-toast-container" class="toast-container" aria-hidden="true"></div>
+<!-- Modules -->
+<script type="module" src="js/toast.module.js"></script>
+<script type="module" src="js/cart.module.js"></script>
+<script type="module" src="js/main.module.js"></script>
+<script type="module" src="js/modal.module.js"></script>
+<script type="module" src="js/filter.module.js"></script>
+
 <script src="js/auth.js"></script>
 <script src="js/data.js"></script>
 <script src="js/components.js"></script>
+<!-- legacy cart.js left for compatibility if used elsewhere -->
 <script src="js/cart.js"></script>
 <script src="js/app.js"></script>
 </body>

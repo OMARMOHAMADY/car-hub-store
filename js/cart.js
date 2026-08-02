@@ -213,10 +213,3 @@ const CarHubCart = {
     window.addEventListener('authChanged', () => this.updateBadge());
   }
 };
-
-// Auto-init
-document.addEventListener('DOMContentLoaded', () => {
-  CarHubCart.init();
-});
-</content>
-

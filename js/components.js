@@ -135,6 +135,7 @@ const CarHubComponents = {
         <div class="summary-actions">
           <div class="action-row">
             <button id="contactSellerBtn" class="button button-primary">Contact Seller</button>
+            <button id="bookTestDriveBtn" class="button button-primary open-booking-btn" data-car-id="${car.id}" data-car-title="${car.title}">Book Test Drive</button>
             <button id="addToCartBtn" class="button button-outline add-cart-btn-detail" data-car-id="${car.id}" data-car-title="${car.title}">
               <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>

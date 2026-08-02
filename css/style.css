@@ -400,6 +400,47 @@ button,
     align-items: start;
 }
 
+/* Toast notifications */
+.toast-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 2000;
+}
+.toast {
+    min-width: 220px;
+    max-width: 360px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    animation: toast-in 260ms ease;
+}
+.toast .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.toast.success .dot { background: var(--toast-success); }
+.toast.error .dot { background: var(--toast-error); }
+.toast.info .dot { background: var(--toast-info); }
+
+@keyframes toast-in {
+    from { transform: translateY(6px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Utility small helpers */
+.visually-hidden { position: absolute !important; height: 1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); }
+
 .cart-items-list {
     display: flex;
     flex-direction: column;

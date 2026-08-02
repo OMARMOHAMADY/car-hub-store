@@ -646,6 +646,49 @@ document.addEventListener('DOMContentLoaded', async () => {
           detailsContainer.querySelectorAll('.share-btn').forEach(shareBtnInit);
           detailsContainer.querySelectorAll('.add-cart-btn, .add-cart-btn-detail').forEach(initAddToCartButton);
 
+          // Booking modal handler
+          detailsContainer.querySelectorAll('.open-booking-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              e.preventDefault();
+              const carTitle = btn.dataset.carTitle || 'this car';
+              const carId = btn.dataset.carId;
+              const formHtml = `
+                <h3>Book Test Drive — ${carTitle}</h3>
+                <form id="bookingForm">
+                  <label class="field"><span>Your name</span><input type="text" id="bookingName" required></label>
+                  <label class="field"><span>Your phone</span><input type="tel" id="bookingPhone" required></label>
+                  <label class="field"><span>Preferred date</span><input type="date" id="bookingDate" required></label>
+                  <label class="field"><span>Message (optional)</span><textarea id="bookingMessage"></textarea></label>
+                  <div style="display:flex;gap:8px;margin-top:12px;"><button type="submit" class="button button-primary">Request Booking</button><button type="button" class="button button-outline" id="cancelBookingBtn">Cancel</button></div>
+                </form>
+              `;
+              if (window.CarHub && window.CarHub.openModal) {
+                window.CarHub.openModal(formHtml);
+                const modal = document.getElementById('carhub-modal-root');
+                const bookingForm = modal.querySelector('#bookingForm');
+                const cancelBtn = modal.querySelector('#cancelBookingBtn');
+                if (cancelBtn) cancelBtn.addEventListener('click', () => window.CarHub.closeModal());
+                if (bookingForm) {
+                  bookingForm.addEventListener('submit', (ev) => {
+                    ev.preventDefault();
+                    const name = bookingForm.querySelector('#bookingName').value.trim();
+                    const phone = bookingForm.querySelector('#bookingPhone').value.trim();
+                    const date = bookingForm.querySelector('#bookingDate').value;
+                    if (!name || !phone || !date) {
+                      if (window.showToast) window.showToast('Please complete required fields', 'error');
+                      return;
+                    }
+                    // Simulate booking save
+                    if (window.showToast) window.showToast('Booking request sent — seller will contact you', 'success');
+                    window.CarHub.closeModal();
+                  });
+                }
+              } else {
+                alert('Booking: ' + carTitle);
+              }
+            });
+          });
+
           // Contact seller
           const contactBtn = document.getElementById('contactSellerBtn');
           if (contactBtn) {

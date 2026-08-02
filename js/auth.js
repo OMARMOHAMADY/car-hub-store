@@ -110,6 +110,8 @@ const CarHubAuth = {
         localStorage.setItem('carhub_token', data.token);
         localStorage.setItem('carhub_user', JSON.stringify(data.user));
         this.updateUI();
+        // notify listeners that login succeeded
+        try { window.dispatchEvent(new CustomEvent('loginSuccess', { detail: this._user })); } catch (e) {}
         return data;
       }
       // If server responded with an error about duplicate, respect it
@@ -180,6 +182,8 @@ const CarHubAuth = {
     localStorage.setItem('carhub_token', this._token);
     localStorage.setItem('carhub_user', JSON.stringify(this._user));
     this.updateUI();
+    // notify listeners that login succeeded (local fallback)
+    try { window.dispatchEvent(new CustomEvent('loginSuccess', { detail: this._user })); } catch (e) {}
     return { success: true, user: this._user };
   },
 
@@ -202,6 +206,7 @@ const CarHubAuth = {
         localStorage.setItem('carhub_token', data.token);
         localStorage.setItem('carhub_user', JSON.stringify(data.user));
         this.updateUI();
+        try { window.dispatchEvent(new CustomEvent('loginSuccess', { detail: this._user })); } catch (e) {}
         return data;
       }
       if (resp.ok === false && resp.status < 500) {
@@ -248,6 +253,7 @@ const CarHubAuth = {
     localStorage.setItem('carhub_token', this._token);
     localStorage.setItem('carhub_user', JSON.stringify(this._user));
     this.updateUI();
+    try { window.dispatchEvent(new CustomEvent('loginSuccess', { detail: this._user })); } catch (e) {}
     return { success: true, user: this._user };
   },
 

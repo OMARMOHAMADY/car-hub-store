@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sell Your Car · CarHub</title>
+    <meta name="description" content="List your car on CarHub. Add photos, price and details to reach buyers quickly.">
+    <meta property="og:title" content="Sell Your Car · CarHub">
+    <meta property="og:description" content="List your car with photos and details to attract buyers.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -169,6 +172,56 @@
         <p>CarHub · Modern car marketplace demo</p>
     </div>
 </footer>
+<div id="carhub-toast-container" class="toast-container" aria-hidden="true"></div>
+
+<script type="module">
+import { showToast } from './js/toast.module.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const photoInput = document.getElementById('photoInput');
+    const previewWrap = document.getElementById('imagePreview');
+    if (photoInput && previewWrap) {
+        photoInput.addEventListener('change', () => {
+            const file = photoInput.files && photoInput.files[0];
+            if (!file) return;
+            if (file.size > 10 * 1024 * 1024) { // 10MB
+                showToast('Image is too large. Please use files under 10MB.', 'error');
+                photoInput.value = '';
+                return;
+            }
+            const img = previewWrap.querySelector('img');
+            const reader = new FileReader();
+            reader.onload = () => {
+                img.src = reader.result;
+                img.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    const sellForm = document.getElementById('sellCarForm');
+    if (sellForm) {
+        sellForm.addEventListener('submit', (e) => {
+            const file = photoInput && photoInput.files && photoInput.files[0];
+            if (file && file.size > 10 * 1024 * 1024) {
+                e.preventDefault();
+                showToast('Please choose a smaller image (max 10MB).', 'error');
+                return;
+            }
+            // Let existing sell-car.js handle the submission (localStorage/backend)
+            showToast('Submitting your listing...', 'info');
+        }, true);
+    }
+});
+</script>
+
+<!-- Modules -->
+<script type="module" src="js/toast.module.js"></script>
+<script type="module" src="js/cart.module.js"></script>
+<script type="module" src="js/main.module.js"></script>
+<script type="module" src="js/modal.module.js"></script>
+<script type="module" src="js/filter.module.js"></script>
+
 <script>
     const translations = {
         en: {
