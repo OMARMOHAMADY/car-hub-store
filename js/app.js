@@ -56,9 +56,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   // --- Form Default Handling (no data layer forms) ---
   const forms = document.querySelectorAll('form');
   forms.forEach((form) => {
-    // Skip forms handled by dedicated modules
+    // Skip forms handled by dedicated modules or pages
     if (form.id === 'sellCarForm') return;
     if (form.id === 'reviewForm') return;
+    if (form.id === 'loginForm') return;
+    if (form.id === 'registerForm') return;
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       if (!form.checkValidity()) {
@@ -66,12 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
       }
       const formId = form.id;
-      if (formId === 'loginForm') {
-        alert('Login successful! Welcome back.');
-      } else if (formId === 'registerForm') {
-        alert('Your account was created successfully.');
-        form.reset();
-      } else if (formId === 'contactForm') {
+      if (formId === 'contactForm') {
         alert('Thanks for reaching out! We will respond soon.');
         form.reset();
       }
@@ -93,20 +90,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
   });
-
-  // --- Register: confirm password ---
-  const registerForm = document.getElementById('registerForm');
-  if (registerForm) {
-    registerForm.addEventListener('submit', (e) => {
-      const pass = registerForm.querySelector('input[name="password"]');
-      const confirm = document.getElementById('regPasswordConfirm');
-      if (pass && confirm && pass.value !== confirm.value) {
-        e.preventDefault();
-        alert('Passwords do not match. Please check and try again.');
-        return;
-      }
-    });
-  }
 
   /********************************************************************
    * SECTION 2: Favorites (all pages with .fav-btn)

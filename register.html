@@ -28,8 +28,19 @@
             <a href="contact.html">Contact</a>
         </nav>
         <div class="action-buttons">
-            <a class="button button-outline" href="login.html">Login</a>
-            <a class="button button-primary" href="register.html">Register</a>
+            <a class="button button-outline" href="login.html" id="loginNavBtn">Login</a>
+            <a class="button button-primary" href="register.html" id="registerNavBtn">Register</a>
+            <div class="user-badge" id="userBadge" style="display:none;">
+                <button class="user-badge-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="user-badge-avatar" id="userBadgeAvatar">U</span>
+                    <span class="user-badge-name" id="userBadgeName">User</span>
+                    <i class="fa-solid fa-chevron-down user-badge-caret"></i>
+                </button>
+                <div class="user-badge-dropdown">
+                    <a href="dashboard.html" class="user-badge-item"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                    <button type="button" class="user-badge-item user-badge-logout" id="userBadgeLogout"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
             <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
             <select id="langSelect" class="button button-outline lang-selector" aria-label="Language selector">
                 <option value="en">English</option>
@@ -37,7 +48,6 @@
                 <option value="fr">Français</option>
             </select>
         </div>
-    </div>
 </header>
 <main class="page-section form-section">
     <div class="container">
@@ -71,10 +81,10 @@
                         </label>
 
                         <div class="form-actions">
-                            <button type="submit" class="button button-primary">Create Account</button>
+                            <button type="submit" class="button button-primary" id="registerSubmitBtn">Create Account</button>
                             <a href="login.html" class="button button-outline">Sign in</a>
                         </div>
-                </div>
+                        <div id="registerError" style="color:var(--toast-error); margin-top:12px; display:none;"></div>
             </form>
             <p class="form-footer" style="margin-top:12px; color:var(--muted);">
                 By creating an account you agree to our <a href="#">Terms</a>.
@@ -86,121 +96,48 @@
         <p>CarHub · Modern car marketplace demo</p>
     </div>
 </footer>
+<script src="js/auth.js"></script>
 <script>
-    const translations = {
-        en: {
-            title: 'Register · CarHub',
-            heading: 'Create Account',
-            desc: 'Join CarHub and start selling or buying cars with a beautiful, secure marketplace.',
-            nameLabel: 'Full Name',
-            namePlaceholder: 'Your full name',
-            emailLabel: 'Email',
-            emailPlaceholder: 'you@domain.com',
-            passwordLabel: 'Password',
-            passwordPlaceholder: 'Create a password',
-            confirmLabel: 'Confirm Password',
-            confirmPlaceholder: 'Repeat password',
-            createAccount: 'Create Account',
-            signIn: 'Sign in',
-            footerText: 'CarHub · Modern car marketplace demo',
-            login: 'Login',
-            register: 'Register',
-            termsText: 'By creating an account you agree to our',
-            terms: 'Terms'
-        },
-        ar: {
-            title: 'التسجيل · CarHub',
-            heading: 'إنشاء حساب',
-            desc: 'انضم إلى CarHub وابدأ في بيع أو شراء السيارات من خلال سوق جميل وآمن.',
-            nameLabel: 'الاسم الكامل',
-            namePlaceholder: 'اسمك الكامل',
-            emailLabel: 'البريد الإلكتروني',
-            emailPlaceholder: 'you@domain.com',
-            passwordLabel: 'كلمة المرور',
-            passwordPlaceholder: 'إنشاء كلمة مرور',
-            confirmLabel: 'تأكيد كلمة المرور',
-            confirmPlaceholder: 'أعد كتابة كلمة المرور',
-            createAccount: 'إنشاء حساب',
-            signIn: 'تسجيل الدخول',
-            footerText: 'CarHub · سوق سيارات حديث تجريبي',
-            login: 'تسجيل الدخول',
-            register: 'التسجيل',
-            termsText: 'بإنشاء حساب فإنك توافق على',
-            terms: 'الشروط'
-        },
-        fr: {
-            title: 'Inscription · CarHub',
-            heading: 'Creer un compte',
-            desc: 'Rejoignez CarHub et commencez a vendre ou acheter des voitures sur un marche magnifique et securise.',
-            nameLabel: 'Nom complet',
-            namePlaceholder: 'Votre nom complet',
-            emailLabel: 'Email',
-            emailPlaceholder: 'you@domain.com',
-            passwordLabel: 'Mot de passe',
-            passwordPlaceholder: 'Creer un mot de passe',
-            confirmLabel: 'Confirmer le mot de passe',
-            confirmPlaceholder: 'Repetez le mot de passe',
-            createAccount: 'Creer un compte',
-            signIn: 'Connexion',
-            footerText: 'CarHub · Demo de marche automobile moderne',
-            login: 'Connexion',
-            register: 'Inscription',
-            termsText: 'En creant un compte, vous acceptez nos',
-            terms: 'Conditions'
-        }
-    };
-
-    function updateLanguage(lang) {
-        const strings = translations[lang] || translations.en;
-        document.title = strings.title;
-        document.documentElement.lang = lang;
-        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-
-        const h1 = document.querySelector('.form-box h1');
-        if (h1) h1.textContent = strings.heading;
-        const desc = document.querySelector('.form-box > p');
-        if (desc) desc.textContent = strings.desc;
-
-        const labels = document.querySelectorAll('.field span');
-        if (labels[0]) labels[0].textContent = strings.nameLabel;
-        if (labels[1]) labels[1].textContent = strings.emailLabel;
-        if (labels[2]) labels[2].textContent = strings.passwordLabel;
-        if (labels[3]) labels[3].textContent = strings.confirmLabel;
-
-        const inputs = document.querySelectorAll('.field input');
-        if (inputs[0]) inputs[0].placeholder = strings.namePlaceholder;
-        if (inputs[1]) inputs[1].placeholder = strings.emailPlaceholder;
-        if (inputs[2]) inputs[2].placeholder = strings.passwordPlaceholder;
-        if (inputs[3]) inputs[3].placeholder = strings.confirmPlaceholder;
-
-        const createBtn = document.querySelector('.form-actions .button-primary');
-        if (createBtn) createBtn.textContent = strings.createAccount;
-        const signInBtn = document.querySelector('.button-outline[href="login.html"]');
-        if (signInBtn) signInBtn.textContent = strings.signIn;
-
-        const footerP = document.querySelector('.page-footer p');
-        if (footerP) footerP.textContent = strings.footerText;
-
-        const loginLink = document.querySelector('.button-outline[href="login.html"]');
-        if (loginLink) loginLink.textContent = strings.login;
-
-        const termsP = document.querySelector('.form-footer');
-        if (termsP) termsP.innerHTML = strings.termsText + ' <a href="#">' + strings.terms + '</a>.';
-
-        const langSelect = document.getElementById('langSelect');
-        if (langSelect) langSelect.value = lang;
-        localStorage.setItem('siteLanguage', lang);
+document.addEventListener('DOMContentLoaded', function() {
+    if (CarHubAuth.isLoggedIn()) {
+        window.location.href = 'dashboard.html';
+        return;
     }
 
-    const savedLang = localStorage.getItem('siteLanguage') || 'en';
-    updateLanguage(savedLang);
+    const registerForm = document.getElementById('registerForm');
+    const registerError = document.getElementById('registerError');
+    const submitBtn = document.getElementById('registerSubmitBtn');
 
-    const langSelect = document.getElementById('langSelect');
-    if (langSelect) {
-        langSelect.addEventListener('change', function(event) {
-            updateLanguage(event.target.value);
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            registerError.style.display = 'none';
+
+            const pass = registerForm.querySelector('input[name="password"]').value;
+            const confirm = registerForm.querySelector('input[name="confirm"]').value;
+            if (pass !== confirm) {
+                registerError.textContent = 'Passwords do not match.';
+                registerError.style.display = 'block';
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Creating account...';
+
+            try {
+                const name = registerForm.querySelector('input[name="name"]').value;
+                const email = registerForm.querySelector('input[name="email"]').value;
+                await CarHubAuth.register(name, email, pass);
+                window.location.href = 'dashboard.html';
+            } catch (err) {
+                registerError.textContent = err.message;
+                registerError.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Create Account';
+            }
         });
     }
+});
 </script>
 <script src="js/app.js"></script>
 </body>

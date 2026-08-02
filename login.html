@@ -28,8 +28,19 @@
             <a href="contact.html">Contact</a>
         </nav>
         <div class="action-buttons">
-            <a class="button button-outline" href="login.html">Login</a>
-            <a class="button button-primary" href="register.html">Register</a>
+            <a class="button button-outline" href="login.html" id="loginNavBtn">Login</a>
+            <a class="button button-primary" href="register.html" id="registerNavBtn">Register</a>
+            <div class="user-badge" id="userBadge" style="display:none;">
+                <button class="user-badge-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="user-badge-avatar" id="userBadgeAvatar">U</span>
+                    <span class="user-badge-name" id="userBadgeName">User</span>
+                    <i class="fa-solid fa-chevron-down user-badge-caret"></i>
+                </button>
+                <div class="user-badge-dropdown">
+                    <a href="dashboard.html" class="user-badge-item"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                    <button type="button" class="user-badge-item user-badge-logout" id="userBadgeLogout"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
             <button id="themeToggle" class="button button-outline" type="button" aria-label="Toggle theme">Light Mode</button>
             <select id="langSelect" class="button button-outline lang-selector" aria-label="Language selector">
                 <option value="en">English</option>
@@ -61,9 +72,10 @@
                         </label>
 
                         <div class="form-actions">
-                            <button type="submit" class="button button-primary">Login</button>
+<button type="submit" class="button button-primary" id="loginSubmitBtn">Login</button>
                             <a href="register.html" class="button button-outline">Create account</a>
                         </div>
+                        <div id="loginError" style="color:var(--toast-error); margin-top:12px; display:none;"></div>
                 </div>
             </form>
             <p class="form-footer" style="margin-top:12px; color:var(--muted);">
@@ -166,6 +178,40 @@
             updateLanguage(event.target.value);
         });
     }
+</script>
+<script src="js/auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (CarHubAuth.isLoggedIn()) {
+        window.location.href = 'dashboard.html';
+        return;
+    }
+
+    const loginForm = document.getElementById('loginForm');
+    const loginError = document.getElementById('loginError');
+    const submitBtn = document.getElementById('loginSubmitBtn');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            loginError.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Logging in...';
+
+            try {
+                const email = loginForm.querySelector('input[name="email"]').value;
+                const password = loginForm.querySelector('input[name="password"]').value;
+                await CarHubAuth.login(email, password);
+                window.location.href = 'dashboard.html';
+            } catch (err) {
+                loginError.textContent = err.message;
+                loginError.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Login';
+            }
+        });
+    }
+});
 </script>
 <script src="js/app.js"></script>
 </body>
