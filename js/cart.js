@@ -193,7 +193,7 @@ const CarHubCart = {
     const badge = document.getElementById('cartBadgeCount');
     const cartIcon = document.getElementById('cartBadge');
     if (badge) badge.textContent = count;
-    if (cartIcon) cartIcon.style.display = count > 0 ? 'inline-flex' : '';
+    if (cartIcon) cartIcon.style.display = 'inline-flex';
   },
 
   /**

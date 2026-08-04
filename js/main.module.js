@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const badge = document.getElementById('cartBadge');
     const count = document.getElementById('cartBadgeCount');
     const c = (items && items.length) || 0;
-    if (badge) badge.style.display = c > 0 ? 'inline-flex' : 'none';
+    if (badge) badge.style.display = 'inline-flex';
     if (count) count.textContent = String(c);
   }
 

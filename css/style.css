@@ -359,7 +359,9 @@ button,
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 46px;
+    gap: 8px;
+    padding: 0 14px;
+    min-width: 46px;
     height: 46px;
     border-radius: 14px;
     background: var(--button-outline-bg);
@@ -373,6 +375,12 @@ button,
     background: var(--primary-soft);
     border-color: var(--primary);
     color: var(--primary);
+}
+
+.cart-badge-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
 }
 
 .cart-badge-count {

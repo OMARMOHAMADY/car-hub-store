@@ -26,15 +26,16 @@
             <nav class="navbar">
             <a href="index.html">Home</a>
             <a href="cars.html">Cars</a>
-            <a href="sell-car.html">Sell</a>
+            <a href="sell-car.html" class="active">Sell</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </nav>
         <div class="action-buttons">
             <a class="button button-outline" href="login.html" id="loginNavBtn">Login</a>
             <a class="button button-primary" href="register.html" id="registerNavBtn">Register</a>
-            <a href="cart.html" class="cart-badge" id="cartBadge" style="display:none;" aria-label="Cart">
+            <a href="cart.html" class="cart-badge" id="cartBadge" style="display:inline-flex;" aria-label="Cart">
                 <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-badge-label">Cart</span>
                 <span class="cart-badge-count" id="cartBadgeCount">0</span>
             </a>
             <div class="user-badge" id="userBadge" style="display:none;">
@@ -62,11 +63,12 @@
     <div class="container">
         <div class="form-box">
             <div class="form-header">
-                <div>
-                    <h1>Sell Your Car</h1>
-                    <p>List your vehicle quickly add photos, price, and details to attract buyers.</p>
+                    <div>
+                        <h1>Sell Your Car</h1>
+                        <p>List your vehicle quickly add photos, price, and details to attract buyers.</p>
+                    </div>
+                    <div class="form-note">Tip: High-resolution photos get more views.</div>
                 </div>
-                <div class="form-note">Tip: High-resolution photos get more views.</div>
 
             <form id="sellCarForm" enctype="multipart/form-data">
                 <div class="form-grid">
