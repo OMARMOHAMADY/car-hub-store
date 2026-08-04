@@ -263,11 +263,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       const carId = btn.dataset.carId;
       if (!carId) return;
       try {
-        await CarHubCart.addItem(carId);
+        const cartApi = window.CarHubCart || CarHubCart;
+        const updatedCart = await cartApi.addItem(carId);
         btn.classList.add('added');
         btn.innerHTML = '<i class="fa-solid fa-check"></i> Added';
-        // Dispatch cart event
-        window.dispatchEvent(new CustomEvent('cartChanged'));
+        window.dispatchEvent(new CustomEvent('cartChanged', { detail: updatedCart }));
         setTimeout(() => {
           btn.classList.remove('added');
           btn.innerHTML = '<i class="fa-solid fa-cart-plus"></i> Add to Cart';
