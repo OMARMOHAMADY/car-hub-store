@@ -199,8 +199,8 @@
 <script src="js/cart.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    if (CarHubAuth.isLoggedIn()) {
-        window.location.href = 'dashboard.html';
+if (CarHubAuth.isLoggedIn()) {
+        window.location.href = 'cars.html';
         return;
     }
 
@@ -218,8 +218,8 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 const email = loginForm.querySelector('input[name="email"]').value;
                 const password = loginForm.querySelector('input[name="password"]').value;
-                await CarHubAuth.login(email, password);
-                window.location.href = 'dashboard.html';
+await CarHubAuth.login(email, password);
+                window.location.href = 'cars.html';
             } catch (err) {
                 loginError.textContent = err.message;
                 loginError.style.display = 'block';

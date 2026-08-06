@@ -709,8 +709,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 ${CarHubComponents.renderMapSection(car)}
               </aside>
             </div>
-            ${CarHubComponents.renderDescription(car)}
-            ${CarHubComponents.renderReviewsSection(car)}
+<div class="details-sections">
+              <div class="details-main">
+                ${CarHubComponents.renderDescription(car)}
+              </div>
+              <aside class="details-side">
+                ${CarHubComponents.renderReviewsSection(car)}
+              </aside>
+            </div>
             <div id="detailPageRecent"></div>
           `;
 

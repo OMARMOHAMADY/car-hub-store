@@ -95,14 +95,20 @@ const CarHubAuth = {
    * Register a new user - tries backend first, falls back to localStorage
    */
   async register(name, email, password) {
-    // Try backend API first
+// Try backend API first
     try {
       const resp = await fetch(`${API_BASE}/auth/register`, {
         method: 'POST',
         headers: this._headers(),
         body: JSON.stringify({ name, email, password })
       });
-      const data = await resp.json();
+      let data;
+      try {
+        data = await resp.json();
+      } catch (e) {
+        // Response is not valid JSON - backend not serving the API, use local fallback
+        throw new Error('Failed to fetch');
+      }
       if (data.success) {
         this._usingBackend = true;
         this._token = data.token;
@@ -191,14 +197,20 @@ const CarHubAuth = {
    * Login user - tries backend first, falls back to localStorage
    */
   async login(email, password) {
-    // Try backend API first
+// Try backend API first
     try {
       const resp = await fetch(`${API_BASE}/auth/login`, {
         method: 'POST',
         headers: this._headers(),
         body: JSON.stringify({ email, password })
       });
-      const data = await resp.json();
+      let data;
+      try {
+        data = await resp.json();
+      } catch (e) {
+        // Response is not valid JSON - backend not serving the API, use local fallback
+        throw new Error('Failed to fetch');
+      }
       if (data.success) {
         this._usingBackend = true;
         this._token = data.token;
@@ -684,23 +696,31 @@ const CarHubAuth = {
   /**
    * Get user's compare car IDs
    */
-  getCompareIds() {
-    const record = this.getLocalUserRecord();
-    if (record && record.compareList) return record.compareList;
+getCompareIds() {
+    // Compare buttons across the site store in the global 'carCompare' key.
+    // Prefer it so the dashboard reflects what users actually added.
     try {
-      return JSON.parse(localStorage.getItem('carCompare') || '[]').map(c => c.id);
-    } catch { return []; }
+      const global = JSON.parse(localStorage.getItem('carCompare') || '[]');
+      if (global.length) return global.map(c => c.id);
+    } catch {}
+    const record = this.getLocalUserRecord();
+    if (record && record.compareList && record.compareList.length) return record.compareList;
+    return [];
   },
 
   /**
    * Get user's recently viewed car IDs
    */
-  getRecentIds() {
-    const record = this.getLocalUserRecord();
-    if (record && record.recentlyViewed) return record.recentlyViewed;
+getRecentIds() {
+    // Recently viewed across the site is stored in the global 'carhub_recentlyViewed' key.
+    // Prefer it so the dashboard reflects what users actually viewed.
     try {
-      return JSON.parse(localStorage.getItem('carhub_recentlyViewed') || '[]');
-    } catch { return []; }
+      const global = JSON.parse(localStorage.getItem('carhub_recentlyViewed') || '[]');
+      if (global.length) return global;
+    } catch {}
+    const record = this.getLocalUserRecord();
+    if (record && record.recentlyViewed && record.recentlyViewed.length) return record.recentlyViewed;
+    return [];
   },
 
   /**

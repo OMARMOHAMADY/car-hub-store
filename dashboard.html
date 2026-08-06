@@ -124,7 +124,7 @@
                                 <i class="fa-solid fa-plus"></i>
                                 <span>Sell Your Car</span>
                             </a>
-                            <a href="car-details.html" class="quick-action-card">
+<a href="cars.html" class="quick-action-card">
                                 <i class="fa-solid fa-car"></i>
                                 <span>View a Car</span>
                             </a>
@@ -402,8 +402,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    await renderInventory();
-
+const adminTab = document.querySelector('.dashboard-tab[data-tab="admin"]');
     if (user.role === 'admin') {
         if (adminTab) adminTab.style.display = '';
     }
@@ -564,8 +563,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Dashboard data error:', err);
     }
 
-    // ===== Settings form =====
-    const adminTab = document.querySelector('.dashboard-tab[data-tab="admin"]');
+// ===== Settings form =====
     const inventoryForm = document.getElementById('inventoryForm');
     const inventoryList = document.getElementById('inventoryList');
     const inventoryMessage = document.getElementById('inventoryMessage');
@@ -709,12 +707,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 body: JSON.stringify(payload)
             });
             const data = await response.json();
-            if (!data.success) throw new Error(data.message || 'Unable to save listing');
+if (!data.success) throw new Error(data.message || 'Unable to save listing');
+            const wasEditing = !!inventoryEditingId;
             inventoryForm.reset();
             inventoryEditingId = null;
             inventorySubmitBtn.textContent = 'Save Listing';
             inventoryCancelBtn.style.display = 'none';
-            inventoryMessage.textContent = inventoryEditingId ? 'Listing updated.' : 'Listing published.';
+            inventoryMessage.textContent = wasEditing ? 'Listing updated.' : 'Listing published.';
             inventoryMessage.style.display = 'block';
             inventoryMessage.style.color = 'var(--toast-success)';
             await renderInventory();
