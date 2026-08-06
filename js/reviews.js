@@ -33,8 +33,26 @@ const CarHubReviews = {
    * Add a review for a car
    * @returns {Object} the new review
    */
-  addReview(carId, { user, rating, comment }) {
+  async addReview(carId, { user, rating, comment }) {
     if (!carId || !user || !rating || !comment) return null;
+
+    try {
+      const token = localStorage.getItem('carhub_token');
+      const resp = await fetch(`/api/reviews/${carId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ rating, comment })
+      });
+      const data = await resp.json();
+      if (data.success) {
+        return data.review;
+      }
+    } catch (err) {
+      console.error('Failed to save review via API:', err);
+    }
 
     const reviews = this.getCarReviews(carId);
     const newReview = {
@@ -53,10 +71,19 @@ const CarHubReviews = {
    * Merge JSON reviews with user-submitted localStorage reviews
    */
   async getMergedReviews(carId) {
+    try {
+      const resp = await fetch(`/api/reviews/${carId}`);
+      const data = await resp.json();
+      if (data.success && Array.isArray(data.reviews)) {
+        return data.reviews;
+      }
+    } catch (err) {
+      console.error('Failed to load reviews from API:', err);
+    }
+
     const car = await CarHubData.getCarById(carId);
     const jsonReviews = (car && car.reviews) || [];
     const localReviews = this.getCarReviews(carId);
-    // Merge: local reviews come first (newest)
     return [...localReviews, ...jsonReviews];
   }
 };

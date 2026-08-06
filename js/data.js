@@ -9,10 +9,22 @@ const CarHubData = {
   _loaded: false,
 
   /**
-   * Load all cars from JSON + merge with user-submitted cars from localStorage
+   * Load all cars from the real backend API, falling back to local JSON if needed
    */
   async loadCars() {
     if (this._loaded) return this._cars;
+    try {
+      const resp = await fetch('/api/cars');
+      const data = await resp.json();
+      if (data.success && Array.isArray(data.cars)) {
+        this._cars = data.cars;
+        this._loaded = true;
+        return this._cars;
+      }
+    } catch (err) {
+      console.error('Failed to load cars from API:', err);
+    }
+
     try {
       const resp = await fetch('data/cars.json');
       const jsonCars = await resp.json();
@@ -21,7 +33,7 @@ const CarHubData = {
       this._loaded = true;
       return this._cars;
     } catch (err) {
-      console.error('Failed to load cars:', err);
+      console.error('Failed to load cars from fallback data:', err);
       this._cars = this.getUserCars();
       this._loaded = true;
       return this._cars;
@@ -48,63 +60,146 @@ const CarHubData = {
    * @param {Object} filters
    * @param {string} filters.keyword - Search keyword
    * @param {string} filters.brand - Brand filter
+   * @param {string} filters.model - Model filter
    * @param {string} filters.body - Body type filter
    * @param {string} filters.fuel - Fuel type filter
+   * @param {string} filters.transmission - Transmission filter
+   * @param {string} filters.color - Color filter
    * @param {string} filters.priceMin - Minimum price
    * @param {string} filters.priceMax - Maximum price
    * @param {number} filters.yearMin - Minimum year
    * @param {number} filters.yearMax - Maximum year
+   * @param {number} filters.mileageMin - Minimum mileage
+   * @param {number} filters.mileageMax - Maximum mileage
    * @param {string} filters.sortBy - Sort field (price, year, mileage)
    * @param {string} filters.sortOrder - 'asc' or 'desc'
    */
+  _parseNaturalLanguageFilters(query) {
+    const normalized = (query || '').toLowerCase().trim();
+    const filters = {};
+
+    if (!normalized) return filters;
+
+    const budgetMatch = normalized.match(/under\s*\$?\s*(\d{1,3}(?:,\d{3})*|\d+)/i);
+    if (budgetMatch) {
+      filters.priceMax = Number(budgetMatch[1].replace(/,/g, ''));
+    }
+
+    const maxBudgetMatch = normalized.match(/\$?\s*(\d{1,3}(?:,\d{3})*|\d+)\s*max/i);
+    if (maxBudgetMatch && !filters.priceMax) {
+      filters.priceMax = Number(maxBudgetMatch[1].replace(/,/g, ''));
+    }
+
+    if (/family|kids|large|spacious/.test(normalized)) {
+      filters.body = 'SUV';
+    } else if (/sedan|saloon/.test(normalized)) {
+      filters.body = 'Sedan';
+    } else if (/hatchback/.test(normalized)) {
+      filters.body = 'Hatchback';
+    } else if (/coupe/.test(normalized)) {
+      filters.body = 'Coupe';
+    } else if (/convertible/.test(normalized)) {
+      filters.body = 'Convertible';
+    }
+
+    if (/electric/.test(normalized)) {
+      filters.fuel = 'Electric';
+    } else if (/hybrid/.test(normalized)) {
+      filters.fuel = 'Hybrid';
+    } else if (/diesel/.test(normalized)) {
+      filters.fuel = 'Diesel';
+    }
+
+    if (/automatic/.test(normalized)) {
+      filters.transmission = 'Automatic';
+    } else if (/manual/.test(normalized)) {
+      filters.transmission = 'Manual';
+    }
+
+    if (/cheap|budget|affordable/.test(normalized)) {
+      filters.sortBy = 'price';
+      filters.sortOrder = 'asc';
+    }
+
+    if (/luxury|premium|sport/.test(normalized)) {
+      filters.sortBy = 'price';
+      filters.sortOrder = 'desc';
+    }
+
+    return filters;
+  },
+
   async searchCars(filters = {}) {
     let cars = await this.loadCars();
+    const parsedFilters = this._parseNaturalLanguageFilters(filters.keyword || '');
+    const effectiveFilters = { ...parsedFilters, ...filters };
 
-    if (filters.keyword) {
-      const kw = filters.keyword.toLowerCase();
+    if (effectiveFilters.keyword) {
+      const kw = effectiveFilters.keyword.toLowerCase();
       cars = cars.filter(c =>
-        c.title.toLowerCase().includes(kw) ||
-        c.brand.toLowerCase().includes(kw) ||
-        c.model.toLowerCase().includes(kw) ||
-        c.description.toLowerCase().includes(kw) ||
-        c.location.toLowerCase().includes(kw)
+        (c.title || '').toLowerCase().includes(kw) ||
+        (c.brand || '').toLowerCase().includes(kw) ||
+        (c.model || '').toLowerCase().includes(kw) ||
+        (c.description || '').toLowerCase().includes(kw) ||
+        (c.location || '').toLowerCase().includes(kw)
       );
     }
 
-    if (filters.brand) {
-      cars = cars.filter(c => c.brand === filters.brand);
+    if (effectiveFilters.brand) {
+      cars = cars.filter(c => c.brand === effectiveFilters.brand);
     }
 
-    if (filters.body) {
-      cars = cars.filter(c => c.body === filters.body);
+    if (effectiveFilters.model) {
+      const modelQuery = effectiveFilters.model.toLowerCase();
+      cars = cars.filter(c => (c.model || '').toLowerCase().includes(modelQuery));
     }
 
-    if (filters.fuel) {
-      cars = cars.filter(c => c.fuel === filters.fuel);
+    if (effectiveFilters.body) {
+      cars = cars.filter(c => c.body === effectiveFilters.body);
     }
 
-    if (filters.priceMin) {
-      cars = cars.filter(c => c.price >= Number(filters.priceMin));
+    if (effectiveFilters.fuel) {
+      cars = cars.filter(c => c.fuel === effectiveFilters.fuel);
     }
 
-    if (filters.priceMax) {
-      cars = cars.filter(c => c.price <= Number(filters.priceMax));
+    if (effectiveFilters.transmission) {
+      cars = cars.filter(c => c.transmission === effectiveFilters.transmission);
     }
 
-    if (filters.yearMin) {
-      cars = cars.filter(c => c.year >= Number(filters.yearMin));
+    if (effectiveFilters.color) {
+      cars = cars.filter(c => (c.color || 'Unknown').toLowerCase() === effectiveFilters.color.toLowerCase());
     }
 
-    if (filters.yearMax) {
-      cars = cars.filter(c => c.year <= Number(filters.yearMax));
+    if (effectiveFilters.priceMin) {
+      cars = cars.filter(c => c.price >= Number(effectiveFilters.priceMin));
+    }
+
+    if (effectiveFilters.priceMax) {
+      cars = cars.filter(c => c.price <= Number(effectiveFilters.priceMax));
+    }
+
+    if (effectiveFilters.yearMin) {
+      cars = cars.filter(c => c.year >= Number(effectiveFilters.yearMin));
+    }
+
+    if (effectiveFilters.yearMax) {
+      cars = cars.filter(c => c.year <= Number(effectiveFilters.yearMax));
+    }
+
+    if (effectiveFilters.mileageMin) {
+      cars = cars.filter(c => Number(c.mileage || 0) >= Number(effectiveFilters.mileageMin));
+    }
+
+    if (effectiveFilters.mileageMax) {
+      cars = cars.filter(c => Number(c.mileage || 0) <= Number(effectiveFilters.mileageMax));
     }
 
     // Sorting
-    if (filters.sortBy) {
-      const order = filters.sortOrder === 'desc' ? -1 : 1;
+    if (effectiveFilters.sortBy) {
+      const order = effectiveFilters.sortOrder === 'desc' ? -1 : 1;
       cars.sort((a, b) => {
-        if (a[filters.sortBy] < b[filters.sortBy]) return -1 * order;
-        if (a[filters.sortBy] > b[filters.sortBy]) return 1 * order;
+        if (a[effectiveFilters.sortBy] < b[effectiveFilters.sortBy]) return -1 * order;
+        if (a[effectiveFilters.sortBy] > b[effectiveFilters.sortBy]) return 1 * order;
         return 0;
       });
     }
@@ -142,6 +237,31 @@ const CarHubData = {
   async getFuelTypes() {
     const cars = await this.loadCars();
     return [...new Set(cars.map(c => c.fuel))].sort();
+  },
+
+  /**
+   * Get unique models from all cars
+   */
+  async getModels() {
+    const cars = await this.loadCars();
+    return [...new Set(cars.map(c => c.model).filter(Boolean))].sort();
+  },
+
+  /**
+   * Get unique transmission types
+   */
+  async getTransmissions() {
+    const cars = await this.loadCars();
+    return [...new Set(cars.map(c => c.transmission).filter(Boolean))].sort();
+  },
+
+  /**
+   * Get unique colors from all cars
+   */
+  async getColors() {
+    const cars = await this.loadCars();
+    const values = [...new Set(cars.map(c => (c.color || 'Unknown')).filter(Boolean))];
+    return values.length ? values.sort() : ['Black', 'White', 'Silver', 'Blue', 'Red', 'Gray'];
   },
 
   // ========================================
@@ -188,7 +308,7 @@ const CarHubData = {
       longDescription: carData.description || '',
       highlights: ['Recently listed'],
       image: carData.photo || 'assets/image/images.jpg',
-      images: [carData.photo || 'assets/image/images.jpg'],
+      images: carData.images && carData.images.length ? carData.images : [carData.photo || 'assets/image/images.jpg'],
       tag: 'New Listing',
       featured: false,
       isUserSubmitted: true,

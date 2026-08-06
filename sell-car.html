@@ -107,12 +107,12 @@
 
                     <aside class="col image-col">
                         <label class="field file-field">
-                            <span>Primary Photo</span>
-                            <input id="photoInput" type="file" name="photo" accept="image/*" required>
-                            <div class="file-hint">PNG/JPG up to 10MB</div>
+                            <span>Photos</span>
+                            <input id="photoInput" type="file" name="photo" accept="image/*" multiple>
+                            <div class="file-hint">Select multiple images. The first one becomes the cover image.</div>
                         </label>
                         <div class="image-preview" id="imagePreview">
-                            <img src="" alt="Preview" style="display:none;">
+                            <div id="imagePreviewGrid" class="gallery-preview-grid"></div>
                         </div>
 
                         <label class="field">

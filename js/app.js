@@ -105,30 +105,52 @@ document.addEventListener('DOMContentLoaded', async () => {
     localStorage.setItem('carFavorites', JSON.stringify(list));
   }
 
-  function toggleFavorite(carId, carTitle, btn) {
-    const favs = getFavorites();
-    const idx = favs.findIndex(f => f.id === carId);
-    if (idx > -1) {
-      favs.splice(idx, 1);
-      btn.classList.remove('favorited');
-      btn.innerHTML = '<i class="fa-regular fa-heart"></i> Add Favorite';
-    } else {
-      favs.push({ id: carId, title: carTitle });
-      btn.classList.add('favorited');
-      btn.innerHTML = '<i class="fa-solid fa-heart"></i> Favorited';
+  async function toggleFavorite(carId, carTitle, btn) {
+    const isFavorited = btn.classList.contains('favorited');
+
+    try {
+      if (CarHubAuth.isLoggedIn()) {
+        await CarHubAuth.toggleFavorite(carId);
+        const favoriteIds = CarHubAuth.getFavoriteIds();
+        const favoriteNow = favoriteIds.includes(carId);
+        btn.classList.toggle('favorited', favoriteNow);
+        btn.innerHTML = favoriteNow
+          ? '<i class="fa-solid fa-heart"></i> Favorited'
+          : '<i class="fa-regular fa-heart"></i> Add Favorite';
+        return;
+      }
+
+      const favs = getFavorites();
+      const idx = favs.findIndex(f => f.id === carId);
+      if (idx > -1) {
+        favs.splice(idx, 1);
+        btn.classList.remove('favorited');
+        btn.innerHTML = '<i class="fa-regular fa-heart"></i> Add Favorite';
+      } else {
+        favs.push({ id: carId, title: carTitle });
+        btn.classList.add('favorited');
+        btn.innerHTML = '<i class="fa-solid fa-heart"></i> Favorited';
+      }
+      setFavorites(favs);
+    } catch (err) {
+      console.error('Favorite toggle failed:', err);
+      alert(err.message || 'Unable to save favorite right now.');
     }
-    setFavorites(favs);
   }
 
   function initFavoriteButton(btn) {
     const carId = btn.dataset.carId;
-    const favs = getFavorites();
-    if (favs.some(f => f.id === carId)) {
+    const favoriteIds = CarHubAuth.getFavoriteIds();
+    const isFavorite = favoriteIds.includes(carId);
+
+    if (isFavorite) {
       btn.classList.add('favorited');
       btn.innerHTML = '<i class="fa-solid fa-heart"></i> Favorited';
     } else {
+      btn.classList.remove('favorited');
       btn.innerHTML = '<i class="fa-regular fa-heart"></i> Add Favorite';
     }
+
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       toggleFavorite(carId, btn.dataset.carTitle || carId, btn);
@@ -437,12 +459,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       const kw = searchHeaderInput.value.trim();
       const filters = { keyword: kw };
       if (dynamicBrandFilter) filters.brand = dynamicBrandFilter;
+      if (dynamicModelFilter) filters.model = dynamicModelFilter;
       if (dynamicBodyFilter) filters.body = dynamicBodyFilter;
       if (dynamicFuelFilter) filters.fuel = dynamicFuelFilter;
+      if (dynamicTransmissionFilter) filters.transmission = dynamicTransmissionFilter;
+      if (dynamicColorFilter) filters.color = dynamicColorFilter;
       if (dynamicPriceMin) filters.priceMin = dynamicPriceMin;
       if (dynamicPriceMax) filters.priceMax = dynamicPriceMax;
       if (dynamicYearMin) filters.yearMin = dynamicYearMin;
       if (dynamicYearMax) filters.yearMax = dynamicYearMax;
+      if (dynamicMileageMin) filters.mileageMin = dynamicMileageMin;
+      if (dynamicMileageMax) filters.mileageMax = dynamicMileageMax;
       if (dynamicSortBy) {
         filters.sortBy = dynamicSortBy;
         filters.sortOrder = dynamicSortOrder || 'asc';
@@ -467,20 +494,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   let dynamicBrandFilter = '';
   let dynamicBodyFilter = '';
   let dynamicFuelFilter = '';
+  let dynamicModelFilter = '';
+  let dynamicTransmissionFilter = '';
+  let dynamicColorFilter = '';
   let dynamicPriceMin = '';
   let dynamicPriceMax = '';
   let dynamicYearMin = '';
   let dynamicYearMax = '';
+  let dynamicMileageMin = '';
+  let dynamicMileageMax = '';
   let dynamicSortBy = '';
   let dynamicSortOrder = 'asc';
 
   const filterBrand = document.getElementById('filterBrand');
+  const filterModel = document.getElementById('filterModel');
   const filterBody = document.getElementById('filterBody');
   const filterFuel = document.getElementById('filterFuel');
+  const filterTransmission = document.getElementById('filterTransmission');
+  const filterColor = document.getElementById('filterColor');
   const filterPriceMin = document.getElementById('filterPriceMin');
   const filterPriceMax = document.getElementById('filterPriceMax');
   const filterYearMin = document.getElementById('filterYearMin');
   const filterYearMax = document.getElementById('filterYearMax');
+  const filterMileageMin = document.getElementById('filterMileageMin');
+  const filterMileageMax = document.getElementById('filterMileageMax');
   const filterSort = document.getElementById('filterSort');
   const filterApply = document.getElementById('filterApply');
   const filterClear = document.getElementById('filterClear');
@@ -495,6 +532,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         opt.value = b;
         opt.textContent = b;
         filterBrand.appendChild(opt);
+      });
+    } catch (err) { console.error(err); }
+  }
+  if (filterModel) {
+    try {
+      const models = await CarHubData.getModels();
+      models.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m;
+        opt.textContent = m;
+        filterModel.appendChild(opt);
       });
     } catch (err) { console.error(err); }
   }
@@ -520,6 +568,28 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     } catch (err) { console.error(err); }
   }
+  if (filterTransmission) {
+    try {
+      const transmissions = await CarHubData.getTransmissions();
+      transmissions.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t;
+        filterTransmission.appendChild(opt);
+      });
+    } catch (err) { console.error(err); }
+  }
+  if (filterColor) {
+    try {
+      const colors = await CarHubData.getColors();
+      colors.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        filterColor.appendChild(opt);
+      });
+    } catch (err) { console.error(err); }
+  }
 
   const renderCarsList = async (extraFilters = {}) => {
     if (!carsListContainer) return;
@@ -527,12 +597,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       const filters = { ...extraFilters };
       if (filterBrand && filterBrand.value) filters.brand = filterBrand.value;
+      if (filterModel && filterModel.value) filters.model = filterModel.value;
       if (filterBody && filterBody.value) filters.body = filterBody.value;
       if (filterFuel && filterFuel.value) filters.fuel = filterFuel.value;
+      if (filterTransmission && filterTransmission.value) filters.transmission = filterTransmission.value;
+      if (filterColor && filterColor.value) filters.color = filterColor.value;
       if (filterPriceMin && filterPriceMin.value) filters.priceMin = filterPriceMin.value;
       if (filterPriceMax && filterPriceMax.value) filters.priceMax = filterPriceMax.value;
       if (filterYearMin && filterYearMin.value) filters.yearMin = parseInt(filterYearMin.value);
       if (filterYearMax && filterYearMax.value) filters.yearMax = parseInt(filterYearMax.value);
+      if (filterMileageMin && filterMileageMin.value) filters.mileageMin = parseInt(filterMileageMin.value);
+      if (filterMileageMax && filterMileageMax.value) filters.mileageMax = parseInt(filterMileageMax.value);
       if (filterSort && filterSort.value) {
         const [sortBy, sortOrder] = filterSort.value.split('-');
         if (sortBy && sortOrder) {
@@ -564,16 +639,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   if (filterClear) {
     filterClear.addEventListener('click', () => {
-      const filterInputs = [filterBrand, filterBody, filterFuel, filterPriceMin, filterPriceMax, filterYearMin, filterYearMax, filterSort];
+      const filterInputs = [filterBrand, filterModel, filterBody, filterFuel, filterTransmission, filterColor, filterPriceMin, filterPriceMax, filterYearMin, filterYearMax, filterMileageMin, filterMileageMax, filterSort];
       filterInputs.forEach(el => { if (el) el.value = ''; });
       if (searchHeaderInput) searchHeaderInput.value = '';
       dynamicBrandFilter = '';
       dynamicBodyFilter = '';
       dynamicFuelFilter = '';
+      dynamicModelFilter = '';
+      dynamicTransmissionFilter = '';
+      dynamicColorFilter = '';
       dynamicPriceMin = '';
       dynamicPriceMax = '';
       dynamicYearMin = '';
       dynamicYearMax = '';
+      dynamicMileageMin = '';
+      dynamicMileageMax = '';
       dynamicSortBy = '';
       dynamicSortOrder = 'asc';
       renderCarsList();

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email · CarHub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="page-section form-section">
+        <div class="container">
+            <div class="form-box">
+                <h1>Email verification</h1>
+                <p id="verifyMessage">Verifying your email...</p>
+            </div>
+        </div>
+    </main>
+    <script src="js/auth.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('token');
+        const message = document.getElementById('verifyMessage');
+        if (!token) {
+            message.textContent = 'Missing verification token.';
+            return;
+        }
+        try {
+            const data = await CarHubAuth.verifyEmail(token);
+            message.textContent = data.message;
+        } catch (err) {
+            message.textContent = err.message;
+        }
+    });
+    </script>
+</body>
+</html>

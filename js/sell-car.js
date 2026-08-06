@@ -13,6 +13,7 @@ const CarHubSell = {
 
     this.photoInput = document.getElementById('photoInput');
     this.imagePreview = document.getElementById('imagePreview');
+    this.imagePreviewGrid = document.getElementById('imagePreviewGrid');
 
     // Image preview
     if (this.photoInput && this.imagePreview) {
@@ -27,20 +28,36 @@ const CarHubSell = {
    * Handle image preview before upload
    */
   _handleImagePreview(event) {
-    const file = event.target.files && event.target.files[0];
-    if (!file) return;
-    if (!file.type.startsWith('image/')) {
-      alert('Please select an image file.');
+    const files = Array.from(event.target.files || []);
+    if (!files.length) return;
+    const validFiles = files.filter(file => file.type.startsWith('image/'));
+    if (validFiles.length !== files.length) {
+      alert('Please select only image files.');
       return;
     }
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const previewImg = this.imagePreview.querySelector('img');
-      if (previewImg) {
-        previewImg.src = e.target.result;
-      }
-    };
-    reader.readAsDataURL(file);
+
+    const previewItems = [];
+    let completed = 0;
+    validFiles.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        previewItems.push(e.target.result);
+        completed += 1;
+        if (completed === validFiles.length) {
+          this._renderPreview(previewItems);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  },
+
+  _renderPreview(imageDataUrls) {
+    if (!this.imagePreviewGrid) return;
+    this.imagePreviewGrid.innerHTML = imageDataUrls.map((src) => `
+      <div class="gallery-preview-item">
+        <img src="${src}" alt="Preview image">
+      </div>
+    `).join('');
   },
 
   /**
@@ -72,17 +89,27 @@ const CarHubSell = {
       dealerName: formData.get('dealerName') || ''
     };
 
-    // Handle photo
-    const photoFile = this.photoInput && this.photoInput.files && this.photoInput.files[0];
-    if (photoFile) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        carData.photo = e.target.result;
-        this._saveAndRedirect(carData);
-      };
-      reader.readAsDataURL(photoFile);
+    // Handle photos
+    const photoFiles = Array.from(this.photoInput?.files || []);
+    if (photoFiles.length) {
+      const imageDataUrls = [];
+      let completed = 0;
+      photoFiles.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          imageDataUrls.push(e.target.result);
+          completed += 1;
+          if (completed === photoFiles.length) {
+            carData.photo = imageDataUrls[0] || '';
+            carData.images = imageDataUrls;
+            this._saveAndRedirect(carData);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
     } else {
       carData.photo = '';
+      carData.images = [];
       this._saveAndRedirect(carData);
     }
   },
@@ -95,9 +122,8 @@ const CarHubSell = {
       CarHubData.addUserCar(carData);
       alert('Your car listing has been published successfully! It will appear in the marketplace.');
       this.form.reset();
-      if (this.imagePreview) {
-        const previewImg = this.imagePreview.querySelector('img');
-        if (previewImg) previewImg.src = '';
+      if (this.imagePreviewGrid) {
+        this.imagePreviewGrid.innerHTML = '';
       }
       // Redirect to cars page to see the listing
       window.location.href = 'cars.html';

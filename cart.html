@@ -189,8 +189,22 @@
 
                 const checkoutBtn = document.getElementById('checkoutBtn');
                 if (checkoutBtn) {
-                    checkoutBtn.addEventListener('click', () => {
-                        alert('Checkout is a demo feature in this version.\n\nYour order total: $' + total.toLocaleString() + '\n\nThank you for shopping with CarHub!');
+                    checkoutBtn.addEventListener('click', async () => {
+                        try {
+                            const result = await CarHubCart.checkout({
+                                paymentMethod: 'cash',
+                                shippingAddress: 'Pickup from showroom',
+                                notes: 'Placed from CarHub storefront'
+                            });
+                            if (result.success) {
+                                alert('Order placed successfully!');
+                                await renderCart();
+                            } else {
+                                alert(result.message || 'Unable to place order.');
+                            }
+                        } catch (err) {
+                            alert(err.message || 'Unable to place order.');
+                        }
                     });
                 }
 

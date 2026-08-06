@@ -362,6 +362,64 @@ const CarHubAuth = {
     return this._user;
   },
 
+  async changePassword(currentPassword, newPassword) {
+    if (this._usingBackend && this._token) {
+      const resp = await fetch(`${API_BASE}/auth/change-password`, {
+        method: 'POST',
+        headers: this._headers(),
+        body: JSON.stringify({ currentPassword, newPassword })
+      });
+      const data = await resp.json();
+      if (!data.success) throw new Error(data.message || 'Unable to change password');
+      return data;
+    }
+
+    const current = this.getUser();
+    if (!current) throw new Error('Not logged in');
+    const users = this._getLocalUsers();
+    const userRecord = users.find(u => u.id === current.id);
+    if (!userRecord) throw new Error('User not found');
+    if (userRecord.password !== this._simpleHash(currentPassword)) {
+      throw new Error('Current password is incorrect.');
+    }
+    userRecord.password = this._simpleHash(newPassword);
+    this._saveLocalUsers(users);
+    return { success: true, message: 'Password changed successfully.' };
+  },
+
+  async forgotPassword(email) {
+    const resp = await fetch(`${API_BASE}/auth/forgot-password`, {
+      method: 'POST',
+      headers: this._headers(),
+      body: JSON.stringify({ email })
+    });
+    const data = await resp.json();
+    if (!data.success) throw new Error(data.message || 'Unable to process password reset');
+    return data;
+  },
+
+  async resetPassword(token, password) {
+    const resp = await fetch(`${API_BASE}/auth/reset-password`, {
+      method: 'POST',
+      headers: this._headers(),
+      body: JSON.stringify({ token, password })
+    });
+    const data = await resp.json();
+    if (!data.success) throw new Error(data.message || 'Unable to reset password');
+    return data;
+  },
+
+  async verifyEmail(token) {
+    const resp = await fetch(`${API_BASE}/auth/verify-email`, {
+      method: 'POST',
+      headers: this._headers(),
+      body: JSON.stringify({ token })
+    });
+    const data = await resp.json();
+    if (!data.success) throw new Error(data.message || 'Unable to verify email');
+    return data;
+  },
+
   /**
    * Check if user is logged in
    */
@@ -549,10 +607,37 @@ const CarHubAuth = {
   },
 
   /**
+   * Normalize favorite ids into simple string values
+   */
+  _normalizeFavoriteIds(favorites) {
+    if (!Array.isArray(favorites)) return [];
+    return favorites
+      .map((favorite) => {
+        if (typeof favorite === 'string') return favorite;
+        if (favorite && typeof favorite === 'object') {
+          if (favorite._id) return favorite._id.toString();
+          if (favorite.id) return favorite.id.toString();
+          if (favorite.toString) return favorite.toString();
+        }
+        return '';
+      })
+      .filter(Boolean);
+  },
+
+  /**
    * Toggle favorite
    */
   async toggleFavorite(carId) {
-    return this.api('POST', `/users/favorites/${carId}`);
+    const result = await this.api('POST', `/users/favorites/${carId}`);
+    const favoriteIds = this._normalizeFavoriteIds(result.favorites || []);
+
+    if (this._usingBackend && this._token) {
+      this._user = this._user || this.getUser() || {};
+      this._user.favorites = favoriteIds;
+      localStorage.setItem('carhub_user', JSON.stringify(this._user));
+    }
+
+    return { success: true, favorites: favoriteIds };
   },
 
   /**
@@ -583,8 +668,13 @@ const CarHubAuth = {
    * Get user's favorite car IDs
    */
   getFavoriteIds() {
+    if (this._user && Array.isArray(this._user.favorites)) {
+      return this._normalizeFavoriteIds(this._user.favorites);
+    }
+
     const record = this.getLocalUserRecord();
-    if (record && record.favorites) return record.favorites;
+    if (record && record.favorites) return this._normalizeFavoriteIds(record.favorites);
+
     // Legacy global favorites
     try {
       return JSON.parse(localStorage.getItem('carFavorites') || '[]').map(f => f.id);

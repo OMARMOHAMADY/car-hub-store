@@ -78,6 +78,8 @@
             <!-- Dashboard Tabs -->
             <div class="dashboard-tabs">
                 <button class="dashboard-tab active" data-tab="overview"><i class="fa-solid fa-chart-simple"></i> Overview</button>
+                <button class="dashboard-tab" data-tab="inventory"><i class="fa-solid fa-car-side"></i> Inventory</button>
+                <button class="dashboard-tab" data-tab="admin" style="display:none;"><i class="fa-solid fa-shield-halved"></i> Admin</button>
                 <button class="dashboard-tab" data-tab="favorites"><i class="fa-regular fa-heart"></i> Favorites</button>
                 <button class="dashboard-tab" data-tab="compare"><i class="fa-regular fa-clipboard"></i> Compare</button>
                 <button class="dashboard-tab" data-tab="recent"><i class="fa-regular fa-clock"></i> Recent</button>
@@ -130,6 +132,145 @@
                     </div>
                 </div>
 
+                <!-- Inventory Tab -->
+                <div class="tab-content" id="tab-inventory">
+                    <div class="dashboard-quick-actions" style="margin-bottom:16px;">
+                        <h3>Dealer Inventory</h3>
+                        <p style="color:var(--muted); margin-top:6px;">Add, edit, or remove your listings and upload a new image for each car.</p>
+                    </div>
+                    <div class="settings-card" style="margin-bottom:20px;">
+                        <form id="inventoryForm">
+                            <div class="form-grid">
+                                <label class="field">
+                                    <span>Brand</span>
+                                    <input type="text" id="inventoryBrand" name="brand" required>
+                                </label>
+                                <label class="field">
+                                    <span>Model</span>
+                                    <input type="text" id="inventoryModel" name="model" required>
+                                </label>
+                                <label class="field">
+                                    <span>Year</span>
+                                    <input type="number" id="inventoryYear" name="year" min="1900" max="2099" required>
+                                </label>
+                                <label class="field">
+                                    <span>Price</span>
+                                    <input type="number" id="inventoryPrice" name="price" min="1" required>
+                                </label>
+                                <label class="field">
+                                    <span>Mileage</span>
+                                    <input type="number" id="inventoryMileage" name="mileage" min="0" required>
+                                </label>
+                                <label class="field">
+                                    <span>Location</span>
+                                    <input type="text" id="inventoryLocation" name="location" required>
+                                </label>
+                                <label class="field">
+                                    <span>Body Type</span>
+                                    <select id="inventoryBody" name="body">
+                                        <option value="Sedan">Sedan</option>
+                                        <option value="SUV">SUV</option>
+                                        <option value="Coupe">Coupe</option>
+                                        <option value="Hatchback">Hatchback</option>
+                                        <option value="Convertible">Convertible</option>
+                                    </select>
+                                </label>
+                                <label class="field">
+                                    <span>Fuel</span>
+                                    <select id="inventoryFuel" name="fuel">
+                                        <option value="Petrol">Petrol</option>
+                                        <option value="Diesel">Diesel</option>
+                                        <option value="Electric">Electric</option>
+                                        <option value="Hybrid">Hybrid</option>
+                                    </select>
+                                </label>
+                                <label class="field">
+                                    <span>Transmission</span>
+                                    <select id="inventoryTransmission" name="transmission">
+                                        <option value="Automatic">Automatic</option>
+                                        <option value="Manual">Manual</option>
+                                    </select>
+                                </label>
+                                <label class="field">
+                                    <span>Image</span>
+                                    <input type="file" id="inventoryImage" accept="image/*">
+                                </label>
+                            </div>
+                            <label class="field">
+                                <span>Description</span>
+                                <textarea id="inventoryDescription" name="description" rows="4" required></textarea>
+                            </label>
+                            <div class="form-actions">
+                                <button type="submit" class="button button-primary" id="inventorySubmitBtn">Save Listing</button>
+                                <button type="button" class="button button-outline" id="inventoryCancelBtn" style="display:none;">Cancel</button>
+                            </div>
+                            <div id="inventoryMessage" style="margin-top:12px; display:none;"></div>
+                        </form>
+                    </div>
+                    <div id="inventoryList" class="dashboard-cars-list">
+                        <p class="dashboard-empty">Loading your listings...</p>
+                    </div>
+                    <div class="settings-card" style="margin-top:20px;">
+                        <h3>Sales Overview</h3>
+                        <div class="dashboard-stats-grid">
+                            <div class="dashboard-stat-card">
+                                <i class="fa-solid fa-chart-line"></i>
+                                <div>
+                                    <strong id="salesCount">0</strong>
+                                    <span>Listings</span>
+                                </div>
+                            </div>
+                            <div class="dashboard-stat-card">
+                                <i class="fa-solid fa-dollar-sign"></i>
+                                <div>
+                                    <strong id="salesRevenue">$0</strong>
+                                    <span>Revenue</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Tab -->
+                <div class="tab-content" id="tab-admin">
+                    <h3 class="tab-title"><i class="fa-solid fa-shield-halved"></i> Admin Console</h3>
+                    <div class="dashboard-stats-grid">
+                        <div class="dashboard-stat-card">
+                            <i class="fa-solid fa-users"></i>
+                            <div>
+                                <strong id="adminUsersCount">0</strong>
+                                <span>Users</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-stat-card">
+                            <i class="fa-solid fa-car-side"></i>
+                            <div>
+                                <strong id="adminCarsCount">0</strong>
+                                <span>Cars</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-stat-card">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                            <div>
+                                <strong id="adminRevenue">$0</strong>
+                                <span>Revenue</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-card" style="margin-top:16px;">
+                        <h4>Users & Dealers</h4>
+                        <div id="adminUsersList" class="dashboard-cars-list"></div>
+                    </div>
+                    <div class="settings-card" style="margin-top:16px;">
+                        <h4>Listings & Orders</h4>
+                        <div id="adminCarsList" class="dashboard-cars-list"></div>
+                    </div>
+                    <div class="settings-card" style="margin-top:16px;">
+                        <h4>Reports</h4>
+                        <div id="adminReports" class="dashboard-cars-list"></div>
+                    </div>
+                </div>
+
                 <!-- Favorites Tab -->
                 <div class="tab-content" id="tab-favorites">
                     <h3 class="tab-title"><i class="fa-regular fa-heart"></i> My Favorite Cars</h3>
@@ -171,8 +312,33 @@
                                 <span>Dealer Name (for selling)</span>
                                 <input type="text" id="settingsDealerName" name="dealerName" placeholder="Your dealership name">
                             </label>
+                            <label class="field">
+                                <span>Profile Picture</span>
+                                <input type="file" id="settingsAvatarUpload" accept="image/*">
+                                <input type="url" id="settingsAvatar" name="avatar" placeholder="https://...">
+                                <div id="avatarHint" style="color:var(--muted); font-size:0.9rem;">Choose a file to upload or paste an image URL.</div>
+                            </label>
+                            <div class="field">
+                                <span>Email Verification</span>
+                                <div id="verificationStatus" style="color:var(--muted); font-size:0.95rem;">Checking...</div>
+                                <button type="button" id="verifyEmailBtn" class="button button-outline" style="margin-top:6px;">Verify Email</button>
+                            </div>
                             <button type="submit" class="button button-primary" id="settingsSaveBtn">Save Changes</button>
                             <div id="settingsMessage" style="margin-top:12px; display:none;"></div>
+                        </form>
+
+                        <form id="passwordForm" style="margin-top:24px;">
+                            <h4>Change Password</h4>
+                            <label class="field">
+                                <span>Current Password</span>
+                                <input type="password" id="currentPassword" name="currentPassword" required>
+                            </label>
+                            <label class="field">
+                                <span>New Password</span>
+                                <input type="password" id="newPassword" name="newPassword" required>
+                            </label>
+                            <button type="submit" class="button button-outline">Update Password</button>
+                            <div id="passwordMessage" style="margin-top:12px; display:none;"></div>
                         </form>
                     </div>
                 </div>
@@ -236,6 +402,120 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
+    await renderInventory();
+
+    if (user.role === 'admin') {
+        if (adminTab) adminTab.style.display = '';
+    }
+
+    const loadAdminPanel = async () => {
+        if (user.role !== 'admin') return;
+        try {
+            const [statsRes, usersRes, carsRes] = await Promise.all([
+                fetch('/api/admin/stats', { headers: { Authorization: `Bearer ${CarHubAuth.getToken()}` } }),
+                fetch('/api/admin/users', { headers: { Authorization: `Bearer ${CarHubAuth.getToken()}` } }),
+                fetch('/api/admin/cars', { headers: { Authorization: `Bearer ${CarHubAuth.getToken()}` } })
+            ]);
+            const statsData = await statsRes.json();
+            const usersData = await usersRes.json();
+            const carsData = await carsRes.json();
+            if (!statsData.success) throw new Error(statsData.message || 'Admin stats unavailable');
+            document.getElementById('adminUsersCount').textContent = statsData.stats.totalUsers || 0;
+            document.getElementById('adminCarsCount').textContent = statsData.stats.totalCars || 0;
+            document.getElementById('adminRevenue').textContent = `$${Number(statsData.stats.revenue || 0).toLocaleString()}`;
+            const usersList = document.getElementById('adminUsersList');
+            if (usersList) {
+                usersList.innerHTML = (usersData.users || []).slice(0, 8).map(userItem => `
+                    <div class="dashboard-car-row">
+                        <div class="dashboard-car-info">
+                            <strong>${userItem.name}</strong>
+                            <span>${userItem.email}</span>
+                            <span>${userItem.role}</span>
+                        </div>
+                        <div class="dashboard-car-actions">
+                            <button class="button button-outline" data-admin-role="${userItem._id}" data-role="seller">Make Dealer</button>
+                            <button class="button button-outline" data-admin-role="${userItem._id}" data-role="user">Make User</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            const carsList = document.getElementById('adminCarsList');
+            if (carsList) {
+                carsList.innerHTML = (carsData.cars || []).slice(0, 8).map(carItem => `
+                    <div class="dashboard-car-row">
+                        <div class="dashboard-car-info">
+                            <strong>${carItem.title}</strong>
+                            <span>${carItem.status || 'active'} · ${carItem.price ? '$' + Number(carItem.price).toLocaleString() : ''}</span>
+                        </div>
+                        <div class="dashboard-car-actions">
+                            <button class="button button-outline" data-admin-car="${carItem._id}" data-action="approve">Approve</button>
+                            <button class="button button-outline" data-admin-car="${carItem._id}" data-action="delete">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            const reports = document.getElementById('adminReports');
+            if (reports) {
+                reports.innerHTML = `
+                    <p><strong>Active listings:</strong> ${statsData.stats.activeCars || 0}</p>
+                    <p><strong>Pending listings:</strong> ${statsData.stats.pendingCars || 0}</p>
+                    <p><strong>Sold listings:</strong> ${statsData.stats.soldCars || 0}</p>
+                    <p><strong>Reviews:</strong> ${statsData.stats.totalReviews || 0}</p>
+                `;
+            }
+        } catch (err) {
+            const reports = document.getElementById('adminReports');
+            if (reports) reports.innerHTML = `<p class="dashboard-empty">${err.message}</p>`;
+        }
+    };
+
+    document.addEventListener('click', async (e) => {
+        const roleBtn = e.target.closest('button[data-admin-role]');
+        if (roleBtn) {
+            try {
+                const response = await fetch(`/api/admin/users/${roleBtn.getAttribute('data-admin-role')}/role`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${CarHubAuth.getToken()}`
+                    },
+                    body: JSON.stringify({ role: roleBtn.getAttribute('data-role') })
+                });
+                const data = await response.json();
+                if (!data.success) throw new Error(data.message || 'Role update failed');
+                await loadAdminPanel();
+            } catch (err) {
+                alert(err.message);
+            }
+        }
+        const carBtn = e.target.closest('button[data-admin-car]');
+        if (carBtn) {
+            try {
+                if (carBtn.getAttribute('data-action') === 'delete') {
+                    const response = await fetch(`/api/admin/cars/${carBtn.getAttribute('data-admin-car')}`, { method: 'DELETE', headers: { Authorization: `Bearer ${CarHubAuth.getToken()}` } });
+                    const data = await response.json();
+                    if (!data.success) throw new Error(data.message || 'Delete failed');
+                } else {
+                    const response = await fetch(`/api/admin/cars/${carBtn.getAttribute('data-admin-car')}/status`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${CarHubAuth.getToken()}`
+                        },
+                        body: JSON.stringify({ status: 'active' })
+                    });
+                    const data = await response.json();
+                    if (!data.success) throw new Error(data.message || 'Approval failed');
+                }
+                await loadAdminPanel();
+            } catch (err) {
+                alert(err.message);
+            }
+        }
+    });
+
+    await loadAdminPanel();
+
     // ===== Load data =====
     try {
         const allCars = await CarHubData.getAllCars();
@@ -285,16 +565,199 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ===== Settings form =====
+    const adminTab = document.querySelector('.dashboard-tab[data-tab="admin"]');
+    const inventoryForm = document.getElementById('inventoryForm');
+    const inventoryList = document.getElementById('inventoryList');
+    const inventoryMessage = document.getElementById('inventoryMessage');
+    const inventorySubmitBtn = document.getElementById('inventorySubmitBtn');
+    const inventoryCancelBtn = document.getElementById('inventoryCancelBtn');
+    const salesCount = document.getElementById('salesCount');
+    const salesRevenue = document.getElementById('salesRevenue');
+    let inventoryEditingId = null;
+
+    const renderInventory = async () => {
+        if (!inventoryList) return;
+        try {
+            const response = await fetch('/api/users/profile', {
+                headers: { Authorization: `Bearer ${CarHubAuth.getToken()}` }
+            });
+            const data = await response.json();
+            if (!data.success) throw new Error(data.message || 'Unable to load inventory');
+            const cars = data.myCars || [];
+            if (!cars.length) {
+                inventoryList.innerHTML = '<p class="dashboard-empty">You have not listed any cars yet.</p>';
+            } else {
+                inventoryList.innerHTML = cars.map(car => `
+                    <div class="dashboard-car-row">
+                        <img src="${car.image || 'assets/image/images.jpg'}" alt="${car.title}">
+                        <div class="dashboard-car-info">
+                            <strong>${car.title}</strong>
+                            <span>${car.year} · ${car.location}</span>
+                            <span class="dashboard-car-price">$${Number(car.price).toLocaleString()}</span>
+                        </div>
+                        <div class="dashboard-car-actions">
+                            <button class="button button-outline" data-action="edit" data-id="${car._id || car.id}">Edit</button>
+                            <button class="button button-outline" data-action="delete" data-id="${car._id || car.id}">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            if (salesCount) salesCount.textContent = String(cars.length);
+            if (salesRevenue) salesRevenue.textContent = `$${cars.reduce((sum, car) => sum + Number(car.price || 0), 0).toLocaleString()}`;
+        } catch (err) {
+            inventoryList.innerHTML = `<p class="dashboard-empty">${err.message}</p>`;
+        }
+    };
+
+    inventoryList?.addEventListener('click', async (e) => {
+        const button = e.target.closest('button[data-action]');
+        if (!button) return;
+        const id = button.getAttribute('data-id');
+        if (button.dataset.action === 'delete') {
+            try {
+                const response = await fetch(`/api/cars/${id}`, {
+                    method: 'DELETE',
+                    headers: { Authorization: `Bearer ${CarHubAuth.getToken()}` }
+                });
+                const data = await response.json();
+                if (!data.success) throw new Error(data.message || 'Unable to delete listing');
+                inventoryMessage.textContent = 'Listing removed.';
+                inventoryMessage.style.display = 'block';
+                inventoryMessage.style.color = 'var(--toast-success)';
+                await renderInventory();
+            } catch (err) {
+                inventoryMessage.textContent = err.message;
+                inventoryMessage.style.display = 'block';
+                inventoryMessage.style.color = 'var(--toast-error)';
+            }
+        }
+        if (button.dataset.action === 'edit') {
+            try {
+                const response = await fetch(`/api/cars/${id}`, { headers: { Authorization: `Bearer ${CarHubAuth.getToken()}` } });
+                const data = await response.json();
+                if (!data.success) throw new Error(data.message || 'Unable to load listing');
+                const car = data.car;
+                inventoryEditingId = id;
+                document.getElementById('inventoryBrand').value = car.brand || '';
+                document.getElementById('inventoryModel').value = car.model || '';
+                document.getElementById('inventoryYear').value = car.year || '';
+                document.getElementById('inventoryPrice').value = car.price || '';
+                document.getElementById('inventoryMileage').value = car.mileage || '';
+                document.getElementById('inventoryLocation').value = car.location || '';
+                document.getElementById('inventoryBody').value = car.body || 'Sedan';
+                document.getElementById('inventoryFuel').value = car.fuel || 'Petrol';
+                document.getElementById('inventoryTransmission').value = car.transmission || 'Automatic';
+                document.getElementById('inventoryDescription').value = car.description || '';
+                inventorySubmitBtn.textContent = 'Update Listing';
+                inventoryCancelBtn.style.display = 'inline-block';
+                inventoryMessage.textContent = 'Editing listing. Update and save when ready.';
+                inventoryMessage.style.display = 'block';
+                inventoryMessage.style.color = 'var(--toast-info)';
+            } catch (err) {
+                inventoryMessage.textContent = err.message;
+                inventoryMessage.style.display = 'block';
+                inventoryMessage.style.color = 'var(--toast-error)';
+            }
+        }
+    });
+
+    if (inventoryCancelBtn) {
+        inventoryCancelBtn.addEventListener('click', () => {
+            inventoryForm.reset();
+            inventoryEditingId = null;
+            inventorySubmitBtn.textContent = 'Save Listing';
+            inventoryCancelBtn.style.display = 'none';
+            inventoryMessage.style.display = 'none';
+        });
+    }
+
+    if (inventoryForm) {
+        inventoryForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            inventoryMessage.style.display = 'none';
+            const formData = new FormData(inventoryForm);
+            const payload = Object.fromEntries(formData.entries());
+            payload.year = Number(payload.year);
+            payload.price = Number(payload.price);
+            payload.mileage = Number(payload.mileage);
+            payload.image = '';
+
+            const imageFile = document.getElementById('inventoryImage').files?.[0];
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = async () => {
+                    payload.image = reader.result;
+                    await submitInventory(payload);
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                await submitInventory(payload);
+            }
+        });
+    }
+
+    async function submitInventory(payload) {
+        try {
+            const method = inventoryEditingId ? 'PUT' : 'POST';
+            const url = inventoryEditingId ? `/api/cars/${inventoryEditingId}` : '/api/cars';
+            const response = await fetch(url, {
+                method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${CarHubAuth.getToken()}`
+                },
+                body: JSON.stringify(payload)
+            });
+            const data = await response.json();
+            if (!data.success) throw new Error(data.message || 'Unable to save listing');
+            inventoryForm.reset();
+            inventoryEditingId = null;
+            inventorySubmitBtn.textContent = 'Save Listing';
+            inventoryCancelBtn.style.display = 'none';
+            inventoryMessage.textContent = inventoryEditingId ? 'Listing updated.' : 'Listing published.';
+            inventoryMessage.style.display = 'block';
+            inventoryMessage.style.color = 'var(--toast-success)';
+            await renderInventory();
+        } catch (err) {
+            inventoryMessage.textContent = err.message;
+            inventoryMessage.style.display = 'block';
+            inventoryMessage.style.color = 'var(--toast-error)';
+        }
+    }
+
     const settingsForm = document.getElementById('settingsForm');
     const settingsName = document.getElementById('settingsName');
     const settingsPhone = document.getElementById('settingsPhone');
     const settingsDealerName = document.getElementById('settingsDealerName');
+    const settingsAvatar = document.getElementById('settingsAvatar');
+    const settingsAvatarUpload = document.getElementById('settingsAvatarUpload');
     const settingsMessage = document.getElementById('settingsMessage');
+    const verificationStatus = document.getElementById('verificationStatus');
+    const verifyEmailBtn = document.getElementById('verifyEmailBtn');
 
     if (settingsForm) {
         settingsName.value = user.name || '';
         settingsPhone.value = user.phone || '';
         settingsDealerName.value = (user.sellerProfile && user.sellerProfile.dealerName) || '';
+        settingsAvatar.value = user.avatar || '';
+        if (verificationStatus) {
+            verificationStatus.textContent = user.isVerified ? 'Email verified.' : 'Verification pending.';
+        }
+
+        if (settingsAvatarUpload) {
+            settingsAvatarUpload.addEventListener('change', async (e) => {
+                const file = e.target.files && e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = () => {
+                    if (settingsAvatar) settingsAvatar.value = reader.result;
+                    settingsMessage.textContent = 'Image ready to save. Click Save Changes.';
+                    settingsMessage.style.display = 'block';
+                    settingsMessage.style.color = 'var(--toast-success)';
+                };
+                reader.readAsDataURL(file);
+            });
+        }
 
         settingsForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -304,6 +767,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     name: settingsName.value.trim()
                 };
                 if (settingsPhone.value.trim()) updates.phone = settingsPhone.value.trim();
+                if (settingsAvatar.value.trim()) updates.avatar = settingsAvatar.value.trim();
                 if (settingsDealerName.value.trim()) {
                     updates.sellerProfile = { dealerName: settingsDealerName.value.trim() };
                 }
@@ -311,12 +775,60 @@ document.addEventListener('DOMContentLoaded', async () => {
                 settingsMessage.textContent = 'Profile updated successfully!';
                 settingsMessage.style.display = 'block';
                 settingsMessage.style.color = 'var(--toast-success)';
-                // Refresh header
                 document.getElementById('dashboardUserName').textContent = CarHubAuth.getUser().name || 'User';
             } catch (err) {
                 settingsMessage.textContent = err.message;
                 settingsMessage.style.display = 'block';
                 settingsMessage.style.color = 'var(--toast-error)';
+            }
+        });
+    }
+
+    if (verifyEmailBtn) {
+        verifyEmailBtn.addEventListener('click', async () => {
+            try {
+                const resp = await fetch('/api/auth/resend-verification', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${CarHubAuth.getToken()}`
+                    }
+                });
+                const data = await resp.json();
+                if (data.success) {
+                    if (verificationStatus) verificationStatus.textContent = 'Verification email sent.';
+                    settingsMessage.textContent = data.message;
+                    settingsMessage.style.display = 'block';
+                    settingsMessage.style.color = 'var(--toast-success)';
+                } else {
+                    throw new Error(data.message || 'Could not send verification email.');
+                }
+            } catch (err) {
+                settingsMessage.textContent = err.message;
+                settingsMessage.style.display = 'block';
+                settingsMessage.style.color = 'var(--toast-error)';
+            }
+        });
+    }
+
+    const passwordForm = document.getElementById('passwordForm');
+    const passwordMessage = document.getElementById('passwordMessage');
+    if (passwordForm) {
+        passwordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            passwordMessage.style.display = 'none';
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            try {
+                const data = await CarHubAuth.changePassword(currentPassword, newPassword);
+                passwordMessage.textContent = data.message;
+                passwordMessage.style.display = 'block';
+                passwordMessage.style.color = 'var(--toast-success)';
+                passwordForm.reset();
+            } catch (err) {
+                passwordMessage.textContent = err.message;
+                passwordMessage.style.display = 'block';
+                passwordMessage.style.color = 'var(--toast-error)';
             }
         });
     }

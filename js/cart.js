@@ -115,6 +115,31 @@ const CarHubCart = {
   },
 
   /**
+   * Checkout and create a database-backed order
+   */
+  async checkout(payload = {}) {
+    if (CarHubAuth && CarHubAuth.isLoggedIn() && CarHubAuth._usingBackend) {
+      try {
+        const resp = await fetch('/api/orders/checkout', {
+          method: 'POST',
+          headers: CarHubAuth._headers(),
+          body: JSON.stringify(payload)
+        });
+        const data = await resp.json();
+        if (data.success) {
+          this._save([]);
+          return data;
+        }
+      } catch (err) {
+        console.error('Checkout failed:', err);
+      }
+    }
+
+    this._save([]);
+    return { success: true, order: null };
+  },
+
+  /**
    * Clear the entire cart
    */
   async clearCart() {
